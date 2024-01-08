@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des Agences</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<h3>Liste des Agences</h3>
+<table>
+  <thead>
+  <tr>
+    <th>Code</th>
+    <th>Nom</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="agence : ${listAgences}">
+    <td th:text="${agence.code}"></td>
+    <td th:text="${agence.nomAgence}"></td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- Ajouter une option "New" -->
+<a th:href="@{/agences/new}">Nouvelle Agence</a>
+
+</body>
+</html>

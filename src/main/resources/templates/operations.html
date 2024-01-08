@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<h3>Listes des operations</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Nature d'Opérations</th>
+                <th>Montant</th>
+                <th>Numéro de Téléphone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="operation:${listOperations}">
+                <td th:text="${operation.id}"></td>
+                <td th:text="${operation.date}"></td>
+                <td th:text="${operation.nom}"></td>
+                <td th:text="${operation.prenom}"></td>
+                <td th:text="${operation.natureOperation}"></td>
+                <td th:text="${operation.montant}"></td>
+                <td th:text="${operation.numeroTelephone}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+

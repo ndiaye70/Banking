@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saisie des Quantités de Billets</title>
+</head>
+<body>
+
+<h1>Saisie des Quantités de Billets</h1>
+
+<form id="caisseForm">
+    <label for="quantiteBilletCinq">Quantité Billet 5 euros:</label>
+    <input type="number" id="quantiteBilletCinq" name="quantiteBilletCinq" min="0">
+
+    <label for="quantiteBilletDix">Quantité Billet 10 euros:</label>
+    <input type="number" id="quantiteBilletDix" name="quantiteBilletDix" min="0">
+
+    <label for="quantiteBilletVingt">Quantité Billet 20 euros:</label>
+    <input type="number" id="quantiteBilletVingt" name="quantiteBilletVingt" min="0">
+
+    <label for="quantiteBilletCinquante">Quantité Billet 50 euros:</label>
+    <input type="number" id="quantiteBilletCinquante" name="quantiteBilletCinquante" min="0">
+
+    <label for="quantiteBilletCent">Quantité Billet 100 euros:</label>
+    <input type="number" id="quantiteBilletCent" name="quantiteBilletCent" min="0">
+
+    <label for="quantiteBilletDeuxCents">Quantité Billet 200 euros:</label>
+    <input type="number" id="quantiteBilletDeuxCents" name="quantiteBilletDeuxCents" min="0">
+
+    <label for="quantiteBilletCinqCents">Quantité Billet 500 euros:</label>
+    <input type="number" id="quantiteBilletCinqCents" name="quantiteBilletCinqCents" min="0">
+
+    <button type="button" onclick="afficherResume()">Valider</button>
+</form>
+
+<div id="resumeSection" style="display: none;">
+    <h2>Résumé des Informations</h2>
+    <p id="resumeBilletCinq"></p>
+    <p id="resumeBilletDix"></p>
+    <!-- Ajoutez d'autres lignes de résumé en fonction de vos champs -->
+
+    <p id="montantTotal"></p>
+
+    <button type="button" onclick="valider()">Valider</button>
+    <button type="button" onclick="modifier()">Modifier</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

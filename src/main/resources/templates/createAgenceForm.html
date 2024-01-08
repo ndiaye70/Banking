@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Création d'agence</title>
+</head>
+<body>
+
+<h2>Formulaire de création d'agence</h2>
+
+<form action="save" method="post" th:object="${agenceDto}" >
+    <label>Agence: <input type="text" th:field="*{nomAgence}" required></label><br>
+
+    <!-- Autres champs du formulaire -->
+
+    <button type="submit">Enregistrer</button>
+</form>
+
+</body>
+</html>
