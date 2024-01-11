@@ -20,16 +20,17 @@ public class AgenceService {
 
     public Agence createAgence(AgenceDto agenceDto) {
         Agence agence = agenceDto.convertDtoToEntity();
-        return agenceRepository.save(agence);
+        Agence savedAgence = agenceRepository.save(agence);
 
-
+        return savedAgence;
     }
 
     public List<Agence> getAllAgences() {
-        List<Agence> allAgences = agenceRepository.findAll();
+        List<Agence> allagences = agenceRepository.findAll();
+        return allagences;
 
-        return allAgences;
+
     }
+
+
 }
-
-

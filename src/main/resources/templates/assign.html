@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>reaffecter l'Agent </title>
+</head>
+<body>
+<h3>Affecter Agent</h3>
+<form th:action="@{/agents/assign/{agentId}(agentId=${agentId})}" method="post" th:object="${agentDto}">
+    <label for="agence">Sélectionnez une Agence:</label>
+    <select id="agence" name="agenceNom" th:field="*{agenceNom}">
+        <option th:each="agence : ${agences}" th:value="${agence.nomAgence}" th:text="${agence.nomAgence}"></option>
+    </select>
+
+    <button type="submit">Affecter</button>
+</form>
+</body>
+</html>

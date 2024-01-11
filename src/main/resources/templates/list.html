@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Agents</title>
+</head>
+<body>
+<h3>Liste des Agents</h3>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Username</th>
+        <th>Agence</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="agent : ${agents}">
+        <td th:text="${agent.id}"></td>
+        <td th:text="${agent.user.nom}"></td>
+        <td th:text="${agent.user.prenom}"></td>
+        <td th:text="${agent.user.username}"></td>
+        <td th:text="${agent.agence.nomAgence}"></td>
+        <td>
+            <a th:href="@{/agents/assign/{id}(id=${agent.id})}">Affecter</a>
+            <a th:href="@{/agents/delete/{id}(id=${agent.id})}">Supprimer</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

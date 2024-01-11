@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -71,6 +72,11 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AppUser loadUserByUsername(String username){
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public List<AppUser> getAllUsers(){
+        return userRepository.findAll();
     }
 
 }

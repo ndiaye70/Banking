@@ -1,10 +1,16 @@
 package Reporting.AFA.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class Agent {
 
@@ -14,23 +20,21 @@ public class Agent {
 
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id_agence")
     private Agence agence;
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id_User")
     private AppUser user;
+
+
+
+
 
     // Constructeurs, getters et setters
 
-    public Agent() {
-        // Constructeur par défaut
-    }
 
-    public Agent(String nom, String prenom, Agence agence, AppUser user) {
-        this.agence = agence;
-        this.user = user;
-    }
+
 
     // Autres méthodes, getters et setters
 }

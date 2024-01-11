@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nouvel Agent</title>
+</head>
+<body>
+<h3>Nouvel Agent</h3>
+<form th:action="@{/agents/new}" th:object="${agentDto}" method="post">
+    <label for="utilisateur">Sélectionnez un Utilisateur:</label>
+    <select id="utilisateur" name="utilisateur" th:field="*{username}">
+        <option th:each="user : ${utilisateurs}" th:value="${user.username}" th:text="${user.username}"></option>
+    </select>
+
+    <label for="agence">Sélectionnez une Agence:</label>
+    <select id="agence" name="agence" th:field="*{agenceNom}">
+        <option th:each="agence : ${agences}" th:value="${agence.nomAgence}" th:text="${agence.nomAgence}"></option>
+    </select>
+
+    <!-- Ajoutez d'autres champs nécessaires -->
+
+    <button type="submit">Enregistrer</button>
+</form>
+</body>
+</html>

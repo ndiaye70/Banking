@@ -11,18 +11,21 @@ import lombok.Data;
 public class AgenceDto {
 
     private String nomAgence;
+    private String code;
 
 
 
 
 
-    public void setNomAgence(String nomAgence) {
-        this.nomAgence = nomAgence;
-    }
+    //public void setNomAgence(String nomAgence) {
+     //   this.nomAgence = nomAgence;
+   // }
 
     public Agence convertDtoToEntity(){
         Agence agence=new Agence();
         agence.setNomAgence(nomAgence);
+        agence.setCode(code);
+
         return agence;
     }
 
