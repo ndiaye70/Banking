@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Caisses - Billetage</title>
+</head>
+<body>
+<h3>Liste des Caisses - Billetage</h3>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Date et Heure</th>
+        <!-- Ajouter d'autres colonnes si nécessaire -->
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="caisse : ${caisses}">
+        <td th:text="${caisse.id}"></td>
+        <td th:text="${caisse.dateCreation}"></td>
+        <!-- Ajouter d'autres colonnes si nécessaire -->
+        <td>
+            <a th:href="@{/caisses/{id}/details(id=${caisse.id})}">Détails</a>
+            <a th:href="@{/caisses/{id}/edit(id=${caisse.id})}">Modifier</a>
+            <a th:href="@{/caisses/{id}/delete(id=${caisse.id})}">Supprimer</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

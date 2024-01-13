@@ -31,8 +31,8 @@ public class EuroController {
             // Transformez le EuroDto en objet Euro et enregistrez-le dans la base de données
             Euro euro = euroService.toEntity(euroDto);
             euroService.saveEuro(euro);
-            Caisse caisse= new Caisse(euro);
-            caisseService.saveCaisse(caisse);
+           // Caisse caisse= new Caisse(euro);
+            //caisseService.saveCaisse(caisse);
 
 
             return ResponseEntity.ok("Euro enregistré avec succès");

@@ -4,12 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@Data
 public class Dollars {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,7 +51,7 @@ public class Dollars {
     }
 
     public double calculerMontantTotal() {
-        return  billetUnDollar * 1 +
+        return billetUnDollar * 1 +
                 billetDeuxDollars * 2 +
                 billetCinqDollars * 5 +
                 billetDixDollars * 10 +
@@ -57,71 +59,8 @@ public class Dollars {
                 billetCinquanteDollars * 50 +
                 billetCentDollars * 100;
     }
+}
 
     // Vous pouvez ajouter d'autres méthodes ou constructeurs si nécessaire
 
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getBilletUnDollar() {
-        return billetUnDollar;
-    }
-
-    public void setBilletUnDollar(int billetUnDollar) {
-        this.billetUnDollar = billetUnDollar;
-    }
-
-    public int getBilletDeuxDollars() {
-        return billetDeuxDollars;
-    }
-
-    public void setBilletDeuxDollars(int billetDeuxDollars) {
-        this.billetDeuxDollars = billetDeuxDollars;
-    }
-
-    public int getBilletCinqDollars() {
-        return billetCinqDollars;
-    }
-
-    public void setBilletCinqDollars(int billetCinqDollars) {
-        this.billetCinqDollars = billetCinqDollars;
-    }
-
-    public int getBilletDixDollars() {
-        return billetDixDollars;
-    }
-
-    public void setBilletDixDollars(int billetDixDollars) {
-        this.billetDixDollars = billetDixDollars;
-    }
-
-    public int getBilletVingtDollars() {
-        return billetVingtDollars;
-    }
-
-    public void setBilletVingtDollars(int billetVingtDollars) {
-        this.billetVingtDollars = billetVingtDollars;
-    }
-
-    public int getBilletCinquanteDollars() {
-        return billetCinquanteDollars;
-    }
-
-    public void setBilletCinquanteDollars(int billetCinquanteDollars) {
-        this.billetCinquanteDollars = billetCinquanteDollars;
-    }
-
-    public int getBilletCentDollars() {
-        return billetCentDollars;
-    }
-
-    public void setBilletCentDollars(int billetCentDollars) {
-        this.billetCentDollars = billetCentDollars;
-    }
-}

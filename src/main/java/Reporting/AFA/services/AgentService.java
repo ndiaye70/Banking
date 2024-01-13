@@ -73,4 +73,12 @@ public class AgentService {
     public List<Agent> getAllAgents() {
         return agentRepository.findAll();
     }
+
+    public Agent findAgentByUserId(String id_user) {
+        return agentRepository.findAgentByUserId(id_user);
+    }
+
+    public Agent findByUser(AppUser appUser) {
+        return agentRepository.findByUser(appUser);
+    }
 }

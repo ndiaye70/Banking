@@ -1,6 +1,7 @@
 package Reporting.AFA.Entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@Data
 public class Caisse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +18,15 @@ public class Caisse {
 
     private Date dateCreation;
 
-   // private String nature ;
+    @ManyToOne
+    @JoinColumn(name = "id_agent")
+    private Agent agent;
+
+    // Utilisation de la relation entre Agent et Agence pour obtenir l'agence correspondante
+    @Transient
+    private Agence agence;
+
+    private String natureCaisse;
 
     @OneToOne
     private Euro euros;
@@ -25,86 +35,27 @@ public class Caisse {
     private double montantTotal;
 
     public Caisse() {
-        this.id = 0L; // Vous pouvez définir l'ID de manière appropriée
+        this.id = 0L;
         this.dateCreation = new Date();
         this.euros = new Euro();
         this.montantTotal = 0.0;
     }
 
-    public Caisse(Euro euros) {
-        this.id = 0L; // Vous pouvez définir l'ID de manière appropriée
+    public Caisse(Euro euros, Agent agent,String natureCaisse) {
+        this.id = 0L;
         this.dateCreation = new Date();
         this.euros = euros;
-        if(this.euros!=null) {
+        this.agent = agent;
+        this.agence = agent.getAgence();
+        if (this.euros != null) {
             this.montantTotal = euros.calculerMontantTotal();
-        }
-        else {
+        } else {
             this.montantTotal = 0.0;
         }
     }
 
     public void calculerMontantTotal() {
         montantTotal = euros.calculerMontantTotal();
-    }
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getDateCreation() {
-        return dateCreation;
-    }
-
-    public void setDateCreation(Date dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public Euro getEuros() {
-        return euros;
-    }
-
-    public void setEuros(Euro euros) {
-        this.euros = euros;
-    }
-
-    public double getMontantTotal() {
-        return montantTotal;
-    }
-
-    public void setMontantTotal(double montantTotal) {
-        this.montantTotal = montantTotal;
-    }
-
-    public void setBilletCinqCents(int quantite) {
-        euros.setBilletCinqCents(quantite);
-    }
-
-    public void setBilletDeuxCents(int quantite) {
-        euros.setBilletDeuxCents(quantite);
-    }
-
-    public void setBilletCent(int quantite) {
-        euros.setBilletCent(quantite);
-    }
-
-    public void setBilletCinquante(int quantite) {
-        euros.setBilletCinquante(quantite);
-    }
-
-    public void setBilletCinq(int quantite) {
-        euros.setBilletCinq(quantite);
-    }
-
-    public void setBilletDix(int quantite) {
-        euros.setBilletDix(quantite);
-    }
-
-    public void setBilletVingt(int quantite) {
-        euros.setBilletVingt(quantite);
     }
 }
