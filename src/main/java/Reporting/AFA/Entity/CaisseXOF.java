@@ -5,15 +5,27 @@ import jakarta.persistence.*;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Data;
 import lombok.Getter;
 
 import java.util.Date;
 
 @Entity
+@Data
 public class CaisseXOF {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_agent")
+    private Agent agent;
+
+    private String natureCaisse;
+
+    @Transient
+    private Agence agence;
+
 
 
     @OneToOne
@@ -33,10 +45,12 @@ public class CaisseXOF {
         this.montantTotal = 0.0;
     }
 
-    public CaisseXOF(XOF xof) {
+    public CaisseXOF(XOF xof,Agent agent,String natureCaisse) {
         this.id = 0L;
         this.dateCreation = new Date();
         this.xof = xof;
+        this.agent = agent;
+        this.agence = agent.getAgence();
         if (this.xof != null) {
             this.montantTotal = xof.calculerMontantTotal();
         } else {
@@ -48,51 +62,5 @@ public class CaisseXOF {
         this.montantTotal = xof.calculerMontantTotal();
     }
 
-    public void setBilletDixMille(int quantite) {
-        xof.setBilletDixMille(quantite);
-    }
-
-    public void setBilletCinqMille(int quantite) {
-        xof.setBilletCinqMille(quantite);
-    }
-
-    public void setBilletDeuxMille(int quantite) {
-        xof.setBilletDeuxMille(quantite);
-    }
-
-    public void setBilletMille(int quantite) {
-        xof.setBilletMille(quantite);
-    }
-
-    public void setBilletCinqCent(int quantite) {
-        xof.setBilletCinqCent(quantite);
-    }
-    public void setPieceCinqCent(int quantite) {
-        xof.setPieceCent(quantite);
-    }
-
-    public void setPieceDeuxCent(int quantite) {
-        xof.setPieceDeuxCent(quantite);
-    }
-
-    public void setPieceCent(int quantite) {
-        xof.setPieceCent(quantite);
-    }
-
-    public void setPieceCinquante(int quantite) {
-        xof.setPieceCinquante(quantite);
-    }
-
-    public void setPieceVingtCinq(int quantite) {
-        xof.setPieceVingtCinq(quantite);
-    }
-
-    public void setPieceDix(int quantite) {
-        xof.setPieceDix(quantite);
-    }
-
-    public void setPieceCinq(int quantite) {
-        xof.setPieceCinq(quantite);
-    }
 
 }

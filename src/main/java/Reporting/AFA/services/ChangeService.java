@@ -1,5 +1,6 @@
 package Reporting.AFA.services;
 
+import Reporting.AFA.Entity.Agent;
 import Reporting.AFA.dto.ChangeDto;
 import Reporting.AFA.Entity.Change;
 import Reporting.AFA.Repository.ChangeRepository;
@@ -19,8 +20,9 @@ public class ChangeService {
         this.changeRepository = changeRepository;
     }
 
-    public Change saveChange(ChangeDto changeDto) {
+    public Change saveChange(ChangeDto changeDto, Agent agent) {
         Change change = changeDto.toEntity();
+        change.setAgent(agent);
         return changeRepository.save(change);
     }
 
@@ -30,6 +32,10 @@ public class ChangeService {
 
     public Optional<Change> getChangeById(String changeId) {
         return changeRepository.findById(changeId);
+    }
+
+    public void deleteChangeById(String changeId) {
+        changeRepository.deleteById(changeId);
     }
 
     // Ajoutez les méthodes pour la mise à jour (PUT) et la suppression (DELETE) ici

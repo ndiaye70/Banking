@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Créer une entreprise</title>
+</head>
+<body>
+<h3>Créer une nouvelle entreprise</h3>
+<form th:action="@{/entreprises/save}" method="post" th:object="${entrepriseDto}" enctype="multipart/form-data">
+    <label>Nom: <input type="text" th:field="*{nom}" required></label><br>
+    <label>Prénom: <input type="text" th:field="*{prenom}" required></label><br>
+    <label>Numéro de Téléphone: <input type="text" th:field="*{numTel}" required></label><br>
+    <label>CNI: <input type="text" th:field="*{cni}" required></label><br>
+    <label>Nom De l'Entreprise: <input type="text" th:field="*{nom_Entreprise}" required></label><br>
+    <label>Type d'entreprise:
+        <select th:field="*{typeEntreprise}" required>
+            <option th:each="type : ${T(Reporting.AFA.Entity.Entreprise.TypeEntreprise).values()}"
+                    th:value="${type}" th:text="${type.getLabel()}"></option>
+        </select>
+    </label><br>
+    <label>Demande:
+        <select th:field="*{demande}" required>
+            <option th:each="demande : ${T(Reporting.AFA.Entity.Entreprise.Demande).values()}"
+                    th:value="${demande}" th:text="${demande.getLabel()}"></option>
+        </select>
+    </label><br>
+    <button type="submit">Enregistrer</button>
+</form>
+</body>
+</html>

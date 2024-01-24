@@ -7,23 +7,22 @@
 <body>
 <h3>Créer une nouvelle opération</h3>
 <form action="save" method="post" th:object="${operationsDto}">
-    <label>Agent: <input type="text" th:field="*{agent}" required></label><br>
     <label>Service:
         <select th:field="*{service}" required>
             <option th:each="s : ${T(Reporting.AFA.Entity.Operations.Service).values()}"
-                    th:value="${s}" th:text="${s}"></option>
+                    th:value="${s}" th:text="${s.getLabel()}"></option>
         </select>
     </label><br>
     <label>Nature d'Opération:
         <select th:field="*{natureOperation}" required>
             <option th:each="n : ${T(Reporting.AFA.Entity.Operations.NatureOperation).values()}"
-                    th:value="${n}" th:text="${n}"></option>
+                    th:value="${n}" th:text="${n.getLabel()}"></option>
         </select>
     </label><br>
     <label>Civilite:
         <select th:field="*{civilite}" required>
             <option th:each="c : ${T(Reporting.AFA.Entity.Operations.Civilite).values()}"
-                    th:value="${c}" th:text="${c}"></option>
+                    th:value="${c}" th:text="${c.getLabel()}"></option>
         </select>
     </label><br>
     <label>Nom: <input type="text" th:field="*{nom}" required></label><br>

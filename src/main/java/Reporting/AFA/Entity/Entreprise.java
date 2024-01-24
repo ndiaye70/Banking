@@ -1,13 +1,12 @@
 package Reporting.AFA.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.UUID;
 
@@ -18,12 +17,12 @@ import java.util.UUID;
 public class Entreprise {
     @Id
     private String id;
-    private Date dateCreation;
-    private String agent;
+    private String dateCreation;
     private String nom;
     private String prenom;
     private String numTel;
     private String cni;
+    private String nom_Entreprise;
 
     @Enumerated(EnumType.STRING)
     private TypeEntreprise typeEntreprise;
@@ -33,17 +32,37 @@ public class Entreprise {
 
     private double montant;
 
+    @ManyToOne
+    @JoinColumn(name = "id_agent")
+    private Agent agent;
+
+
     private String generateId() {
         return UUID.randomUUID().toString();
     }
 
     public Entreprise() {
         this.id = generateId();
-        this.dateCreation = new Date();
+        this.id = generateId();
+        LocalDateTime now = LocalDateTime.now();
+
+        // Formater la date avec suppression des fractions de seconde
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        this.dateCreation = now.format(formatter);
+
     }
 
     public enum TypeEntreprise {
-        GIE, Entreprise_Individuelle_avec_Nom_Commercial, Entreprise_Individuelle_sans_Nom_Commercial
+        GIE("GIE"), Entreprise_Individuelle_avec_Nom_Commercial("Entreprise Individuelle avec Nom Commercial"), Entreprise_Individuelle_sans_Nom_Commercial("Entreprise Individuelle sans Nom Commercial");
+        private final String label;
+
+        TypeEntreprise(String label) {
+            this.label = label;
+        }
+
+        public String getLabel() {
+            return label;
+        }
     }
 
     public enum Demande {

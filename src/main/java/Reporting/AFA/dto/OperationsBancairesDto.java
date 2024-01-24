@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OperationsBancairesDto {
-    private String agent;
     private String banques;
     private String natureOperations;
     private String civilite;
@@ -24,7 +23,6 @@ public class OperationsBancairesDto {
 
     public OperationsBancaires toEntity() {
         OperationsBancaires operationsBancaires = new OperationsBancaires();
-        operationsBancaires.setAgent(agent);
         operationsBancaires.setBanques(OperationsBancaires.Banques.valueOf(banques));
         operationsBancaires.setNatureOperations(OperationsBancaires.NatureOperations.valueOf(natureOperations));
         operationsBancaires.setCivilite(OperationsBancaires.Civilite.valueOf(civilite));

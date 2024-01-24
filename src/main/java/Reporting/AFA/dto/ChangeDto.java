@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ChangeDto {
 
-    private String agent;
     private String prenom;
     private String nom;
     private String service;
@@ -21,7 +20,6 @@ public class ChangeDto {
 
     public Change toEntity() {
         Change change = new Change();
-        change.setAgent(agent);
         change.setPrenom(prenom);
         change.setNom(nom);
         change.setService(Change.Service.valueOf(service));

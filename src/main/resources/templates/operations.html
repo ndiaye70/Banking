@@ -2,35 +2,44 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Liste des opérations personnalisées</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-<h3>Listes des operations</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Nature d'Opérations</th>
-                <th>Montant</th>
-                <th>Numéro de Téléphone</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="operation:${listOperations}">
-                <td th:text="${operation.id}"></td>
-                <td th:text="${operation.date}"></td>
-                <td th:text="${operation.nom}"></td>
-                <td th:text="${operation.prenom}"></td>
-                <td th:text="${operation.natureOperation}"></td>
-                <td th:text="${operation.montant}"></td>
-                <td th:text="${operation.numeroTelephone}"></td>
-            </tr>
-        </tbody>
-    </table>
+<h3>Liste des opérations personnalisées</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Caissier</th>
+        <th>Service</th>
+        <th>Nature Opérations</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Numéro de Téléphone</th>
+        <th>Montant</th>
+        <th>Autres</th>
+        <th>Statut</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customOperation : ${customOperations}">
+        <td th:text="${customOperation.caissier}"></td>
+        <td th:text="${customOperation.service}"></td>
+        <td th:text="${customOperation.natureOperation}"></td>
+        <td th:text="${customOperation.nom}"></td>
+        <td th:text="${customOperation.prenom}"></td>
+        <td th:text="${customOperation.numeroTelephone}"></td>
+        <td th:text="${customOperation.montant}"></td>
+        <td th:text="${customOperation.autres}"></td>
+        <td th:text="${customOperation.statut}"></td>
+        <td>
+
+        <a th:href="@{'/operations/' + ${customOperation.id} + '/edit'}">Modifier</a>
+        <a th:href="@{'/operations/' + ${customOperation.id} + '/delete'}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette opération ?')">Supprimer</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
-

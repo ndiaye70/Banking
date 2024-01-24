@@ -29,26 +29,7 @@ public class Dollars {
         // Le constructeur privé évite l'instanciation de cette classe.
     }
 
-    public double getValeur(String typeDollar) {
-        switch (typeDollar) {
-            case "billetUnDollar":
-                return 1;
-            case "billetDeuxDollars":
-                return 2;
-            case "billetCinqDollars":
-                return 5;
-            case "billetDixDollars":
-                return 10;
-            case "billetVingtDollars":
-                return 20;
-            case "billetCinquanteDollars":
-                return 50;
-            case "billetCentDollars":
-                return 100;
-            default:
-                throw new IllegalArgumentException("Type de billet inconnu : " + typeDollar);
-        }
-    }
+
 
     public double calculerMontantTotal() {
         return billetUnDollar * 1 +

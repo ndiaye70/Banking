@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OuvertureCpteEntrepriseDto {
-    private String agent;
     private String formeJuridique;
     private String rccm;
     private String ninea;
@@ -30,18 +29,17 @@ public class OuvertureCpteEntrepriseDto {
 
         // Appliquez les propriétés spécifiques à OuvertureCpteEntreprise
         OperationsDto ouvertureCpteEntrepriseDto;
-        ouvertureCpteEntreprise.setAgent(agent);
-        ouvertureCpteEntreprise.setFormeJuridique(OuvertureCpteEntreprise.FormeJuridique.valueOf(formeJuridique));
-        ouvertureCpteEntreprise.setRccm(rccm);
-        ouvertureCpteEntreprise.setNinea(ninea);
-        ouvertureCpteEntreprise.setDenominationSocial(denominationSocial);
-        ouvertureCpteEntreprise.setMontantDepotInitial(montantDepotInitial);
-        ouvertureCpteEntreprise.setNom(nom);
-        ouvertureCpteEntreprise.setPrenom(prenom);
-        ouvertureCpteEntreprise.setFonctions(fonctions);
-        ouvertureCpteEntreprise.setNumCNI_Passeport(numCNI_Passeport);
-        ouvertureCpteEntreprise.setNumTelephone(numTelephone);
-        ouvertureCpteEntreprise.setAdresse(adresse);
+        ouvertureCpteEntreprise.setFormeJuridique(OuvertureCpteEntreprise.FormeJuridique.valueOf(this.formeJuridique));
+        ouvertureCpteEntreprise.setRccm(this.rccm);
+        ouvertureCpteEntreprise.setNinea(this.ninea);
+        ouvertureCpteEntreprise.setDenominationSocial(this.denominationSocial);
+        ouvertureCpteEntreprise.setMontantDepotInitial(this.montantDepotInitial);
+        ouvertureCpteEntreprise.setNom(this.nom);
+        ouvertureCpteEntreprise.setPrenom(this.prenom);
+        ouvertureCpteEntreprise.setFonctions(this.fonctions);
+        ouvertureCpteEntreprise.setNumCNI_Passeport(this.numCNI_Passeport);
+        ouvertureCpteEntreprise.setNumTel(this.numTelephone);
+        ouvertureCpteEntreprise.setAdresse(this.adresse);
 
         return ouvertureCpteEntreprise;
     }

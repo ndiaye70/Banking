@@ -49,4 +49,15 @@ public class AgenceController {
         return "listAgence";
     }
 
-}
+    @GetMapping("/{agenceId}/delete")
+    public ResponseEntity<String> deleteAgence(@PathVariable Long agenceId) {
+        try {
+            agenceService.deleteAgence(agenceId);
+            return ResponseEntity.ok("Agence supprimée avec succès");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de la suppression de l'Agence");
+        }
+    }
+
+    }
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails de la Caisse</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Include html2pdf library -->
+    <script src="https://cdn.rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <!-- Script JavaScript -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#imprimerPdf').click(function () {
+                console.log('Clic sur le bouton Imprimer PDF');
+                // Récupérez le contenu HTML de la page
+                var content = $('#pdfContent').html();
+
+                // Convertissez le HTML en PDF
+                html2pdf(content, {
+                    margin: 10,
+                    filename: 'details_caisse.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                });
+            });
+        });
+    </script>
+
+</head>
+<body>
+<div id="pdfContent">
+<h3>Détails de la Caisse</h3>
+
+<!-- Affichage des détails de la caisse -->
+<div>
+    <label>Nature de la Caisse: <span th:text="${caisse.natureCaisse}"></span></label><br>
+    <label>Nom de l'Agent: <span th:text="${user.nom}"></span></label><br>
+    <label>Prénom de l'Agent: <span th:text="${user.prenom}"></span></label><br>
+    <label>Agence: <span th:text="${agence.nomAgence}"></span></label><br>
+    <label>Date de Création: <span th:text="${#dates.format(caisse.dateCreation, 'dd-MM-yyyy HH:mm:ss')}"></span></label><br>
+    <label> Devise : EURO </label><br>
+</div>
+
+<!-- Affichage des détails des Euros -->
+<div>
+    <label>Billet 500 € : <span th:text="${euros.billetCinqCents}"></span></label><br>
+    <label>Billet 200 € : <span th:text="${euros.billetDeuxCents}"></span></label><br>
+    <label>Billet 100 € : <span th:text="${euros.billetCent}"></span></label><br>
+    <label>Billet 50 € : <span th:text="${euros.billetCinquante}"></span></label><br>
+    <label>Billet 5 € : <span th:text="${euros.billetCinq}"></span></label><br>
+    <label>Billet 10 € : <span th:text="${euros.billetDix}"></span></label><br>
+    <label>Billet 20 € : <span th:text="${euros.billetVingt}"></span></label><br>
+
+    <label>Montant : <span th:text="${euros.calculerMontantTotal()}"></span></label><br>
+
+</div>
+
+</div>
+
+<!-- Ajoutez d'autres détails selon vos besoins -->
+
+<!-- Bouton de retour -->
+<a href="http://localhost:8081/ipsl/euros/list">Retour à la liste</a>
+<button id="imprimerPdf">Imprimer en PDF</button>
+
+</body>
+</html>

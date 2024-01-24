@@ -91,26 +91,7 @@ public class Euro {
         // Le constructeur privé évite l'instanciation de cette classe.
     }
 
-    public double getValeur(String typeEuro) {
-        switch (typeEuro) {
-            case "billetCinqCents":
-                return 500;
-            case "billetDeuxCents":
-                return 200;
-            case "billetCent":
-                return 100;
-            case "billetCinquante":
-                return 50;
-            case "billetCinq":
-                return 5;
-            case "billetDix":
-                return 10;
-            case "billetVingt":
-                return 20;
-            default:
-                throw new IllegalArgumentException("Type de billet ou pièce inconnu : " + typeEuro);
-        }
-    }
+
 
     public double calculerMontantTotal() {
         return billetCinqCents * 500 +

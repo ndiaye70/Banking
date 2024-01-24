@@ -1,13 +1,12 @@
 package Reporting.AFA.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.UUID;
 
@@ -19,9 +18,8 @@ public class OuvertureCpteEntreprise {
     @Id
     private String id;
 
-    private Date date;
+    private String date;
 
-    private String agent;
 
     // Attributs spécifiques à OuvertureCpteEntreprise
     private String typeCompte;
@@ -48,9 +46,12 @@ public class OuvertureCpteEntreprise {
 
     private String numCNI_Passeport;
 
-    private String numTelephone;
+    private String numTel;
 
     private String adresse;
+    @ManyToOne
+    @JoinColumn(name = "id_agent")
+    private Agent agent;
 
     private String generateId() {
         return UUID.randomUUID().toString();
@@ -58,7 +59,11 @@ public class OuvertureCpteEntreprise {
 
     public OuvertureCpteEntreprise() {
         this.id = generateId();
-        this.date = new Date();
+        LocalDateTime now = LocalDateTime.now();
+
+        // Formater la date avec suppression des fractions de seconde
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        this.date = now.format(formatter);
         this.typeCompte = "Compte_Courant";
     }
 
@@ -68,6 +73,18 @@ public class OuvertureCpteEntreprise {
     }
 
     public enum Pack {
-        Terru, Doolel, YaatalTPE, Ndariñ_microentreprises, AND_Jappo_GIE_TAMBALI
+        Terru("Terru"), Doolel("Doolel"), YaatalTPE("Yaatal TPE"), Ndariñ_microentreprises("Ndariñ Microentreprises"),
+        AND_Jappo_GIE_TAMBALI("AND Jappo GIE/TAMBALI");
+
+        private final String label;
+
+        Pack(String label) {
+            this.label = label;
+
+        }
+
+        public String getLabel() {
+            return label;
+        }
     }
 }

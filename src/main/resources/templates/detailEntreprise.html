@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails de l'entreprise</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Include html2pdf library -->
+    <script src="https://cdn.rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <!-- Script JavaScript -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#imprimerPdf').click(function () {
+                console.log('Clic sur le bouton Imprimer PDF');
+                // Récupérez le contenu HTML de la page
+                var content = $('#pdfContent').html();
+
+                // Convertissez le HTML en PDF
+                html2pdf(content, {
+                    margin: 10,
+                    filename: 'details_caisse.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="pdfContent">
+    <div>
+        <h3>Quittance</h3>
+        <p>Agent : <span th:text="${nomComplet}"></span></p>
+        <p>Agence : <span th:text="${agence.nomAgence}"></span></p>
+        <p>Payé le : <span th:text="${date}"></span></p>
+        <p>Nom : <span th:text="${entrepriseDto.nom}"></span></p>
+        <p>Prénom : <span th:text="${entrepriseDto.prenom}"></span></p>
+        <p>Numéro de Téléphone : <span th:text="${entrepriseDto.numTel}"></span></p>
+        <p>CNI : <span th:text="${entrepriseDto.cni}"></span></p>
+        <p>Type d'entreprise : <span th:text="${entrepriseDto.typeEntreprise.label}"></span></p>
+        <p>Nom de l'entreprise : <span th:text="${entrepriseDto.getNom_Entreprise()}"></span></p>
+        <p>Demande : <span th:text="${entrepriseDto.demande.label}"></span></p>
+        <p>Montant : <span th:text="${Montant}"></span></p>
+    </div>
+
+
+
+
+</div>
+
+
+<!-- Ajoutez d'autres détails si nécessaire -->
+
+<button id="imprimerPdf">Imprimer en PDF</button>
+
+
+</body>
+</html>

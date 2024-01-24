@@ -9,9 +9,6 @@ import lombok.NoArgsConstructor;
 public class OperationsDto {
 
 
-    public String getAgent() {
-        return agent;
-    }
 
     public String getService() {
         return service;
@@ -48,8 +45,6 @@ public class OperationsDto {
     public String getStatut() {
         return statut;
     }
-    private String agent;
-
     private String service;
     private String natureOperation;
     private String civilite;
@@ -63,7 +58,7 @@ public class OperationsDto {
 
     public Operations convertDtoToEntity() {
         Operations operations = new Operations();
-        operations.setAgent(agent);
+        //operations.setAgent(agent);
         operations.setService(Operations.Service.valueOf(service));
         operations.setNatureOperation(Operations.NatureOperation.valueOf(natureOperation));
         operations.setCivilite(Operations.Civilite.valueOf(civilite));

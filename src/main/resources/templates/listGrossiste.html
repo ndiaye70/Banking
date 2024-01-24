@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des Grossistes</title>
+</head>
+<body>
+
+<h3>Liste des Grossistes</h3>
+
+<table border="1">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Caissier</th>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Numéro de Téléphone</th>
+    <th>Montant</th>
+    <th>Frais</th>
+    <th>Autres</th>
+    <th>Statut</th>
+    <th>Montant Payé par</th>
+    <th>Frais Payé par</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="grossiste : ${customGrossiste}">
+    <td th:text="${grossiste.date}"></td>
+    <td th:text="${grossiste.caissier}"></td>
+    <td th:text="${grossiste.nom}"></td>
+    <td th:text="${grossiste.prenom}"></td>
+    <td th:text="${grossiste.numTel}"></td>
+    <td th:text="${grossiste.montant}"></td>
+    <td th:text="${grossiste.frais}"></td>
+    <td th:text="${grossiste.autres}"></td>
+    <td th:text="${grossiste.statut}"></td>
+    <td th:text="${grossiste.montantPayépar}"></td>
+    <td th:text="${grossiste.fraisPayépar}"></td>
+    <td>
+      <a th:href="@{'/grossistes/' + ${grossiste.id} + '/edit'}">Éditer</a>
+      |
+      <a th:href="@{'/grossistes/' + ${grossiste.id} + '/delete'}">Supprimer</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

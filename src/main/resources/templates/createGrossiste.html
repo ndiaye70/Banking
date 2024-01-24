@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Créer un Grossiste</title>
+</head>
+<body>
+<h3>Créer un nouveau Grossiste</h3>
+<form th:action="@{/grossistes/save}" method="post" th:object="${grossisteDto}">
+  <label>Nom : <input type="text" th:field="*{nom}" required></label><br>
+  <label>Prénom : <input type="text" th:field="*{prenom}" required></label><br>
+  <label>Numéro de Téléphone : <input type="text" th:field="*{numTel}" required></label><br>
+  <label>Civilite :
+    <select th:field="*{civilite}">
+      <option value="M">M.</option>
+      <option value="Mme">Mme</option>
+    </select>
+  </label><br>
+  <label>Montant : <input type="number" step="0.01" th:field="*{montant}" required></label><br>
+  <label>Montant Payé par :
+    <select th:field="*{montantPayePar}">
+      <option value="Especes">Espèces</option>
+      <option value="Wave">Wave</option>
+      <option value="OM">OM</option>
+    </select>
+  </label><br>
+  <label>Frais : <input type="number" step="0.01" th:field="*{frais}" required></label><br>
+  <label>Frais Payés par :
+    <select th:field="*{fraisPayePar}">
+      <option value="Especes">Espèces</option>
+      <option value="Wave">Wave</option>
+      <option value="OM">OM</option>
+    </select>
+  </label><br>
+  <label>Autres : <input type="text" th:field="*{autres}"></label><br>
+  <label>Statut : <input type="text" th:field="*{statut}" required></label><br>
+
+  <button type="submit">Enregistrer</button>
+</form>
+</body>
+</html>

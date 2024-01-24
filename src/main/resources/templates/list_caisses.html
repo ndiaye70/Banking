@@ -5,25 +5,30 @@
     <title>Liste des Caisses - Billetage</title>
 </head>
 <body>
-<h3>Liste des Caisses - Billetage</h3>
+<h3>Liste des Caisses</h3>
 <table>
     <thead>
     <tr>
         <th>ID</th>
         <th>Date et Heure</th>
         <!-- Ajouter d'autres colonnes si nécessaire -->
-        <th>Action</th>
+        <th>Montant</th>
+        <th>Type De Caisse</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="caisse : ${caisses}">
+    <tr th:each="caisse : ${list_caisses}">
         <td th:text="${caisse.id}"></td>
-        <td th:text="${caisse.dateCreation}"></td>
+        <td th:text="${#dates.format(caisse.dateCreation, 'dd-MM-yyyy HH:mm:ss')}"></td>
+        <td th:text="${caisse.montantTotal}"></td>
+        <td th:text="${caisse.natureCaisse}"></td>
         <!-- Ajouter d'autres colonnes si nécessaire -->
         <td>
-            <a th:href="@{/caisses/{id}/details(id=${caisse.id})}">Détails</a>
-            <a th:href="@{/caisses/{id}/edit(id=${caisse.id})}">Modifier</a>
-            <a th:href="@{/caisses/{id}/delete(id=${caisse.id})}">Supprimer</a>
+            <a th:href="@{/euros/caisse/{caisseId}/detail(caisseId=${caisse.id})}">Détails</a>
+            <a th:href="@{/euros/caisse/{caisseId}/edit(caisseId=${caisse.id})}">Modifier</a>
+            <a th:href="@{/euros/caisse/{caisseId}/delete(caisseId=${caisse.id})}" >Supprimer</a>
+
+
         </td>
     </tr>
     </tbody>

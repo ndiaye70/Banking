@@ -4,6 +4,7 @@ import Reporting.AFA.Entity.AppRole;
 import Reporting.AFA.Entity.AppUser;
 import Reporting.AFA.Security.repo.AppRoleRepository;
 import Reporting.AFA.Security.repo.UserRepository;
+import Reporting.AFA.dto.AppUserDto;
 import jakarta.persistence.GenerationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,6 +40,10 @@ public class AccountServiceImpl implements AccountService {
         AppUser savedUser=userRepository.save(user);
 
         return savedUser;
+    }
+    public AppUser save(AppUserDto appUserDto){
+        AppUser appUser=appUserDto.toEntity();
+        return userRepository.save(appUser);
     }
 
     @Override

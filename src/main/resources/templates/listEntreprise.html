@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des entreprises</title>
+</head>
+<body>
+<h3>Liste des entreprises</h3>
+<table>
+  <thead>
+  <tr>
+    <th>Date de création</th>
+    <th>Agent</th>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Numéro de Téléphone</th>
+    <th>CNI</th>
+    <th>Nom de l'entreprise</th>
+    <th>Type d'entreprise</th>
+    <th>Demande</th>
+    <th>Montant</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="entreprise : ${listEntreprise}">
+    <td th:text="${entreprise.dateCreation}"></td>
+    <td th:text="${entreprise.agent}"></td>
+    <td th:text="${entreprise.nom}"></td>
+    <td th:text="${entreprise.prenom}"></td>
+    <td th:text="${entreprise.numTel}"></td>
+    <td th:text="${entreprise.cni}"></td>
+    <td th:text="${entreprise.nom_Entreprise}"></td>
+    <td th:text="${entreprise.typeEntreprise.label}"></td>
+    <td th:text="${entreprise.demande.label}"></td>
+    <td th:text="${entreprise.montant}"></td>
+    <td>
+      <a th:href="@{'/entreprises/' + ${entreprise.id}+'/edit'}">Modifier</a>
+      <a th:href="@{'/entreprises/' + ${entreprise.id} + '/delete'}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette entreprise ?')">Supprimer</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

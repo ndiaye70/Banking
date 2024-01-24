@@ -11,13 +11,12 @@
 <div>
     <label> Agent: <span th:text="${nomComplet}"></span></label><br>
     <label>Agence: <span th:text="${agence.nomAgence}"></span></label><br>
-    <label>Nature de la Caisse: Billetage</label><br>
     <label>Date et Heure: <span th:text="${dateHeure}"></span></label><br>
-</div>
 
 
 
-<form th:action="billetage" method="post" th:object="${EuroDto}">
+
+<form th:action="caisse" method="post" th:object="${EuroDto}">
     <!-- Section de saisie des quantités -->
     <label>Quantité de Billet 500 € : <input type="number" th:field="*{billetCinqCents}" required></label><br>
     <label>Quantité de Billet 200 € : <input type="number" th:field="*{billetDeuxCents}" required></label><br>
@@ -28,8 +27,16 @@
     <label>Quantité de Billet 20 € : <input type="number" th:field="*{billetVingt}" required></label><br>
 
 
+
+    <label for="natureCaisse">Nature de la Caisse:</label>
+    <select id="natureCaisse" name="natureCaisse" required>
+        <option value="Caisse">Caisse</option>
+        <option value="Ouverture_caisse">Ouverture de Caisse</option>
+        <option value="Fermeture_Caisse">Fermeture de Caisse</option>
+    </select>
+
+
     <!-- Section d'affichage du montant total -->
-    <label>Montant Total: <span th:text="${montantTotal}"></span></label><br>
 
     <button type="submit">Valider</button>
 </form>

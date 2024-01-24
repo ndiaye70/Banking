@@ -1,13 +1,12 @@
 package Reporting.AFA.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.UUID;
 
@@ -19,8 +18,7 @@ public class OperationsBancaires {
     @Id
     private String id;
 
-    private Date date;
-    private String agent;
+    private String date;
 
     @Enumerated(EnumType.STRING)
     private Banques banques;
@@ -36,10 +34,14 @@ public class OperationsBancaires {
     private String nom;
     private String prenom;
     private String numeroTelephone;
-    private double montant;
-    private double commissions;
+    private Double montant;
+    private Double commissions;
     private String autres;
     private String statut;
+
+    @ManyToOne
+    @JoinColumn(name = "id_agent")
+    private Agent agent;
 
     private String generateId() {
         return UUID.randomUUID().toString();
@@ -47,7 +49,11 @@ public class OperationsBancaires {
 
     public OperationsBancaires() {
         this.id = generateId();
-        this.date = new Date();
+        LocalDateTime now = LocalDateTime.now();
+
+        // Formater la date avec suppression des fractions de seconde
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        this.date = now.format(formatter);
     }
 
     // Enumérations
@@ -56,8 +62,21 @@ public class OperationsBancaires {
     }
 
     public enum NatureOperations {
-        Depot, Retrait, Virement, Paiement
-    }
+        Depot("Dépôts"), Retrait("Retrait"),Achat_Carte_Prépayée("Achat Carte Prépayée") ,
+        Recharge_Carte_Prépayée("Recharge Carte Prépayée")  ,Décaissement_UBA_CP("Décaissement UBA (CP)"),
+        Dépôt_initial("Dépôt initial") ;
+
+        private final String label;
+
+        NatureOperations(String label) {
+            this.label = label;
+        }
+
+        public String getLabel() {
+            return label;
+
+        }
+        }
 
     public enum Civilite {
         Mr, Mme

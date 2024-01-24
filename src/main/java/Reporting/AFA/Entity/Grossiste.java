@@ -1,13 +1,12 @@
 package Reporting.AFA.Entity;
 
+import jakarta.persistence.*;
 import lombok.Data;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
 
 
 import javax.persistence.Table;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.UUID;
 
@@ -19,7 +18,7 @@ public class Grossiste {
     @Id
     private String id;
 
-    private Date date;
+    private String date;
 
 
     private String NatureOperations;
@@ -30,23 +29,31 @@ public class Grossiste {
     private String nom;
     private String prenom;
     private String numTel;
-    private double montant;
+    private Double montant;
 
     @Enumerated(EnumType.STRING)
-    private PayePar payePar;
+    private MontantPayePar montantPayePar;
 
-    private double frais;
+    private Double frais;
 
     @Enumerated(EnumType.STRING)
-    private PayesPar payesPar;
+    private FraisPayePar fraisPayePar;
 
     private String autres;
     private String statut;
+    @ManyToOne
+    @JoinColumn(name = "id_agent")
+    private Agent agent;
+
 
     // Constructeur sans paramètres
     public Grossiste() {
         this.id = generateId();
-        this.date = new Date();
+        LocalDateTime now = LocalDateTime.now();
+
+        // Formater la date avec suppression des fractions de seconde
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        this.date = now.format(formatter);
         this.NatureOperations = "Depot_grossiste_BNB";
     }
 
@@ -61,11 +68,11 @@ public class Grossiste {
         M, Mme
     }
 
-    public enum PayePar {
+    public enum MontantPayePar {
         Especes, Wave, OM
     }
 
-    public enum PayesPar {
+    public enum FraisPayePar {
         Especes, Wave, OM
         // Ajoutez les valeurs spécifiques ici
     }

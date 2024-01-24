@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class OuvertureCompteDto{ private String typeCompte;
-        private String agent;
+public class OuvertureCompteDto{
+        private OuvertureCompte.TypeCompte typeCompte;
         private String civilite;
         private String nom;
         private String prenom;
@@ -20,15 +20,14 @@ public class OuvertureCompteDto{ private String typeCompte;
         private String numCni_Passeport;
         private String nomConjoint_Conjointe;
         private String nom_PrenomMere;
-        private String pack;
+        private OuvertureCompte.Pack pack;
         private double montantDepotInitial;
 
         public OuvertureCompte toEntity() {
             OuvertureCompte ouvertureCompte = new OuvertureCompte();
-            ouvertureCompte.setTypeCompte(OuvertureCompte.TypeCompte.valueOf(typeCompte));
+            ouvertureCompte.setTypeCompte(this.typeCompte);
             ouvertureCompte.setCivilite(OuvertureCompte.Civilite.valueOf(civilite));
             ouvertureCompte.setNom(nom);
-            ouvertureCompte.setAgent(agent);
             ouvertureCompte.setPrenom(prenom);
             ouvertureCompte.setNumTel(numTel);
             ouvertureCompte.setAdresse(adresse);
@@ -36,7 +35,7 @@ public class OuvertureCompteDto{ private String typeCompte;
             ouvertureCompte.setNumCni_Passeport(numCni_Passeport);
             ouvertureCompte.setNomConjoint_Conjointe(nomConjoint_Conjointe);
             ouvertureCompte.setNom_PrenomMere(nom_PrenomMere);
-            ouvertureCompte.setPack(OuvertureCompte.Pack.valueOf(pack));
+            ouvertureCompte.setPack(this.pack);
             ouvertureCompte.setMontantDepotInitial(montantDepotInitial);
             return ouvertureCompte;
         }

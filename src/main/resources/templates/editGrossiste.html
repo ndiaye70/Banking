@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Éditer Grossiste</title>
+</head>
+<body>
+
+<h3>Éditer Grossiste</h3>
+
+<form th:object="${grossisteDto}" th:action="@{'/grossistes/' + ${grossisteDto.id} + '/edit'}" method="post">
+
+    <label>ID:</label>
+    <input type="text" th:field="*{id}" readonly="readonly"/><br>
+
+    <label>Date:</label>
+    <input type="text" th:field="*{date}" readonly="readonly"/><br>
+
+    <label>Nature d'Opérations:</label>
+    <input type="text" th:field="*{natureOperations}" readonly="readonly"/><br>
+
+    <label>Civilite:</label>
+    <select th:field="*{civilite}">
+        <option value="M" th:selected="${grossisteDto.civilite == 'M'}">M</option>
+        <option value="Mme" th:selected="${grossisteDto.civilite == 'Mme'}">Mme</option>
+    </select><br>
+
+    <label>Nom:</label>
+    <input type="text" th:field="*{nom}"/><br>
+
+    <label>Prénom:</label>
+    <input type="text" th:field="*{prenom}"/><br>
+
+    <label>Numéro de Téléphone:</label>
+    <input type="text" th:field="*{numTel}"/><br>
+
+    <label>Montant:</label>
+    <input type="text" th:field="*{montant}"/><br>
+
+    <label>Montant Payé par:</label>
+    <select th:field="*{montantPayePar}">
+        <option value="Especes" th:selected="${grossisteDto.montantPayePar == 'Especes'}">Especes</option>
+        <option value="Wave" th:selected="${grossisteDto.montantPayePar == 'Wave'}">Wave</option>
+        <option value="OM" th:selected="${grossisteDto.montantPayePar == 'OM'}">OM</option>
+    </select><br>
+
+    <label>Frais:</label>
+    <input type="text" th:field="*{frais}"/><br>
+
+    <label>Frais Payé par:</label>
+    <select th:field="*{fraisPayePar}">
+        <option value="Especes" th:selected="${grossisteDto.fraisPayePar == 'Especes'}">Especes</option>
+        <option value="Wave" th:selected="${grossisteDto.fraisPayePar == 'Wave'}">Wave</option>
+        <option value="OM" th:selected="${grossisteDto.fraisPayePar == 'OM'}">OM</option>
+    </select><br>
+
+    <label>Autres:</label>
+    <input type="text" th:field="*{autres}"/><br>
+
+    <label>Statut:</label>
+    <input type="text" th:field="*{statut}"/><br>
+
+    <input type="submit" value="Enregistrer les modifications"/>
+</form>
+
+<a th:href="@{'/grossistes/list'}">Retour à la liste des Grossistes</a>
+
+</body>
+</html>

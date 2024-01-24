@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -35,27 +37,15 @@ public class CaisseService {
         this.userRepository=userRepository;
     }
 
-    public Caisse convertirDtoEnCaisse(CaisseDto caisseDto) {
-        Caisse caisse = new Caisse();
-        Euro euros = new Euro();
-        caisse.setEuros(euros);
-        euros.setBilletCinqCents(caisseDto.getBilletCinqCents());
-        euros.setBilletDeuxCents(caisseDto.getBilletDeuxCents());
-        euros.setBilletCent(caisseDto.getBilletCent());
-        euros.setBilletCinquante(caisseDto.getBilletCinquante());
-        euros.setBilletCinq(caisseDto.getBilletCinq());
-        euros.setBilletDix(caisseDto.getBilletDix());
-        euros.setBilletVingt(caisseDto.getBilletVingt());
 
-        return caisse;
-    }
+
     @Transactional
 
-    public Caisse saisirCaisse(Euro euro, Agent agent) {
+    public Caisse saisirCaisse(Euro euro, Agent agent,String natureCaisse) {
         Caisse caisse=new Caisse();
         caisse.setEuros(euro);
         caisse.setAgent(agent);
-        caisse.setNatureCaisse("billetage");
+        caisse.setNatureCaisse(natureCaisse);
         caisse.setDateCreation(new Date());
         caisse.calculerMontantTotal();
         return caisseRepository.save(caisse);
@@ -69,21 +59,42 @@ public class CaisseService {
         return caisseRepository.findById(caisseId).orElse(null);
     }
 
-    public Caisse updateCaisse(Long caisseId, CaisseDto caisseDto) {
+    @Transactional
+    public Caisse updateCaisse(Long caisseId, Euro euro, Agent agent) {
         Optional<Caisse> optionalCaisse = caisseRepository.findById(caisseId);
 
         if (optionalCaisse.isPresent()) {
             Caisse caisse = optionalCaisse.get();
-            Caisse updatedCaisse = convertirDtoEnCaisse(caisseDto);
-            updatedCaisse.setId(caisse.getId());
-            updatedCaisse.setDateCreation(caisse.getDateCreation());
-            updatedCaisse.calculerMontantTotal();
+            // Mise à jour de la date
+            //caisse.setDateCreation(new Date());
 
-            return caisseRepository.save(updatedCaisse);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+            // Créez la date actuelle
+            Date currentDate = new Date();
+
+            // Formatez la date selon le format spécifié
+            String formattedDate = dateFormat.format(currentDate);
+            try {
+                caisse.setDateCreation(dateFormat.parse(formattedDate));
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            caisse.setEuros(euro);
+
+
+            caisse.setAgent(agent);
+
+            // Recalculer le montant total après la mise à jour des euros
+            caisse.calculerMontantTotal();
+
+            // Enregistrez les modifications dans la base de données
+            return caisseRepository.save(caisse);
         } else {
             throw new RuntimeException("Caisse not found with id: " + caisseId);
         }
     }
+
 
     public void deleteCaisse(Long caisseId) {
         caisseRepository.deleteById(caisseId);

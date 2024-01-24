@@ -32,5 +32,9 @@ public class AgenceService {
 
     }
 
+    public void deleteAgence(Long agenceId) {
+        agenceRepository.deleteById(agenceId);
+    }
+
 
 }

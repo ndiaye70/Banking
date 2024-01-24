@@ -1,5 +1,6 @@
 package Reporting.AFA.services;
 
+import Reporting.AFA.Entity.Agent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,4 +47,6 @@ public class XOFService {
     public XOF getXOFById(Long xofId) {
         return xofRepository.findById(xofId).orElse(null);
     }
+
+
 }

@@ -8,12 +8,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Entity
 @Table(name="Utilisateur",uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class AppUser {
@@ -28,6 +28,13 @@ public class AppUser {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<AppRole> roles;
+
+    private String generateId() {
+        return UUID.randomUUID().toString();
+    }
+    public AppUser(){
+        this.id=generateId();
+    }
 
 
 
