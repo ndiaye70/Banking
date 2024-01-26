@@ -18,8 +18,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
+import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
 
 import javax.sql.DataSource;
+
+import static org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter.Directive.COOKIES;
 
 @Configuration
 @EnableWebSecurity
@@ -57,12 +61,14 @@ public class SecurityConfig {
                 authorize ->authorize.requestMatchers("/ipsl/**").permitAll()
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.POST, "/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/registration/**").permitAll()
+                       // .requestMatchers("/**").hasRole("USER")
+                       // .requestMatchers(HttpMethod.POST, "/**").permitAll()
+                        //.anyRequest().authenticated()
                 );
         http
                 .csrf(AbstractHttpConfigurer::disable);
+
 
         http
                 .formLogin(form -> form
@@ -76,7 +82,7 @@ public class SecurityConfig {
                 );
         http
                 .logout((logout) ->logout
-                                        .deleteCookies("remove")
+                        .addLogoutHandler(new HeaderWriterLogoutHandler(new ClearSiteDataHeaderWriter(COOKIES)))
                                         .invalidateHttpSession(false)
                                         .logoutUrl("/ipsl/logout")
                                         .logoutSuccessUrl("/login"));
