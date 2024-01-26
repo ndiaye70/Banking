@@ -62,7 +62,7 @@ public class SecurityConfig {
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/registration/**").permitAll()
-                       // .requestMatchers("/**").hasRole("USER")
+                        .requestMatchers("/**").hasRole("USER")
                        // .requestMatchers(HttpMethod.POST, "/**").permitAll()
                         //.anyRequest().authenticated()
                 );
@@ -83,6 +83,7 @@ public class SecurityConfig {
         http
                 .logout((logout) ->logout
                         .addLogoutHandler(new HeaderWriterLogoutHandler(new ClearSiteDataHeaderWriter(COOKIES)))
+                                .deleteCookies("JSESSIONID")
                                         .invalidateHttpSession(false)
                                         .logoutUrl("/ipsl/logout")
                                         .logoutSuccessUrl("/login"));
