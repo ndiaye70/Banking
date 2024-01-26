@@ -59,11 +59,28 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/**").hasRole("USER")
                         .requestMatchers(HttpMethod.POST, "/**").permitAll()
-                        .anyRequest().authenticated())
-                .formLogin(Customizer.withDefaults()
+                        .anyRequest().authenticated()
                 );
         http
                 .csrf(AbstractHttpConfigurer::disable);
+
+        http
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .usernameParameter("username")
+                        .defaultSuccessUrl("/operations/list")
+                        .permitAll()
+
+
+
+                );
+        http
+                .logout((logout) ->logout
+                                        .deleteCookies("remove")
+                                        .invalidateHttpSession(false)
+                                        .logoutUrl("/ipsl/logout")
+                                        .logoutSuccessUrl("/login"));
+
 
 
         http.userDetailsService(userDetailsServiceImpl);

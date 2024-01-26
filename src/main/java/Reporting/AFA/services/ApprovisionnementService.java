@@ -1,14 +1,12 @@
 package Reporting.AFA.services;
 
+import Reporting.AFA.Entity.Agent;
 import Reporting.AFA.Repository.ApprovisionnementRepository;
 import Reporting.AFA.dto.ApprovisionnementDto;
 import Reporting.AFA.Entity.Approvisionnement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import java.util.Optional;
-
 @Service
 public class ApprovisionnementService {
 
@@ -24,9 +22,7 @@ public class ApprovisionnementService {
         return approvisionnementRepository.save(approvisionnement);
     }
 
-    public List<Approvisionnement> getAllApprovisionnements() {
-        return approvisionnementRepository.findAll();
-    }
+
 
     public Optional<Approvisionnement> getApprovisionnementById(String approvisionnementId) {
         return approvisionnementRepository.findById(approvisionnementId);

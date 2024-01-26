@@ -24,6 +24,14 @@ public class AccountServiceImpl implements AccountService {
     private AppRoleRepository appRoleRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+
+    @Autowired
+    public AccountServiceImpl(UserRepository userRepository, AppRoleRepository appRoleRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.appRoleRepository = appRoleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
     @Override
     public AppUser addNewUser(String username, String Prenom, String Nom, String email, String password, String confirmPassword) {
         AppUser user=userRepository.findByUsername(username);
@@ -41,10 +49,15 @@ public class AccountServiceImpl implements AccountService {
 
         return savedUser;
     }
-    public AppUser save(AppUserDto appUserDto){
-        AppUser appUser=appUserDto.toEntity();
+    @Override
+    public AppUser save(AppUserDto appUserDto) {
+        AppUser appUser = appUserDto.toEntity();
+        AppUser user=userRepository.findByUsername(appUser.getUsername());
+        if(user!=null) throw new RuntimeException("L'utilisateur existe deja ");
+        appUser.setPassword(passwordEncoder.encode(appUserDto.getPassword()));
         return userRepository.save(appUser);
     }
+
 
     @Override
     public AppRole addNewRole(String role) {

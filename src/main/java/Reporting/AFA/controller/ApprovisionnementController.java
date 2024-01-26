@@ -32,10 +32,6 @@ public class ApprovisionnementController {
         }
     }
 
-    @GetMapping("/getAll")
-    public List<Approvisionnement> getAllApprovisionnements() {
-        return approvisionnementService.getAllApprovisionnements();
-    }
 
     @GetMapping("/{approvisionnementId}")
     public ResponseEntity<Approvisionnement> getApprovisionnementById(@PathVariable String approvisionnementId) {
