@@ -62,8 +62,9 @@ public class SecurityConfig {
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/registration/**").permitAll()
+                        .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/**").hasRole("USER")
-                       // .requestMatchers(HttpMethod.POST, "/**").permitAll()
+                       .requestMatchers(HttpMethod.GET, "/css**").permitAll()
                         //.anyRequest().authenticated()
                 );
         http

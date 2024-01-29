@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OuvertureCpteEntrepriseService {
+public class  OuvertureCpteEntrepriseService {
 
     private final OuvertureCpteEntrepriseRepository ouvertureCpteEntrepriseRepository;
 

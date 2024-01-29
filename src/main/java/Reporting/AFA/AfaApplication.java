@@ -12,7 +12,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EntityScan("Reporting.AFA.Entity")
 @ComponentScan(value = {"Reporting.AFA", "Reporting.AFA.Security"})
 @SpringBootApplication
-@EnableWebMvc
 public class AfaApplication {
 	public static void main(String[] args) {SpringApplication.run(AfaApplication.class, args);
 	}

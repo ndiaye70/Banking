@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Créer un cours du jour</title>
+</head>
+<body>
+<h3>Créer un nouveau cours du jour</h3>
+<form th:action="@{/exchange/new}" method="post" th:object="${exchange}">
+    <label>Achat Euro : <input type="text" th:field="*{achatEuro}" required></label><br>
+    <label>Vente Euro : <input type="text" th:field="*{venteEuro}" required></label><br>
+    <label>Achat USD : <input type="text" th:field="*{achatUSD}" required></label><br>
+    <label>Vente USD : <input type="text" th:field="*{venteUSD}" required></label><br>
+    <button type="submit">Enregistrer</button>
+</form>
+</body>
+</html>

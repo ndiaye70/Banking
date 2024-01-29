@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des cours du jour</title>
+    <style>
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            margin-bottom: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<div class="section">
+    <h2>Cours du jour - Achats :</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Euro</th>
+            <th>USD</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Loop through each courDuJour for achats and display its details -->
+        <tr th:each="courDuJour : ${courDuJourList}">
+            <td th:text="${courDuJour.achatEuro}"></td>
+            <td th:text="${courDuJour.achatUSD}"></td>
+            <td>
+                <a th:href="@{/cour-du-jour/edit/{id}(id=${courDuJour.id})}">Modifier</a>
+                <a th:href="@{/cour-du-jour/delete/{id}(id=${courDuJour.id})}" onclick="return confirm('Voulez-vous vraiment supprimer ce cours du jour ?')">Supprimer</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section">
+    <h2>Cours du jour - Ventes :</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Euro</th>
+            <th>USD</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Loop through each courDuJour for ventes and display its details -->
+        <tr th:each="courDuJour : ${courDuJourList}">
+            <td th:text="${courDuJour.venteEuro}"></td>
+            <td th:text="${courDuJour.venteUSD}"></td>
+            <td>
+                <a th:href="@{/cour-du-jour/edit/{id}(id=${courDuJour.id})}">Modifier</a>
+                <a th:href="@{/cour-du-jour/delete/{id}(id=${courDuJour.id})}" onclick="return confirm('Voulez-vous vraiment supprimer ce cours du jour ?')">Supprimer</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

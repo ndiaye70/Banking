@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier un approvisionnement</title>
+</head>
+<body>
+<h3>Modifier un approvisionnement</h3>
+<form th:action="@{/approvisionnements/{approvisionnementId}/edit(approvisionnementId=${approvisionnement1.id})}"
+      method="post"
+      th:object="${approvisionnement1}">
+    <input type="hidden" th:field="*{id}">
+    <label>Date : <input type="text" th:field="*{date}" readonly></label><br>
+    <label>Montant : <input type="number" step="0.01" th:field="*{montant}" required></label><br>
+    <label>Type :
+        <select th:field="*{type}" required>
+            <option th:each="type : ${T(Reporting.AFA.Entity.Approvisionnement.TYPE).values()}"
+                    th:value="${type}" th:text="${type.getLabel()}"></option>
+        </select>
+    </label><br>
+    <label>Origine :
+        <select th:field="*{origine}" required>
+            <option th:each="origine : ${T(Reporting.AFA.Entity.Approvisionnement.Origine).values()}"
+                    th:value="${origine}" th:text="${origine.getLabel()}"></option>
+        </select>
+    </label><br>
+    <label>Compte Caisse 1 :
+        <select th:field="*{compteCaisse1}" required>
+            <option th:each="compte : ${T(Reporting.AFA.Entity.Approvisionnement.Compte).values()}"
+                    th:value="${compte}" th:text="${compte.getLabel()}"></option>
+        </select>
+    </label><br>
+    <label>Destination :
+        <select th:field="*{destination}" required>
+            <option th:each="destination : ${T(Reporting.AFA.Entity.Approvisionnement.Origine).values()}"
+                    th:value="${destination}" th:text="${destination.getLabel()}"></option>
+        </select>
+    </label><br>
+    <label>Compte Caisse 2 :
+        <select th:field="*{compteCaisse2}" required>
+            <option th:each="compte : ${T(Reporting.AFA.Entity.Approvisionnement.Compte).values()}"
+                    th:value="${compte}" th:text="${compte.getLabel()}"></option>
+        </select>
+    </label><br>
+    <label>Devise :
+        <select th:field="*{devise}" required>
+            <option th:each="devise : ${T(Reporting.AFA.Entity.Approvisionnement.Devise).values()}"
+                    th:value="${devise}" th:text="${devise}"></option>
+        </select>
+    </label><br>
+    <label>Statut : <input type="text" th:field="*{statut}" required></label><br>
+
+    <button type="submit">Enregistrer</button>
+</form>
+</body>
+</html>

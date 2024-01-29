@@ -2,13 +2,10 @@ package Reporting.AFA.controller;
 
 import Reporting.AFA.Entity.Agent;
 import Reporting.AFA.Entity.AppUser;
-import Reporting.AFA.Entity.Operations;
 import Reporting.AFA.Security.Services.AccountServiceImpl;
 import Reporting.AFA.dto.CustomGrossisteResult;
-import Reporting.AFA.dto.CustomOperationResult;
 import Reporting.AFA.dto.GrossisteDto;
 import Reporting.AFA.Entity.Grossiste;
-import Reporting.AFA.dto.OperationsDto;
 import Reporting.AFA.services.AgentService;
 import Reporting.AFA.services.GrossisteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -115,17 +112,16 @@ public class GrossisteController {
     // Ajoutez les méthodes pour la mise à jour (PUT) et la suppression (DELETE) ici
 
 
+    @GetMapping("/{grossisteId}/delete")
+    public String deleteGrossiste(@PathVariable String grossisteId, RedirectAttributes redirectAttributes) {
+        try {
+            grossisteService.deleteGrossisteById(grossisteId);
+            redirectAttributes.addFlashAttribute("successMessage", "Grossiste supprimée avec succès");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de la suppression du Grossiste");
+        }
+        return "redirect:/grossistes/list";
+    }
 
-    // Exemple de méthode pour la suppression :
-     @GetMapping("/{grossisteId}/delete")
-     public ResponseEntity<String> deleteGrossiste(@PathVariable String grossisteId) {
-         try {
-             grossisteService.deleteGrossisteById(grossisteId);
-             return ResponseEntity.ok("Grossiste supprimée avec succès");
-         } catch (Exception e) {
-             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de la suppression du Grossiste");
-         }
-     }
-    //      Implémentez la suppression ici
 
 }

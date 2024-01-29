@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des approvisionnements</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .action-links {
+            display: inline-block;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Liste des approvisionnements :</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Montant</th>
+        <th>Agent</th>
+        <th>Type</th>
+        <th>Origine</th>
+        <th>Compte Caisse 1</th>
+        <th>Destination</th>
+        <th>Compte Caisse 2</th>
+        <th>Devise</th>
+        <th>Statut</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through each customApprovisionnement and display its details -->
+    <tr th:each="approvisionnement : ${customApprovisionnements}">
+        <td th:text="${approvisionnement.date}"></td>
+        <td th:text="${approvisionnement.montant}"></td>
+        <td th:text="${approvisionnement.agent}"></td>
+        <td th:text="${approvisionnement.type.label}"></td>
+        <td th:text="${approvisionnement.origine.label}"></td>
+        <td th:text="${approvisionnement.compteCaisse1.label}"></td>
+        <td th:text="${approvisionnement.destination.label}"></td>
+        <td th:text="${approvisionnement.compteCaisse2.label}"></td>
+        <td th:text="${approvisionnement.devise}"></td>
+        <td th:text="${approvisionnement.statut}"></td>
+        <td>
+            <span class="action-links">
+                <a th:href="@{/approvisionnements/{approvisionnementId}/edit(approvisionnementId=${approvisionnement.id})}">Modifier</a>
+            </span>
+            <span class="action-links">
+                <a th:href="@{/approvisionnements/{approvisionnementId}/delete(approvisionnementId=${approvisionnement.id})}" onclick="return confirm('Voulez-vous vraiment supprimer cet approvisionnement ?')">Supprimer</a>
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

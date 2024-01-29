@@ -1,16 +1,15 @@
 package Reporting.AFA.services;
 
-        import Reporting.AFA.Entity.Agent;
-        import Reporting.AFA.Repository.OuvertureCompteRepository;
-        import Reporting.AFA.dto.CustomCompteResult;
-        import Reporting.AFA.dto.OuvertureCompteDto;
-        import Reporting.AFA.Entity.OuvertureCompte;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.stereotype.Service;
-
-        import java.util.List;
-        import java.util.Optional;
-        import java.util.stream.Collectors;
+import Reporting.AFA.Entity.Agent;
+import Reporting.AFA.Repository.OuvertureCompteRepository;
+import Reporting.AFA.dto.CustomCompteResult;
+import Reporting.AFA.dto.OuvertureCompteDto;
+import Reporting.AFA.Entity.OuvertureCompte;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OuvertureCompteService {

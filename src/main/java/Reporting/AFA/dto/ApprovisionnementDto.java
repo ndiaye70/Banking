@@ -24,7 +24,7 @@ public class ApprovisionnementDto {
         approvisionnement.setType(Approvisionnement.TYPE.valueOf(type));
         approvisionnement.setOrigine(Approvisionnement.Origine.valueOf(origine));
         approvisionnement.setCompteCaisse1(Approvisionnement.Compte.valueOf(compteCaisse1));
-        approvisionnement.setDestination(destination);
+        approvisionnement.setDestination(Approvisionnement.Origine.valueOf(destination));
         approvisionnement.setCompteCaisse2(Approvisionnement.Compte.valueOf(compteCaisse2));
         approvisionnement.setDevise(Approvisionnement.Devise.valueOf(devise));
         approvisionnement.setStatut(statut);

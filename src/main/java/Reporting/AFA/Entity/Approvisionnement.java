@@ -26,7 +26,8 @@ public class Approvisionnement {
     private Origine origine;
     @Enumerated(EnumType.STRING)
     private Compte compteCaisse1;
-    private String destination;
+    @Enumerated(EnumType.STRING)
+    private Origine destination;
     @Enumerated(EnumType.STRING)
     private Compte compteCaisse2;
 
@@ -87,7 +88,7 @@ public class Approvisionnement {
         }
 
         public enum Origine{
-            Distributeur("Distributeur"),Siége("Siége"),Commissions("Commissions"),Obélisque("Obélisque"),
+            Caisse("Caisse"),Distributeur("Distributeur"),Siége("Siége"),Commissions("Commissions"),Obélisque("Obélisque"),
             Castor("Castor"),Sacré_cœur("Sacré-cœur"),Niary_Tally("Niary Tally"),Agence_Principale("Agence Principale"),
             Parcelles("Parcelles"),Guédiawaye("Guédiawaye");
 
