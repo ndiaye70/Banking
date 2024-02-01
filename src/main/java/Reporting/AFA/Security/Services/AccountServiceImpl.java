@@ -5,7 +5,6 @@ import Reporting.AFA.Entity.AppUser;
 import Reporting.AFA.Security.repo.AppRoleRepository;
 import Reporting.AFA.Security.repo.UserRepository;
 import Reporting.AFA.dto.AppUserDto;
-import jakarta.persistence.GenerationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,6 @@ public class AccountServiceImpl implements AccountService {
     private AppRoleRepository appRoleRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
 
     @Autowired
     public AccountServiceImpl(UserRepository userRepository, AppRoleRepository appRoleRepository, PasswordEncoder passwordEncoder) {
@@ -49,14 +47,45 @@ public class AccountServiceImpl implements AccountService {
 
         return savedUser;
     }
+
     @Override
     public AppUser save(AppUserDto appUserDto) {
+        // Création de l'utilisateur à partir du DTO
         AppUser appUser = appUserDto.toEntity();
-        AppUser user=userRepository.findByUsername(appUser.getUsername());
-        if(user!=null) throw new RuntimeException("L'utilisateur existe deja ");
+
+        // Vérification si l'utilisateur existe déjà
+        AppUser existingUser = userRepository.findByUsername(appUser.getUsername());
+        if (existingUser != null)
+            throw new RuntimeException("L'utilisateur existe déjà");
+
+        // Attribution automatique du rôle "USER" à l'utilisateur
+        AppRole userRole = appRoleRepository.findById("USER")
+                .orElseThrow(() -> new RuntimeException("Le rôle USER n'existe pas"));
+        appUser.getRoles().add(userRole);
+
+        // Encodage du mot de passe
         appUser.setPassword(passwordEncoder.encode(appUserDto.getPassword()));
+
+        // Sauvegarde de l'utilisateur
         return userRepository.save(appUser);
     }
+
+    @Override
+    public void changeUserPassword(String userId, String newPassword) {
+        // Recherche de l'utilisateur par ID
+        AppUser user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            // Encode le nouveau mot de passe
+            String encodedPassword = passwordEncoder.encode(newPassword);
+
+            // Met à jour le mot de passe de l'utilisateur
+            user.setPassword(encodedPassword);
+            userRepository.save(user);
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
+
 
 
     @Override

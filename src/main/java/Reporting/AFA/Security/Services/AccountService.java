@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface AccountService {
     AppUser addNewUser(String username,String Prenom,String Nom,String email,String password,String confirmPassword);
+
+    void changeUserPassword(String userId, String newPassword);
+
     AppRole addNewRole(String role);
     void addRoleToUser(String username,String role);
     AppUser save(AppUserDto appUserDto);

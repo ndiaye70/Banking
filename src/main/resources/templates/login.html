@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+
+
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Please Log In</title>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
     <link th:href="@{/css/app.css}" rel="stylesheet">
-    <link th:href="@{/images/image3.JPG}" rel="shortcut icon" type="image/x-icon">
+    <link th:href="@{/images/image3.jpg}" rel="shortcut icon" type="image/x-icon">
 </head>
+
+
+
+
 <body>
 <div id="auth">
 <div class="container">
@@ -39,7 +47,7 @@
                         <div class="form-group position-relative has-icon-left">
                             <div class="clearfix">
                                 <label for="password">Password</label>
-                                <a href="auth-forgot-password.html" class='float-right'>
+                                <a th:href="@{'/forgotPass'}" class='float-right'>
                                     <small>Forgot password?</small>
                                 </a>
                             </div>
@@ -58,7 +66,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>1
 </div>
 </div>
 

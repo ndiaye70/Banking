@@ -59,16 +59,23 @@ public class SecurityConfig {
         http.authorizeHttpRequests(
 
                 authorize ->authorize.requestMatchers("/ipsl/**").permitAll()
-                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/registration/**").permitAll()
+                        .requestMatchers("/registration/**","/forgotPass/**").permitAll()
+                        .requestMatchers("/ResetPass/{id}").permitAll()
+                        .requestMatchers("/ResetPass/**").permitAll()
+                        .requestMatchers("/changePassword/**").permitAll()
                         .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/JS/**").permitAll()
                         .requestMatchers("/**").hasRole("USER")
+                        .requestMatchers("/favicon.ico", "/resources/**", "/error").permitAll()
                        .requestMatchers(HttpMethod.GET, "/css**").permitAll()
-                        //.anyRequest().authenticated()
+                        .anyRequest().authenticated()
+
                 );
         http
                 .csrf(AbstractHttpConfigurer::disable);
+
 
 
         http
