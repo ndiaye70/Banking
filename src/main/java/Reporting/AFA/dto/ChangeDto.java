@@ -16,7 +16,6 @@ public class ChangeDto {
     private String deviseRecu;
     private String deviseRemis;
     private double montantRecu;
-    private double montantRemis;
 
     public Change toEntity() {
         Change change = new Change();
@@ -26,7 +25,6 @@ public class ChangeDto {
         change.setDeviseRecu(Change.Devise.valueOf(deviseRecu));
         change.setDeviseRemis(Change.Devise.valueOf(deviseRemis));
         change.setMontantRecu(montantRecu);
-        change.setMontantRemis(montantRemis);
         return change;
     }
 }

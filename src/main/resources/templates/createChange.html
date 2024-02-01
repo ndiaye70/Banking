@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Change</title>
+</head>
+<body>
+<h1>Create Change</h1>
+<form action="/save" method="post">
+    <div>
+        <label for="prenom">Prénom:</label>
+        <input type="text" id="prenom" name="prenom" required>
+    </div>
+    <div>
+        <label for="nom">Nom:</label>
+        <input type="text" id="nom" name="nom" required>
+    </div>
+
+
+    <div>
+        <label for="deviseRemis">Devise Remise:</label>
+        <select id="deviseRecue" name="deviseRemis" required>
+            <option value="EUR">EUR</option>
+            <option value="XOF">XOF</option>
+            <option value="USD">USD</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="deviseRemis">Devise Remise:</label>
+        <select id="deviseRemis" name="deviseRemis" required>
+            <option value="EUR">EUR</option>
+            <option value="XOF">XOF</option>
+            <option value="USD">USD</option>
+        </select>
+    </div>
+    <div>
+        <label for="montantRecu">Montant Reçu:</label>
+        <input type="number" id="montantRecu" name="montantRecu" required>
+    </div>
+    <!-- Ajoutez d'autres champs si nécessaire -->
+    <button type="submit">Enregistrer</button>
+</form>
+</body>
+</html>

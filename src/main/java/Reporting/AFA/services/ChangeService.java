@@ -23,6 +23,8 @@ public class ChangeService {
     public Change saveChange(ChangeDto changeDto, Agent agent) {
         Change change = changeDto.toEntity();
         change.setAgent(agent);
+        double montant=change.convertirMontants();
+        change.setMontantRemis(montant);
         return changeRepository.save(change);
     }
 
