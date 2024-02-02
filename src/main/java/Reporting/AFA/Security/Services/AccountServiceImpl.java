@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.List;
 import java.util.UUID;
 
@@ -47,6 +48,31 @@ public class AccountServiceImpl implements AccountService {
 
         return savedUser;
     }
+    @Override
+    public AppUser NewUser(AppUserDto appUserDto) {
+        // Vérifie si l'utilisateur existe déjà
+        if (userRepository.findByUsername(appUserDto.getUsername()) != null) {
+            throw new RuntimeException("L'utilisateur existe déjà");
+        }
+        // Vérifie si les mots de passe correspondent
+        if (!appUserDto.getPassword().equals(appUserDto.getConfirmPassword())) {
+            throw new RuntimeException("Les mots de passe doivent être identiques");
+        }
+
+        // Création de l'utilisateur à partir du DTO
+        AppUser user = AppUser.builder()
+                .id(UUID.randomUUID().toString())
+                .username(appUserDto.getUsername())
+                .Prenom(appUserDto.getPrenom())
+                .Nom(appUserDto.getNom())
+                .email(appUserDto.getEmail())
+                .password(passwordEncoder.encode(appUserDto.getPassword()))
+                .build();
+
+
+        // Sauvegarde de l'utilisateur
+        return userRepository.save(user);
+    }
 
     @Override
     public AppUser save(AppUserDto appUserDto) {
@@ -69,6 +95,7 @@ public class AccountServiceImpl implements AccountService {
         // Sauvegarde de l'utilisateur
         return userRepository.save(appUser);
     }
+
 
     @Override
     public void changeUserPassword(String userId, String newPassword) {

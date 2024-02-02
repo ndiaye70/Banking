@@ -33,7 +33,7 @@ public class AppUser {
         return UUID.randomUUID().toString();
     }
     public AppUser(){
-        this.id=generateId();
+
     }
 
 

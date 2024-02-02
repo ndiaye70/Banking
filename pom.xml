@@ -76,6 +76,11 @@
 			<artifactId>fr.opensagres.xdocreport.document.odt</artifactId>
 			<version>2.0.1</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.itextpdf</groupId>
@@ -86,12 +91,6 @@
 			<groupId>com.itextpdf</groupId>
 			<artifactId>html2pdf</artifactId>
 			<version>5.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.1</version> <!-- La version peut varier en fonction de votre environnement -->
-			<scope>provided</scope> <!-- Utilisez la portée "provided" pour indiquer que cette dépendance est fournie par le conteneur de servlets -->
 		</dependency>
 
 

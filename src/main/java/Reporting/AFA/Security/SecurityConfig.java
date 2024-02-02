@@ -32,7 +32,7 @@ public class SecurityConfig {
     private UserDetailsService userDetailsServiceImpl;
 
     //@Bean
-    public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource){
+    public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
         return new JdbcUserDetailsManager(dataSource);
     }
 
@@ -55,27 +55,27 @@ public class SecurityConfig {
     }*/
 
     @Bean
-    public SecurityFilterChain configure (HttpSecurity http)throws Exception{
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
 
-                authorize ->authorize.requestMatchers("/ipsl/**").permitAll()
+                authorize -> authorize.requestMatchers("/ipsl/**").permitAll()
 
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/registration/**","/forgotPass/**").permitAll()
+                        .requestMatchers("/forgotPass/**").permitAll()
                         .requestMatchers("/ResetPass/{id}").permitAll()
+                        .requestMatchers("/registration/**").anonymous()
+                        // Seulement accessible aux utilisateurs non authentifiés
                         .requestMatchers("/ResetPass/**").permitAll()
                         .requestMatchers("/changePassword/**").permitAll()
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/JS/**").permitAll()
-                        .requestMatchers("/**").hasRole("USER")
                         .requestMatchers("/favicon.ico", "/resources/**", "/error").permitAll()
-                       .requestMatchers(HttpMethod.GET, "/css**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/css**").permitAll()
                         .anyRequest().authenticated()
 
-                );
+        );
         http
                 .csrf(AbstractHttpConfigurer::disable);
-
 
 
         http
@@ -86,16 +86,14 @@ public class SecurityConfig {
                         .permitAll()
 
 
-
                 );
         http
-                .logout((logout) ->logout
-                        .addLogoutHandler(new HeaderWriterLogoutHandler(new ClearSiteDataHeaderWriter(COOKIES)))
-                                .deleteCookies("JSESSIONID")
-                                        .invalidateHttpSession(false)
-                                        .logoutUrl("/ipsl/logout")
-                                        .logoutSuccessUrl("/login"));
-
+                .logout((logout) -> logout
+                        //.addLogoutHandler(new HeaderWriterLogoutHandler(new ClearSiteDataHeaderWriter(COOKIES)))
+                        //.deleteCookies("JSESSIONID")
+                        .invalidateHttpSession(false)
+                        .logoutUrl("/ipsl/logout")
+                        .logoutSuccessUrl("/login"));
 
 
         http.userDetailsService(userDetailsServiceImpl);
@@ -104,8 +102,6 @@ public class SecurityConfig {
         return http.build();
 
     }
-
-
 
 
 

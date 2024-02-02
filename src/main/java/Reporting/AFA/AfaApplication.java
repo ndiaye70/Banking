@@ -1,4 +1,6 @@
 package Reporting.AFA;
+import Reporting.AFA.Security.Services.AccountService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -17,10 +19,10 @@ public class AfaApplication {
 	}
 	//@Bean
 	//CommandLineRunner commandLineRunnerUserDetails(AccountService accountService){
-	//	return args -> {
+		//return args -> {
 			//accountService.addNewRole("USER");
 			//accountService.addNewRole("ADMIN");
-			//accountService.addNewUser("pan","pape","Ndiaye","ndiayelayesix@gmail.com","1234","1234");+
+			//accountService.addNewUser("philly","alpha","wann","flingo@gmail.com","1234","1234");
 
 			//accountService.addNewUser("user1","issa","faye","ins@gmail.com","1234","1234");
 			//accountService.addNewUser("user2","khady","gueye","khg@gmail.com","1234","1234");
@@ -29,7 +31,7 @@ public class AfaApplication {
 		//	accountService.addRoleToUser("pan","USER");
 		//	accountService.addRoleToUser("user1","USER");
 			//accountService.addRoleToUser("user2","USER");
-		//};
+		 //  };
 
 	//}
 	@Bean
