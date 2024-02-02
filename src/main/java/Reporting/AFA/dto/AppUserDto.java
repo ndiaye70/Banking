@@ -10,6 +10,7 @@ public class AppUserDto {
     private String username;
     private String email;
     private String Password;
+    private String ConfirmPassword;
 
     public AppUser toEntity() {
         AppUser appUser = new AppUser();

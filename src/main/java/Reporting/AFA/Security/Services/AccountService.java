@@ -13,6 +13,9 @@ public interface AccountService {
 
     AppRole addNewRole(String role);
     void addRoleToUser(String username,String role);
+
+    AppUser NewUser(AppUserDto appUserDto);
+
     AppUser save(AppUserDto appUserDto);
     void removeRoleFromUser(String username,String role);
     AppUser loadUserByUsername(String username);
