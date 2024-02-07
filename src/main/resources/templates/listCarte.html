@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Cartes</title>
+</head>
+<body>
+<h1>Liste des Cartes</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Agent</th>
+        <th>Nom et Prenom du Client</th>
+        <th>Telephone</th>
+        <th>Services</th>
+        <th>Montant </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="customcarte : ${customCarte}">
+        <td th:text="${customcarte.date}"></td>
+        <td th:text="${customcarte.agent}"></td>
+        <td th:text="${customcarte.nomComplet}"></td>
+        <td th:text="${customcarte.tel}"></td>
+        <td th:text="${customcarte.service.label}"></td>
+        <td th:text="${customcarte.montant}"></td>
+        <td>
+            <a th:href="@{'/cartes/' + ${customcarte.id} + '/edit'}">Éditer</a>
+            |
+            <a th:href="@{'/cartes/' + ${customcarte.id} + '/delete'}">Supprimer</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

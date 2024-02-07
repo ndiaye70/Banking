@@ -68,8 +68,6 @@ public class AccountServiceImpl implements AccountService {
                 .email(appUserDto.getEmail())
                 .password(passwordEncoder.encode(appUserDto.getPassword()))
                 .build();
-
-
         // Sauvegarde de l'utilisateur
         return userRepository.save(user);
     }

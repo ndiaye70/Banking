@@ -19,12 +19,12 @@ public class ChangeDto {
 
     public Change toEntity() {
         Change change = new Change();
-        change.setPrenom(prenom);
-        change.setNom(nom);
-        change.setService(Change.Service.valueOf(service));
-        change.setDeviseRecu(Change.Devise.valueOf(deviseRecu));
-        change.setDeviseRemis(Change.Devise.valueOf(deviseRemis));
-        change.setMontantRecu(montantRecu);
+        change.setPrenom(this.prenom);
+        change.setNom(this.nom);
+        change.setService(Change.Service.valueOf(this.service));
+        change.setDeviseRecu(Change.Devise.valueOf(this.deviseRecu));
+        change.setDeviseRemis(Change.Devise.valueOf(this.deviseRemis));
+        change.setMontantRecu(this.montantRecu);
         return change;
     }
 }

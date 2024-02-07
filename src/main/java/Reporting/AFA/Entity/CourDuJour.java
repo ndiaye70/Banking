@@ -20,6 +20,5 @@ public class CourDuJour {
 
 
     public CourDuJour() {
-        this.id = id;
     }
 }

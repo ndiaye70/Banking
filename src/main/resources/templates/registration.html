@@ -3,21 +3,33 @@
 <head>
   <meta charset="UTF-8"/>
   <title>Création d'utilisateur</title>
+  <script>
+    function checkPasswordMatch() {
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (password != confirmPassword) {
+        alert("Les mots de passe ne correspondent pas");
+        return false;
+      }
+      return true;
+    }
+  </script>
 </head>
 <body>
 
 <h2>Formulaire de création d'utilisateur</h2>
-
-<form action="new" method="post" th:object="${user}">
+<form th:action="@{/registration/new}" method="post" th:object="${userDto}" onsubmit="return checkPasswordMatch()">
   <label>Nom: <input type="text" th:field="*{Nom}" required></label><br>
   <label>Prénom: <input type="text" th:field="*{Prenom}" required></label><br>
   <label>Nom d'utilisateur: <input type="text" th:field="*{username}" required></label><br>
   <label>Email: <input type="email" th:field="*{email}" required></label><br>
-  <label>Mot de passe: <input type="password" th:field="*{password}" required></label><br>
-
+  <label>Mot de passe: <input type="password" th:field="*{Password}" id="password" required></label><br>
+  <label>Confirmation mot de passe: <input type="password" th:field="*{ConfirmPassword}" id="confirmPassword" required></label><br>
   <button type="submit">Enregistrer</button>
 </form>
-<a th:href="@{'/login'}">deja inscrit connecter vous ici</a>
+
+<a th:href="@{'/login'}">déjà inscrit connectez-vous ici</a>
 
 </body>
 </html>

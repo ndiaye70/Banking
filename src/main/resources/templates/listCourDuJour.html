@@ -46,8 +46,8 @@
             <td th:text="${courDuJour.achatEuro}"></td>
             <td th:text="${courDuJour.achatUSD}"></td>
             <td>
-                <a th:href="@{/cour-du-jour/edit/{id}(id=${courDuJour.id})}">Modifier</a>
-                <a th:href="@{/cour-du-jour/delete/{id}(id=${courDuJour.id})}" onclick="return confirm('Voulez-vous vraiment supprimer ce cours du jour ?')">Supprimer</a>
+                <a th:href="@{/exchange/edit/{id}(id=${courDuJour.id})}">Modifier</a>
+                <a th:href="@{/exchange/delete/{id}(id=${courDuJour.id})}" onclick="return confirm('Voulez-vous vraiment supprimer ce cours du jour ?')">Supprimer</a>
             </td>
         </tr>
         </tbody>
@@ -70,8 +70,8 @@
             <td th:text="${courDuJour.venteEuro}"></td>
             <td th:text="${courDuJour.venteUSD}"></td>
             <td>
-                <a th:href="@{/cour-du-jour/edit/{id}(id=${courDuJour.id})}">Modifier</a>
-                <a th:href="@{/cour-du-jour/delete/{id}(id=${courDuJour.id})}" onclick="return confirm('Voulez-vous vraiment supprimer ce cours du jour ?')">Supprimer</a>
+                <a th:href="@{/exchange/edit/{id}(id=${courDuJour.id})}">Modifier</a>
+                <a th:href="@{/exchange/delete/{id}(id=${courDuJour.id})}" onclick="return confirm('Voulez-vous vraiment supprimer ce cours du jour ?')">Supprimer</a>
             </td>
         </tr>
         </tbody>

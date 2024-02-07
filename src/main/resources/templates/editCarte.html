@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier une Carte</title>
+</head>
+<body>
+<h3>Modifier les détails de la Carte</h3>
+<form th:action="@{'/cartes/'+${carteDto.id}+'/edit'}" method="post" th:object="${carteDto}">
+
+    <label>Nom et Prenom: <input type="text" th:field="*{nomComplet}" required></label><br>
+
+    <label>Numéro de Téléphone: <input type="text" th:field="*{Tel}" required></label><br>
+    <label>service:
+        <select th:field="*{service}" required>
+            <option th:each="type : ${T(Reporting.AFA.Entity.Carte.Service).values()}"
+                    th:value="${type}" th:text="${type.getLabel()}"></option>
+        </select>
+    </label><br>
+    <button type="submit">Enregistrer les modifications</button>
+</form>
+</body>
+</html>
