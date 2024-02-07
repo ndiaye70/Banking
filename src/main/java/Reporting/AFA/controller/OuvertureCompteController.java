@@ -71,11 +71,6 @@ public class OuvertureCompteController {
     }
 
 
-
-
-
-
-
     @GetMapping("/{ouvertureCompteId}")
     public ResponseEntity<OuvertureCompte> getOuvertureCompteById(@PathVariable String ouvertureCompteId) {
         Optional<OuvertureCompte> ouvertureCompte = ouvertureCompteService.getOuvertureCompteById(ouvertureCompteId);

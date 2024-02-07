@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Carte</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Include html2pdf library -->
+    <script src="https://cdn.rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <!-- Script JavaScript -->
+
+</head>
+<body>
+<div id="pdfContent">
+<h1>Create Carte</h1>
+<form th:action="@{/cartes/save}" method="post" th:object="${carteDto}" onsubmit="return updateMontant()">
+    <div>
+        <label for="nom">NomComplet:</label>
+        <input type="text" id="nom" name="nomComplet" required>
+    </div>
+
+    <div>
+        <label for="tel">Téléphone:</label>
+        <input type="tel" id="tel" name="Tel" required>
+    </div>
+
+    <div>
+        <label for="service">Service:</label>
+        <select id="service" name="service" onchange="updateMontant()" required>
+            <option value="CARTE_COMMERCANT">Carte Commerçant (C.C)</option>
+            <option value="CARTE_IMPORT_EXPORT">Carte Import-Export (C.I.E)</option>
+            <option value="Première_demande_PACK">Première demande Pack (C.C et C.I.E)</option>
+            <option value="RENOUVELLEMENT_CARTE_COMMERCANT">Renouvellement Carte Commerçant (C.C)</option>
+            <option value="RENOUVELLEMENT_CARTE_IMPORT_EXPORT">Renouvellement Carte Import-Export (C.I.E)</option>
+            <option value="RENOUVELLEMENT_PACK">Renouvellement Pack (C.C et C.I.E)</option>
+        </select>
+    </div>
+    <div>
+        <label for="montant">Montant:</label>
+        <input type="number" id="montant" name="montant" required>
+    </div>
+    <div>
+        <label>NINEA:</label>
+        <input type="radio" id="nineaCopie1" name="nineaCopie" value="Une copie" required>
+        <label for="nineaCopie1">Une copie</label>
+        <input type="radio" id="nineaCopie2" name="nineaCopie" value="Deux copies">
+        <label for="nineaCopie2">Deux copies</label>
+    </div>
+    <div>
+        <label>RC:</label>
+        <input type="radio" id="rcCopie1" name="rcCopie" value="Une copie" required>
+        <label for="rcCopie1">Une copie</label>
+        <input type="radio" id="rcCopie2" name="rcCopie" value="Deux copies">
+        <label for="rcCopie2">Deux copies</label>
+    </div>
+    <div>
+        <label>Passeport/ CNI valide:</label>
+        <input type="radio" id="passeportCopie1" name="passeportCopie" value="Une copie" required>
+        <label for="passeportCopie1">Une copie</label>
+        <input type="radio" id="passeportCopie2" name="passeportCopie" value="Deux copies">
+        <label for="passeportCopie2">Deux copies</label>
+    </div>
+    <div>
+        <label>Photo d'identité:</label>
+        <input type="radio" id="photoCopie1" name="photoCopie" value="Une copie" required>
+        <label for="photoCopie1">Une copie</label>
+        <input type="radio" id="photoCopie2" name="photoCopie" value="Deux copies">
+        <label for="photoCopie2">Deux copies</label>
+    </div>
+    <div>
+        <label>Ancienne C.C:</label>
+        <input type="radio" id="ccCopie1" name="ccCopie" value="Une copie" required>
+        <label for="ccCopie1">Une copie</label>
+        <input type="radio" id="ccCopie2" name="ccCopie" value="Deux copies">
+        <label for="ccCopie2">Deux copies</label>
+    </div>
+    <div>
+        <label>Ancienne C.I.E:</label>
+        <input type="radio" id="cieCopie1" name="cieCopie" value="Une copie" required>
+        <label for="cieCopie1">Une copie</label>
+        <input type="radio" id="cieCopie2" name="cieCopie" value="Deux copies">
+        <label for="cieCopie2">Deux copies</label>
+    </div>
+    <!-- Ajoutez d'autres champs si nécessaire -->
+    <button type="submit">Enregistrer</button>
+</form>
+
+</div>
+
+<button id="imprimerPdf">Imprimer en PDF</button>
+
+<script>
+    function updateMontant() {
+        var serviceSelect = document.getElementById("service");
+        var montantInput = document.getElementById("montant");
+
+        // Récupérer la valeur sélectionnée du service
+        var service = serviceSelect.value;
+
+        // Mettre à jour automatiquement le montant en fonction du service sélectionné
+        switch (service) {
+            case "CARTE_COMMERCANT":
+                montantInput.value = 19200;
+                break;
+            case "CARTE_IMPORT_EXPORT":
+                montantInput.value = 49750;
+                break;
+            case "Première_demande_PACK":
+                montantInput.value = 62900;
+                break;
+            case "RENOUVELLEMENT_CARTE_COMMERCANT":
+                montantInput.value = 15400;
+                break;
+            case "RENOUVELLEMENT_CARTE_IMPORT_EXPORT":
+                montantInput.value = 49750;
+                break;
+            case "RENOUVELLEMENT_PACK":
+                montantInput.value = 59200;
+                break;
+            default:
+                montantInput.value = ""; // Effacer le montant si aucun service n'est sélectionné
+        }
+    }
+
+    $(document).ready(function () {
+            $('#imprimerPdf').click(function () {
+                console.log('Clic sur le bouton Imprimer PDF');
+                // Récupérez le contenu HTML de la page
+                var content = $('#pdfContent').html();
+
+                // Convertissez le HTML en PDF
+                html2pdf(content, {
+                    margin: 10,
+                    filename: 'details_caisse.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                });
+            });
+        });
+</script>
+
+</body>
+</html>

@@ -42,7 +42,10 @@ public class Entreprise {
     }
 
     public Entreprise() {
-        this.id = generateId();
+
+
+
+
         this.id = generateId();
         LocalDateTime now = LocalDateTime.now();
 

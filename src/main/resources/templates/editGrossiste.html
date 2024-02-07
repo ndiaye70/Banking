@@ -10,15 +10,10 @@
 
 <form th:object="${grossisteDto}" th:action="@{'/grossistes/' + ${grossisteDto.id} + '/edit'}" method="post">
 
-    <label>ID:</label>
-    <input type="text" th:field="*{id}" readonly="readonly"/><br>
 
     <label>Date:</label>
     <input type="text" th:field="*{date}" readonly="readonly"/><br>
-
-    <label>Nature d'Opérations:</label>
-    <input type="text" th:field="*{natureOperations}" readonly="readonly"/><br>
-
+    
     <label>Civilite:</label>
     <select th:field="*{civilite}">
         <option value="M" th:selected="${grossisteDto.civilite == 'M'}">M</option>

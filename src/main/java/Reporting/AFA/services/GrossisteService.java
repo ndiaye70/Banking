@@ -30,6 +30,7 @@ public class GrossisteService {
         grossiste.setAgent(agent);
         return grossisteRepository.save(grossiste);
     }
+
     public Grossiste updateGrossiste(String grossisteId, Grossiste grossiste) {
         Optional<Grossiste> existingGrossisteOptional = grossisteRepository.findById(grossisteId);
 

@@ -1,24 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Change</title>
+    <title>Edit Change</title>
 </head>
 <body>
-<h1>Create Change</h1>
-<form id="changeForm" th:action="@{/changes/save}" method="post" th:object="${changeDto}" onsubmit="return validateForm()">
+<h1>Edit Change</h1>
+<form th:action="@{'/changes/' + ${changeDto.id} + '/edit'}" method="post" th:object="${changeDto}" onsubmit="return validateForm()">
     <div>
         <label for="prenom">Prénom:</label>
-        <input type="text" id="prenom" name="prenom" required>
+        <input type="text" id="prenom" name="prenom" th:field="*{prenom}" required>
     </div>
     <div>
         <label for="nom">Nom:</label>
-        <input type="text" id="nom" name="nom" required>
+        <input type="text" id="nom" name="nom" th:field="*{nom}" required>
+    </div>
+    <div>
+        <label for="service">Service:</label>
+        <select id="service" name="service" th:field="*{service}" required>
+            <option th:each="service : ${T(Reporting.AFA.Entity.Change.Service).values()}"
+                    th:value="${service}"
+                    th:text="${service.label}"></option>
+        </select>
     </div>
     <div>
         <label for="deviseRecue">Devise Reçue:</label>
-        <select id="deviseRecue" name="deviseRecu" onchange="updateServiceLabel(this.value)" required>
+        <select id="deviseRecue" name="deviseRecu" th:field="*{deviseRecu}" required>
             <option value="EUR">EUR</option>
             <option value="XOF">XOF</option>
             <option value="USD">USD</option>
@@ -26,7 +34,7 @@
     </div>
     <div>
         <label for="deviseRemis">Devise Remise:</label>
-        <select id="deviseRemis" name="deviseRemis" onchange="checkDeviseMatch()" required>
+        <select id="deviseRemis" name="deviseRemis" th:field="*{deviseRemis}" required>
             <option value="EUR">EUR</option>
             <option value="XOF">XOF</option>
             <option value="USD">USD</option>
@@ -34,30 +42,14 @@
         <p id="deviseMatchError" style="color: red; display: none;">Les devises ne doivent pas être similaires.</p>
     </div>
     <div>
-        <label for="service">Service:</label>
-        <select id="service" name="service" required>
-            <option value="Achat_de_Devise">Achat de Devise</option>
-            <option value="Vente_de_Devise">Vente de Devise</option>
-        </select>
-    </div>
-    <div>
         <label for="montantRecu">Montant Reçu:</label>
-        <input type="number" id="montantRecu" name="montantRecu" required>
+        <input type="number" id="montantRecu" name="montantRecu" th:field="*{montantRecu}" required>
     </div>
     <!-- Ajoutez d'autres champs si nécessaire -->
     <button type="submit">Enregistrer</button>
 </form>
 
 <script>
-    function updateServiceLabel(devise) {
-        var serviceSelect = document.getElementById("service");
-        if (devise === "EUR" || devise === "USD") {
-            serviceSelect.value = "Achat_de_Devise";
-        } else if (devise === "XOF") {
-            serviceSelect.value = "Vente_de_Devise";
-        }
-    }
-
     function checkDeviseMatch() {
         var deviseRecue = document.getElementById("deviseRecue").value;
         var deviseRemis = document.getElementById("deviseRemis").value;

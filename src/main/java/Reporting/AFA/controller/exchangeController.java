@@ -2,6 +2,8 @@ package Reporting.AFA.controller;
 
 import Reporting.AFA.Entity.CourDuJour;
 import Reporting.AFA.dto.CourDuJourDto;
+import Reporting.AFA.dto.CustomGrossisteResult;
+import Reporting.AFA.dto.Customchange;
 import Reporting.AFA.services.CourDuJourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,6 +59,8 @@ public class exchangeController {
         courDuJourService.updateExchange(id,courDuJour);
         return "redirect:/exchange/list";
     }
+
+
 
     @GetMapping("/delete/{id}")
     public ResponseEntity<String> deleteCourDuJour(@PathVariable Long id) {

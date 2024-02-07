@@ -66,6 +66,7 @@ public class SecurityConfig {
                         .requestMatchers("/registration/**").anonymous()
                         // Seulement accessible aux utilisateurs non authentifiés
                         .requestMatchers("/ResetPass/**").permitAll()
+                        //.requestMatchers("//**").permitAll()
                         .requestMatchers("/changePassword/**").permitAll()
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/JS/**").permitAll()
