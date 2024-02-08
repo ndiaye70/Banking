@@ -19,5 +19,6 @@ public class CustomOperationResult {
     private String autres;
     private String statut;
 
+
     // Constructeur, getters et setters
 }
