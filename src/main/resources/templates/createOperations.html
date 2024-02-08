@@ -1,37 +1,94 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Créer une opération</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+    <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
+    <!-- Add your CSS link or style references here -->
 </head>
+
 <body>
-<h3>Créer une nouvelle opération</h3>
-<form action="save" method="post" th:object="${operationsDto}">
-    <label>Service:
-        <select th:field="*{service}" required>
-            <option th:each="s : ${T(Reporting.AFA.Entity.Operations.Service).values()}"
-                    th:value="${s}" th:text="${s.getLabel()}"></option>
-        </select>
-    </label><br>
-    <label>Nature d'Opération:
-        <select th:field="*{natureOperation}" required>
-            <option th:each="n : ${T(Reporting.AFA.Entity.Operations.NatureOperation).values()}"
-                    th:value="${n}" th:text="${n.getLabel()}"></option>
-        </select>
-    </label><br>
-    <label>Civilite:
-        <select th:field="*{civilite}" required>
-            <option th:each="c : ${T(Reporting.AFA.Entity.Operations.Civilite).values()}"
-                    th:value="${c}" th:text="${c.getLabel()}"></option>
-        </select>
-    </label><br>
-    <label>Nom: <input type="text" th:field="*{nom}" required></label><br>
-    <label>Prénom: <input type="text" th:field="*{prenom}" required></label><br>
-    <label>Numéro de Téléphone: <input type="text" th:field="*{numeroTelephone}" required></label><br>
-    <label>Montant: <input type="number" step="0.01" th:field="*{montant}" required></label><br>
-    <label>Autres: <input type="text" th:field="*{autres}"></label><br>
-    <label>Statut: <input type="text" th:field="*{statut}" required></label><br>
-    <button type="submit">Enregistrer</button>
+<h3>Nouvelle opération</h3>
+<form class="form form-horizontal" action="save" method="post" th:object="${operationsDto}">
+    <div class="form-body">
+        <div class="row">
+            <div class="col-md-3">
+                <label>Service:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <select th:field="*{service}" class="form-control" required>
+                    <option th:each="s : ${T(Reporting.AFA.Entity.Operations.Service).values()}"
+                            th:value="${s}" th:text="${s.getLabel()}"></option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Nature d'Opération:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <select th:field="*{natureOperation}" class="form-control" required>
+                    <option th:each="n : ${T(Reporting.AFA.Entity.Operations.NatureOperation).values()}"
+                            th:value="${n}" th:text="${n.getLabel()}"></option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Civilite:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <select th:field="*{civilite}" class="form-control" required>
+                    <option th:each="c : ${T(Reporting.AFA.Entity.Operations.Civilite).values()}"
+                            th:value="${c}" th:text="${c.getLabel()}"></option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Nom:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="text" th:field="*{nom}" class="form-control" required>
+            </div>
+            <div class="col-md-3">
+                <label>Prénom:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="text" th:field="*{prenom}" class="form-control" required>
+            </div>
+            <div class="col-md-3">
+                <label>Numéro de Téléphone:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="text" th:field="*{numeroTelephone}" class="form-control" required>
+            </div>
+            <div class="col-md-3">
+                <label>Montant:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="number" step="0.01" th:field="*{montant}" class="form-control" required>
+            </div>
+            <div class="col-md-3">
+                <label>Statut:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <select th:field="*{statut}" class="form-control" required>
+                    <option value="Validé">Validé</option>
+                    <option value="En attente">En attente</option>
+                    <option value="Annulé">Annulé</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Autres:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="text" th:field="*{autres}" class="form-control">
+            </div>
+            <div class="col-sm-12 d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary mr-1 mb-1">Enregistrer</button>
+                <button type="reset" class="btn btn-light-secondary mr-1 mb-1">Reset</button>
+            </div>
+        </div>
+    </div>
 </form>
 </body>
+
 </html>
