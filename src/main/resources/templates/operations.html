@@ -1,48 +1,65 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Liste des opérations personnalisées</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-</head>
-<body>
-<h3>Liste des opérations personnalisées</h3>
-<table>
-    <thead>
-    <tr>
-        <th>Caissier</th>
-        <th>Service</th>
-        <th>Nature Opérations</th>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Numéro de Téléphone</th>
-        <th>Montant</th>
-        <th>Autres</th>
-        <th>Statut</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="customOperation : ${customOperations}">
-        <td th:text="${customOperation.caissier}"></td>
-        <td th:text="${customOperation.service}"></td>
-        <td th:text="${customOperation.natureOperation}"></td>
-        <td th:text="${customOperation.nom}"></td>
-        <td th:text="${customOperation.prenom}"></td>
-        <td th:text="${customOperation.numeroTelephone}"></td>
-        <td th:text="${customOperation.montant}"></td>
-        <td th:text="${customOperation.autres}"></td>
-        <td th:text="${customOperation.statut}"></td>
-        <td>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opérations</title>
 
-        <a th:href="@{'/operations/' + ${customOperation.id} + '/edit'}">Modifier</a>
-        <a th:href="@{'/operations/' + ${customOperation.id} + '/delete'}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette opération ?')">Supprimer</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-    <form th:action="@{/ipsl/logout}" method="post">
-        <input type="submit" value="logout">
-    </form>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+    <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="mt-5">Opérations</h3>
+            <a th:href="@{'/operations/createOperations'}" class="btn btn-success mt-2 float-right">Nouvelle Opération</a>
+        </div>
+    </div>
+
+    <div class="table-responsive mt-3">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>Caissier</th>
+                <th>Service</th>
+                <th>Nature Opérations</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Numéro de Téléphone</th>
+                <th>Montant</th>
+                <th>Autres</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="customOperation : ${customOperations}"
+                th:class="${customOperation.statut == 'Approved'} ? 'table-success' : (${customOperation.statut == 'Pending'} ? 'table-warning' : 'table-danger')">
+                <td th:text="${customOperation.caissier}"></td>
+                <td th:text="${customOperation.service}"></td>
+                <td th:text="${customOperation.natureOperation}"></td>
+                <td th:text="${customOperation.nom}"></td>
+                <td th:text="${customOperation.prenom}"></td>
+                <td th:text="${customOperation.numeroTelephone}"></td>
+                <td th:text="${customOperation.montant}"></td>
+                <td th:text="${customOperation.autres}"></td>
+                <td th:text="${customOperation.statut}"></td>
+                <td>
+                    <a th:href="@{'/operations/' + ${customOperation.id} + '/edit'}"
+                       class="btn btn-primary btn-sm">Modifier</a>
+                    <a th:href="@{'/operations/' + ${customOperation.id} + '/delete'}"
+                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette opération ?')"
+                       class="btn btn-danger btn-sm">Supprimer</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
+
 </html>
