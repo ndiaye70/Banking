@@ -1,35 +1,62 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8"/>
-  <title>Création d'utilisateur</title>
-  <script>
-    function checkPasswordMatch() {
-      var password = document.getElementById("password").value;
-      var confirmPassword = document.getElementById("confirmPassword").value;
 
-      if (password != confirmPassword) {
-        alert("Les mots de passe ne correspondent pas");
-        return false;
-      }
-      return true;
-    }
-  </script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création d'utilisateur</title>
+    <script>
+        function checkPasswordMatch() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password != confirmPassword) {
+                alert("Les mots de passe ne correspondent pas");
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="shortcut icon" th:href="@{/images/favicon.svg}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
+
 <body>
 
-<h2>Formulaire de création d'utilisateur</h2>
-<form th:action="@{/registration/new}" method="post" th:object="${userDto}" onsubmit="return checkPasswordMatch()">
-  <label>Nom: <input type="text" th:field="*{Nom}" required></label><br>
-  <label>Prénom: <input type="text" th:field="*{Prenom}" required></label><br>
-  <label>Nom d'utilisateur: <input type="text" th:field="*{username}" required></label><br>
-  <label>Email: <input type="email" th:field="*{email}" required></label><br>
-  <label>Mot de passe: <input type="password" th:field="*{Password}" id="password" required></label><br>
-  <label>Confirmation mot de passe: <input type="password" th:field="*{ConfirmPassword}" id="confirmPassword" required></label><br>
-  <button type="submit">Enregistrer</button>
-</form>
+<div id="auth">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-sm-12 mx-auto">
+                <div class="card py-4">
+                    <div class="card-body">
+                        <div class="text-center mb-5">
+                            <img th:src="@{/images/favicon.svg}" height="48" class='mb-4'>
+                            <h3>Formulaire de création d'utilisateur</h3>
+                            <p>Merci de remplir le formulaire pour vous inscrire.</p>
+                        </div>
+                        <form th:action="@{/registration/new}" method="post" th:object="${userDto}" onsubmit="return checkPasswordMatch()">
+                            <label>Nom: <input type="text" th:field="*{Nom}" class="form-control" required></label><br>
+                            <label>Prénom: <input type="text" th:field="*{Prenom}" class="form-control" required></label><br>
+                            <label>Nom d'utilisateur: <input type="text" th:field="*{username}" class="form-control" required></label><br>
+                            <label>Email: <input type="email" th:field="*{email}" class="form-control" required></label><br>
+                            <label>Mot de passe: <input type="password" th:field="*{Password}" id="password" class="form-control" required></label><br>
+                            <label>Confirmation mot de passe: <input type="password" th:field="*{ConfirmPassword}" id="confirmPassword" class="form-control" required></label><br>
+                            <div class="mt-2"></div> <!-- Ajout de l'espace -->
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        </form>
 
-<a th:href="@{'/login'}">déjà inscrit connectez-vous ici</a>
+                        <a th:href="@{'/login'}">Déjà inscrit ? Connectez-vous ici</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script th:src="@{/js/feather-icons/feather.min.js}"></script>
+<script th:src="@{/js/app.js}"></script>
+<script th:src="@{/js/main.js}"></script>
 </body>
+
 </html>

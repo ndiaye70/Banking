@@ -28,10 +28,10 @@ public class loginController {
 
         }
 
-        @GetMapping("/index")
-        String index() {
-            return "index";
-        }
+    @GetMapping("/index")
+    String index() {
+        return "index";
+    }
 
     @GetMapping("/forgotPass")
     String loadForgotPasword(){
