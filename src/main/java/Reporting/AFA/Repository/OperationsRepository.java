@@ -12,7 +12,7 @@ import java.util.List;
 public interface OperationsRepository extends JpaRepository<Operations, String> {
 
 
-        @Query(value = "SELECT O.id, CONCAT(U.prenom ,' ', U.nom) as caissier, O.service, O.nature_operation, O.nom, O.prenom, O.numero_telephone, O.montant, O.autres, O.statut " +
+        @Query(value = "SELECT O.id, CONCAT(U.prenom ,' ', U.nom) as caissier, O.service, O.nature_operation, O.nom, O.prenom, O.numero_telephone, O.montant, O.date, O.statut " +
                 "FROM operations O, agent A, utilisateur U " +
                 "WHERE O.id_agent = A.id AND A.id_user = U.id", nativeQuery = true)
         List<Object[]> getCustomOperations();

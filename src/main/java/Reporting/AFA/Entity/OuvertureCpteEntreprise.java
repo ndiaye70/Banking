@@ -7,7 +7,6 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -49,6 +48,7 @@ public class OuvertureCpteEntreprise {
     private String numTel;
 
     private String adresse;
+
     @ManyToOne
     @JoinColumn(name = "id_agent")
     private Agent agent;
