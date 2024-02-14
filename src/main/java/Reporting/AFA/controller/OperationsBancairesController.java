@@ -4,6 +4,7 @@ import Reporting.AFA.Entity.Agent;
 import Reporting.AFA.Entity.AppUser;
 import Reporting.AFA.Entity.Grossiste;
 import Reporting.AFA.Security.Services.AccountServiceImpl;
+import Reporting.AFA.dto.CustomOperationsBancaires;
 import Reporting.AFA.dto.GrossisteDto;
 import Reporting.AFA.dto.OperationsBancairesDto;
 import Reporting.AFA.Entity.OperationsBancaires;import Reporting.AFA.dto.OperationsDto;
@@ -60,14 +61,6 @@ public class OperationsBancairesController {
 
 
 
-    @GetMapping("/list")
-    public String operationsBancaire(Model model){
-    List<OperationsBancaires> operationsBancaires=operationsBancairesService.getAllOperationsBancaires();
-    model.addAttribute("list",operationsBancaires);
-
-
-        return "listOperationsBc";
-    }
 
     @GetMapping("/{operationsBancairesId}/edit")
     public String showUpdateForm(@PathVariable String operationsBancairesId, Model model) {
@@ -82,6 +75,7 @@ public class OperationsBancairesController {
             return "error";
         }
     }
+
 
     @PostMapping("/{operationsBancairesId}/edit")
     public String updateOPbancaire(@PathVariable("operationsBancairesId") String operationsBancairesId, OperationsBancairesDto operationsBancairesDto, Principal principal) {
@@ -104,6 +98,12 @@ public class OperationsBancairesController {
         return "redirect:/operationsBancaires/list";
 
     }
+    @GetMapping("/list")
+    public String allOperationsBancaires(Model model){
+        List<CustomOperationsBancaires> customOperationsBancaires = operationsBancairesService.getCustomOperationsBancaires();
+        model.addAttribute("customOperationsBancaires", customOperationsBancaires);
+        return "listOperationsBancaires"; // Assurez-vous que c'est le bon nom de vue
+    }
 
     @GetMapping("/{operationsBancairesId}")
     public ResponseEntity<OperationsBancaires> getOperationsBancairesById(@PathVariable String operationsBancairesId) {
@@ -112,11 +112,11 @@ public class OperationsBancairesController {
     }
 
     @GetMapping("/{operationsBancairesId}/delete")
-    public String deleteOpBancaire(@PathVariable String operationsId){
-        operationsBancairesService.deleteOperationsBancairesById(operationsId);
+    public String deleteOpBancaire(@PathVariable String operationsBancairesId){
+        operationsBancairesService.deleteOperationsBancairesById(operationsBancairesId);
         return "redirect:/operationsBancaires/list";
-
     }
+
 
 
 }

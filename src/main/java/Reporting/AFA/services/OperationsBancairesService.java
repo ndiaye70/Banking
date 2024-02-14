@@ -2,6 +2,7 @@ package Reporting.AFA.services;
 
 import Reporting.AFA.Entity.Agent;
 import Reporting.AFA.Entity.Grossiste;
+import Reporting.AFA.dto.CustomOperationsBancaires;
 import Reporting.AFA.dto.OperationsBancairesDto;
 import Reporting.AFA.Entity.OperationsBancaires;
 import Reporting.AFA.Repository.OperationsBancairesRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OperationsBancairesService {
@@ -54,6 +56,27 @@ public class OperationsBancairesService {
             // Handle the case where the operations with given ID is not found
             throw new RuntimeException("Operations with ID " +OpBancaireId+ " not found");
         }
+    }
+
+    public List<CustomOperationsBancaires> getCustomOperationsBancaires() {
+        List<Object[]> results = operationsBancairesRepository.getCustomOperationsBancaires();
+        return results.stream().map(this::mapToCustomOperationsBancaires).collect(Collectors.toList());
+    }
+
+    private CustomOperationsBancaires mapToCustomOperationsBancaires(Object[] result) {
+        CustomOperationsBancaires customOperationsBancairesResult = new CustomOperationsBancaires();
+        customOperationsBancairesResult.setId((String) result[0]);
+        customOperationsBancairesResult.setDate((String) result[1]);
+        customOperationsBancairesResult.setAgent((String) result[2]);
+        customOperationsBancairesResult.setBanques(CustomOperationsBancaires.Banques.valueOf((String) result[3]));
+        customOperationsBancairesResult.setNatureOperations(CustomOperationsBancaires.NatureOperations.valueOf((String) result[4]));
+        customOperationsBancairesResult.setNumeroCompte((String) result[5]);
+        customOperationsBancairesResult.setNom((String) result[6]);
+        customOperationsBancairesResult.setPrenom((String) result[7]);
+        customOperationsBancairesResult.setNumeroTelephone((String) result[8]);
+        customOperationsBancairesResult.setMontant((Double) result[9]);
+        customOperationsBancairesResult.setCommissions((Double) result[10]);
+        return customOperationsBancairesResult;
     }
 
     public List<OperationsBancaires> getAllOperationsBancaires() {

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Opérations Bancaires</title>
+</head>
+<body>
+
+<h3>Liste des Opérations Bancaires</h3>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Agent</th>
+        <th>Banques</th>
+        <th>Nature des Opérations</th>
+        <th>Numéro de Compte</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Numéro de Téléphone</th>
+        <th>Montant</th>
+        <th>Commissions</th>
+        <!-- Ajoutez d'autres colonnes si nécessaire -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="operation : ${customOperationsBancaires}">
+        <td th:text="${operation.date}"></td>
+        <td th:text="${operation.agent}"></td>
+        <td th:text="${operation.banques}"></td>
+        <td th:text="${operation.natureOperations}"></td>
+        <td th:text="${operation.numeroCompte}"></td>
+        <td th:text="${operation.nom}"></td>
+        <td th:text="${operation.prenom}"></td>
+        <td th:text="${operation.numeroTelephone}"></td>
+        <td th:text="${operation.montant}"></td>
+        <td th:text="${operation.commissions}"></td>
+        <!-- Ajoutez d'autres colonnes si nécessaire -->
+        <td>
+            <a th:href="@{'/operationsBancaires/' + ${operation.id} + '/edit'}">Éditer</a>
+
+            <a th:href="@{'/operationsBancaires/' + ${operation.id} + '/delete'}">Supprimer</a>
+
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
+
+
