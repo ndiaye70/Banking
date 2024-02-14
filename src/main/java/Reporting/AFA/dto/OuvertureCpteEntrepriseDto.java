@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OuvertureCpteEntrepriseDto {
-    private String formeJuridique;
+    private OuvertureCpteEntreprise.FormeJuridique formeJuridique;
     private String rccm;
     private String ninea;
     private String denominationSocial;
-    private String pack;
+    private OuvertureCpteEntreprise.Pack pack;
     private double montantDepotInitial;
     private String nom;
     private String prenom;
@@ -28,11 +28,12 @@ public class OuvertureCpteEntrepriseDto {
         OuvertureCpteEntreprise ouvertureCpteEntreprise = new OuvertureCpteEntreprise();
 
         // Appliquez les propriétés spécifiques à OuvertureCpteEntreprise
-        OperationsDto ouvertureCpteEntrepriseDto;
-        ouvertureCpteEntreprise.setFormeJuridique(OuvertureCpteEntreprise.FormeJuridique.valueOf(this.formeJuridique));
+        ouvertureCpteEntreprise.setFormeJuridique((this.formeJuridique));
+        ouvertureCpteEntreprise.setPack(this.pack);
         ouvertureCpteEntreprise.setRccm(this.rccm);
         ouvertureCpteEntreprise.setNinea(this.ninea);
         ouvertureCpteEntreprise.setDenominationSocial(this.denominationSocial);
+
         ouvertureCpteEntreprise.setMontantDepotInitial(this.montantDepotInitial);
         ouvertureCpteEntreprise.setNom(this.nom);
         ouvertureCpteEntreprise.setPrenom(this.prenom);

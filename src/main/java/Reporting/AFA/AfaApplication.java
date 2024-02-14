@@ -29,7 +29,7 @@ public class AfaApplication {
 
 			//accountService.addRoleToUser("pan","ADMIN");
 		//	accountService.addRoleToUser("pan","USER");
-		//	accountService.addRoleToUser("user1","USER");
+		//	accountService.addRoleToUser("user1","USER"); f
 			//accountService.addRoleToUser("user2","USER");
 		 //  };
 

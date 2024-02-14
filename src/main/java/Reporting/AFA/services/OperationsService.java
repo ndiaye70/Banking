@@ -78,13 +78,13 @@ public class OperationsService {
         CustomOperationResult customOperationResult = new CustomOperationResult();
         customOperationResult.setId((String) result[0]);
         customOperationResult.setCaissier((String) result[1]);
-        customOperationResult.setService((String) result[2]);
-        customOperationResult.setNatureOperation((String) result[3]);
+        customOperationResult.setService(CustomOperationResult.Service.valueOf((String) result[2]));
+        customOperationResult.setNatureOperation(CustomOperationResult.NatureOperation.valueOf((String) result[3]));
         customOperationResult.setNom((String) result[4]);
         customOperationResult.setPrenom((String) result[5]);
         customOperationResult.setNumeroTelephone((String) result[6]);
         customOperationResult.setMontant((Double) result[7]);
-        customOperationResult.setAutres((String) result[8]);
+        customOperationResult.setDate((String) result[8]);
         customOperationResult.setStatut((String) result[9]);
         return customOperationResult;
     }

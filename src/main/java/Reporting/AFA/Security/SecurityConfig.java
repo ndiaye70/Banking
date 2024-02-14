@@ -72,6 +72,7 @@ public class SecurityConfig {
                         .requestMatchers("/JS/**").permitAll()
                         .requestMatchers("/favicon.ico", "/resources/**", "/error").permitAll()
                         .requestMatchers(HttpMethod.GET, "/css**").permitAll()
+                        .requestMatchers("/images/**").permitAll()
                         .anyRequest().authenticated()
 
         );

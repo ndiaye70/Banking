@@ -6,7 +6,7 @@ import Reporting.AFA.Entity.Grossiste;
 import Reporting.AFA.Security.Services.AccountServiceImpl;
 import Reporting.AFA.dto.GrossisteDto;
 import Reporting.AFA.dto.OperationsBancairesDto;
-import Reporting.AFA.Entity.OperationsBancaires;
+import Reporting.AFA.Entity.OperationsBancaires;import Reporting.AFA.dto.OperationsDto;
 import Reporting.AFA.services.AgentService;
 import Reporting.AFA.services.OperationsBancairesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +38,14 @@ public class OperationsBancairesController {
         this.userService=userService;
     }
 
+    @GetMapping("/save")
+    public String showCreateOperationsForm(Model model) {
+        model.addAttribute("operationsDto", new OperationsBancairesDto());
+        return "CreateOperationsBancaire";
+    }
+
     @PostMapping("/save")
-    public String saveOperationsBancaires(@RequestBody OperationsBancairesDto operationsBancairesDto, Principal principal,Model model) {
+    public String saveOperationsBancaires(@ModelAttribute("operationsDto") OperationsBancairesDto operationsDto, Principal principal,Model model) {
 
         String username = principal.getName();
 
@@ -47,7 +53,7 @@ public class OperationsBancairesController {
 
         // Utiliser l'ID de l'utilisateur pour obtenir l'agent correspondant
         Agent agent = agentService.findAgentByUserId(appUser.getId());
-        OperationsBancaires operationsBancaires = operationsBancairesService.saveOperationsBancaires(operationsBancairesDto, agent);
+        OperationsBancaires operationsBancaires = operationsBancairesService.saveOperationsBancaires(operationsDto, agent);
         model.addAttribute("successMessage", "Opération enregistrée avec succès. ID: " + operationsBancaires.getId());
         return "redirect:/operationsBancaires/list";
     }
