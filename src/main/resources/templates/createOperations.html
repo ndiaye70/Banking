@@ -4,91 +4,98 @@
 <head>
     <meta charset="UTF-8">
     <title>Créer une opération</title>
-    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
-    <link th:href="@{/css/app.css}" rel="stylesheet">
-    <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
-    <!-- Add your CSS link or style references here -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+    <link rel="stylesheet" th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}">
+    <style>
+        .center-block {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    </style>
 </head>
 
 <body>
-<h3>Nouvelle opération</h3>
-<form class="form form-horizontal" action="save" method="post" th:object="${operationsDto}">
-    <div class="form-body">
-        <div class="row">
-            <div class="col-md-3">
-                <label>Service:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <select th:field="*{service}" class="form-control" required>
-                    <option th:each="s : ${T(Reporting.AFA.Entity.Operations.Service).values()}"
-                            th:value="${s}" th:text="${s.getLabel()}"></option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label>Nature d'Opération:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <select th:field="*{natureOperation}" class="form-control" required>
-                    <option th:each="n : ${T(Reporting.AFA.Entity.Operations.NatureOperation).values()}"
-                            th:value="${n}" th:text="${n.getLabel()}"></option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label>Civilite:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <select th:field="*{civilite}" class="form-control" required>
-                    <option th:each="c : ${T(Reporting.AFA.Entity.Operations.Civilite).values()}"
-                            th:value="${c}" th:text="${c.getLabel()}"></option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label>Nom:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <input type="text" th:field="*{nom}" class="form-control" required>
-            </div>
-            <div class="col-md-3">
-                <label>Prénom:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <input type="text" th:field="*{prenom}" class="form-control" required>
-            </div>
-            <div class="col-md-3">
-                <label>Numéro de Téléphone:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <input type="text" th:field="*{numeroTelephone}" class="form-control" required>
-            </div>
-            <div class="col-md-3">
-                <label>Montant:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <input type="number" step="0.01" th:field="*{montant}" class="form-control" required>
-            </div>
-            <div class="col-md-3">
-                <label>Statut:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <select th:field="*{statut}" class="form-control" required>
-                    <option value="Validé">Validé</option>
-                    <option value="En attente">En attente</option>
-                    <option value="Annulé">Annulé</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label>Autres:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <input type="text" th:field="*{autres}" class="form-control">
-            </div>
-            <div class="col-sm-12 d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary mr-1 mb-1">Enregistrer</button>
-                <button type="reset" class="btn btn-light-secondary mr-1 mb-1">Reset</button>
-            </div>
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Nouvelle opération</h4>
+        </div>
+
+        <div class="card-body">
+            <form class="form form-horizontal" action="save" method="post" th:object="${operationsDto}">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="basicInput">Service:</label>
+                            <select th:field="*{service}" class="form-control" required>
+                                <option th:each="s : ${T(Reporting.AFA.Entity.Operations.Service).values()}"
+                                        th:value="${s}" th:text="${s.getLabel()}"></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="helpInputTop">Nature d'Opération:</label>
+                            <select th:field="*{natureOperation}" class="form-control" required>
+                                <option th:each="n : ${T(Reporting.AFA.Entity.Operations.NatureOperation).values()}"
+                                        th:value="${n}" th:text="${n.getLabel()}"></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="helperText">Civilite:</label>
+                            <select th:field="*{civilite}" class="form-control" required>
+                                <option th:each="c : ${T(Reporting.AFA.Entity.Operations.Civilite).values()}"
+                                        th:value="${c}" th:text="${c.getLabel()}"></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="disabledInput">Nom:</label>
+                            <input type="text" th:field="*{nom}" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="disabledInput">Prénom:</label>
+                            <input type="text" th:field="*{prenom}" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="disabledInput">Numéro de Téléphone:</label>
+                            <input type="text" th:field="*{numeroTelephone}" class="form-control" required>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="helperText">Montant:</label>
+                            <input type="number" step="0.01" th:field="*{montant}" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="readonlyInput">Statut:</label>
+                            <select th:field="*{statut}" class="form-control" required>
+                                <option value="Validé">Validé</option>
+                                <option value="En attente">En attente</option>
+                                <option value="Annulé">Annulé</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="staticInput">Autres:</label>
+                            <input type="text" th:field="*{autres}" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary mr-1 mb-1">Enregistrer</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-</form>
+</div>
 </body>
 
 </html>
