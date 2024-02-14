@@ -29,13 +29,13 @@
                         <thead class="thead-dark">
                         <tr>
                             <th>Caissier</th>
+                            <th>Date</th>
                             <th>Service</th>
                             <th>Nature Opérations</th>
                             <th>Nom</th>
                             <th>Prénom</th>
                             <th>Numéro de Téléphone</th>
                             <th>Montant</th>
-                            <th>Autres</th>
                             <th>Statut</th>
                             <th>Actions</th>
                         </tr>
@@ -43,14 +43,14 @@
                         <tbody>
                         <tr th:each="customOperation : ${customOperations}" th:class="${customOperation.statut == 'Approved'} ? 'table-success' : (${customOperation.statut == 'Pending'} ? 'table-warning' : '')">
 
-                        <td th:text="${customOperation.caissier}"></td>
+                            <td th:text="${customOperation.caissier}"></td>
+                            <td th:text="${customOperation.date}"></td>
                             <td th:text="${customOperation.service}"></td>
                             <td th:text="${customOperation.natureOperation}"></td>
                             <td th:text="${customOperation.nom}"></td>
                             <td th:text="${customOperation.prenom}"></td>
                             <td th:text="${customOperation.numeroTelephone}"></td>
                             <td th:text="${customOperation.montant}"></td>
-                            <td th:text="${customOperation.autres}"></td>
                             <td th:text="${customOperation.statut}"></td>
                             <td>
                                 <a th:href="@{'/operations/' + ${customOperation.id} + '/edit'}" class="btn btn-primary btn-sm">Modifier</a>
@@ -69,3 +69,4 @@
 </body>
 
 </html>
+
