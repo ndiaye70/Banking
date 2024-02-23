@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier un Compte</title>
+</head>
+
+<body>
+<h3>Modifier un Compte</h3>
+<form th:action="@{'/ouvertureComptes/' + ${compteDto.id} + '/edit'}" method="post" th:object="${compteDto}">
+    <label>Type de Compte:
+        <select th:field="*{typeCompte}" required>
+            <option th:each="type : ${T(Reporting.AFA.Entity.OuvertureCompte.TypeCompte).values()}"
+                    th:value="${type}" th:text="${type.getLabel()}"></option>
+        </select>
+    </label><br>
+    <label>Civilite:
+        <select th:field="*{civilite}" required>
+            <option th:each="civilite : ${T(Reporting.AFA.Entity.OuvertureCompte.Civilite).values()}"
+                    th:value="${civilite}" th:text="${civilite}"></option>
+        </select>
+    </label><br>
+    <label>Nom: <input type="text" th:field="*{nom}" required></label><br>
+    <label>Prénom: <input type="text" th:field="*{prenom}" required></label><br>
+    <label>Numéro de Téléphone: <input type="text" th:field="*{numTel}" required></label><br>
+    <label>Adresse: <input type="text" th:field="*{adresse}" required></label><br>
+    <label>Activité: <input type="text" th:field="*{activite}" required></label><br>
+    <label>Numéro de CNI/Passeport: <input type="text" th:field="*{numCni_Passeport}" required></label><br>
+    <label>Nom Conjoint/Conjointe: <input type="text" th:field="*{nomConjoint_Conjointe}" required></label><br>
+    <label>Nom et Prénom de la Mère: <input type="text" th:field="*{nom_PrenomMere}" required></label><br>
+    <label>Pack:
+        <select th:field="*{pack}" required>
+            <option value="Ganalé">Ganalé</option>
+            <option value="Kilifa">Kilifa</option>
+            <option value="Wurus">Wurus</option>
+        </select>
+    </label><br>
+    <label>Montant de Dépôt Initial: <input type="number" step="0.01" th:field="*{montantDepotInitial}" required></label><br>
+    <button type="submit">Enregistrer les modifications</button>
+</form>
+</body>
+
+</html>

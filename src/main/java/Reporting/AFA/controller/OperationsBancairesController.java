@@ -68,7 +68,7 @@ public class OperationsBancairesController {
 
         if (operationsBancairesOptional.isPresent()) {
             OperationsBancaires operationsBancaires=operationsBancairesOptional.get();
-            model.addAttribute("operationsBancairesDto", operationsBancaires);
+            model.addAttribute("operationsBancaires", operationsBancaires);
             return "editOpBancaires";
         } else {
             // Gérer le cas où les opérations avec l'ID donné ne sont pas trouvées

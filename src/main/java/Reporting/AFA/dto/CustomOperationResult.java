@@ -21,7 +21,9 @@ public class CustomOperationResult {
 
 
     public enum Service {
+        Orange_Money("Orange Money"),
         Orange_money("Orange Money"),
+        Free_Money("Free Money"),
         Free_money("Free Money"),
         Wave("Wave"),
         Wari("Wari"),
@@ -35,7 +37,8 @@ public class CustomOperationResult {
         Askia("Askia"),
         Sunu_Assurance("Sunu Assurance"),
         Creation_Entreprise("Création Entreprise"),
-        Cartes("Cartes"),
+        Cartes("Cartes Com-Imp/Exp"),
+        Cartes_Com_Imp_Exp("Cartes Com-Imp/Exp"),
         Natte("Natte");
 
         private final String label;

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Création de Compte</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+    <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
+    <!-- Add your CSS link or style references here -->
+</head>
+
+<body>
+<h3>Création de Compte</h3>
+<form class="form form-horizontal" th:action="@{save}" method="post" th:object="${ouvertureCompteDto}">
+    <div class="form-body">
+        <div class="row">
+            <div class="col-md-3">
+                <label>Type de Compte:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="text" class="form-control" value="Compte Courant" disabled>
+            </div>
+            <div class="col-md-3">
+                <label>Forme Juridique:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <select th:field="*{formeJuridique}" class="form-control" required>
+                    <option th:each="forme : ${T(Reporting.AFA.Entity.OuvertureCpteEntreprise.FormeJuridique).values()}"
+                            th:value="${forme}" th:text="${forme}"></option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>RCCM:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="text" class="form-control" th:field="*{rccm}" required>
+            </div>
+            <div class="col-md-3">
+                <label>NINEA:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="text" class="form-control" th:field="*{ninea}" required>
+            </div>
+            <div class="col-md-3">
+                <label>Denomination Sociale:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="text" class="form-control" th:field="*{denominationSocial}" required>
+            </div>
+            <div class="col-md-3">
+                <label>Pack:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <select th:field="*{pack}" class="form-control" required>
+                    <option th:each="pack : ${T(Reporting.AFA.Entity.OuvertureCpteEntreprise.Pack).values()}"
+                            th:value="${pack}" th:text="${pack.getLabel()}"></option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Montant Dépôt Initial:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="number" step="0.01" class="form-control" th:field="*{montantDepotInitial}" required>
+            </div>
+            <div class="col-md-3">
+                <label>Nom:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="text" class="form-control" th:field="*{nom}" required>
+            </div>
+            <div class="col-md-3">
+                <label>Prénom:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="text" class="form-control" th:field="*{prenom}" required>
+            </div>
+            <div class="col-md-3">
+                <label>Fonctions:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="text" class="form-control" th:field="*{fonctions}" required>
+            </div>
+            <div class="col-md-3">
+                <label>Numéro CNI ou Passeport:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="text" class="form-control" th:field="*{numCNI_Passeport}" required>
+            </div>
+            <div class="col-md-3">
+                <label>Numéro de Téléphone:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="text" class="form-control" th:field="*{numTel}" required>
+            </div>
+            <div class="col-md-3">
+                <label>Adresse:</label>
+            </div>
+            <div class="col-md-9 form-group">
+                <input type="text" class="form-control" th:field="*{adresse}" required>
+            </div>
+            <!-- Ajoutez les autres champs du formulaire ici -->
+        </div>
+    </div>
+    <div class="col-sm-12 d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary mr-1 mb-1">Enregistrer</button>
+        <button type="reset" class="btn btn-light-secondary mr-1 mb-1">Reset</button>
+    </div>
+</form>
+</body>
+
+</html>

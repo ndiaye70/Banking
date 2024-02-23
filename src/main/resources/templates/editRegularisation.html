@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier une régularisation</title>
+</head>
+<body>
+<h3>Modifier une régularisation</h3>
+<form th:object="${regularisation}" th:action="@{'/regularisations/'+ ${regularisation.id} +'/edit'}" method="post">
+
+    <label>Libellé: <input type="text" th:name="libelle" th:value="*{libelle}" required></label><br>
+    <label>Montant: <input type="number" th:name="montant" th:value="*{montant}" required></label><br>
+
+    <label>Compte/Caisse:
+        <select th:name="compteCaisse" required>
+            <option th:each="compteCaisse : ${T(Reporting.AFA.Entity.Regularisation.CompteCaisse).values()}"
+                    th:value="${compteCaisse}" th:text="${compteCaisse.getLabel()}" th:selected="${regularisation.compteCaisse == compteCaisse}"></option>
+        </select>
+    </label><br>
+
+    <label>Régularisateur:
+        <select th:name="regularisateur" required>
+            <option th:each="regularisateur : ${T(Reporting.AFA.Entity.Regularisation.Regularisateur).values()}"
+                    th:value="${regularisateur}" th:text="${regularisateur.getLabel()}" th:selected="${regularisation.regularisateur == regularisateur}"></option>
+        </select>
+    </label><br>
+
+    <button type="submit">Enregistrer les modifications</button>
+</form>
+<a href="/ipsl/regularisations/list">Retour à la liste des régularisations</a>
+</body>
+</html>

@@ -19,7 +19,7 @@ public class OuvertureCpteEntrepriseDto {
     private String prenom;
     private String fonctions;
     private String numCNI_Passeport;
-    private String numTelephone;
+    private String numTel;
     private String adresse;
 
 
@@ -39,7 +39,7 @@ public class OuvertureCpteEntrepriseDto {
         ouvertureCpteEntreprise.setPrenom(this.prenom);
         ouvertureCpteEntreprise.setFonctions(this.fonctions);
         ouvertureCpteEntreprise.setNumCNI_Passeport(this.numCNI_Passeport);
-        ouvertureCpteEntreprise.setNumTel(this.numTelephone);
+        ouvertureCpteEntreprise.setNumTel(this.numTel);
         ouvertureCpteEntreprise.setAdresse(this.adresse);
 
         return ouvertureCpteEntreprise;

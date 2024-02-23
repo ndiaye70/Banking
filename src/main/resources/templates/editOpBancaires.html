@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Modifier une opération bancaire</title>
+</head>
+
+<body>
+<h3>Modifier une opération bancaire</h3>
+<form th:action="@{'/operationsBancaires/' + ${operationsBancaires.id} + '/edit'}" method="post" th:object="${operationsBancaires}">
+  <label>Banque:
+    <select th:field="*{banques}" required>
+      <option th:each="banque : ${T(Reporting.AFA.Entity.OperationsBancaires.Banques).values()}"
+              th:value="${banque}" th:text="${banque}"></option>
+    </select>
+  </label><br>
+  <label>Nature Opération:
+    <select th:field="*{natureOperations}" required>
+      <option th:each="nature : ${T(Reporting.AFA.Entity.OperationsBancaires.NatureOperations).values()}"
+              th:value="${nature}" th:text="${nature.getLabel()}"></option>
+    </select>
+  </label><br>
+  <label>Numéro de Compte: <input type="text" th:field="*{numeroCompte}" required></label><br>
+  <label>Civilite:
+    <select th:field="*{civilite}" required>
+      <option th:each="civilite : ${T(Reporting.AFA.Entity.OperationsBancaires.Civilite).values()}"
+              th:value="${civilite}" th:text="${civilite}"></option>
+    </select>
+  </label><br>
+  <label>Nom: <input type="text" th:field="*{nom}" required></label><br>
+  <label>Prénom: <input type="text" th:field="*{prenom}" required></label><br>
+  <label>Numéro de Téléphone: <input type="text" th:field="*{numeroTelephone}" required></label><br>
+  <label>Montant: <input type="number" step="0.01" th:field="*{montant}" required></label><br>
+  <label>Comission: <input type="number" step="0.01" th:field="*{commissions}" required></label><br>
+  <label>Statut: <input type="text" th:field="*{statut}" required></label><br>
+  <label>Autres: <input type="text" th:field="*{autres}"></label><br>
+  <button type="submit">Enregistrer les modifications</button>
+</form>
+</body>
+
+</html>

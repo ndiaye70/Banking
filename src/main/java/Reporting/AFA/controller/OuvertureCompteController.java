@@ -46,22 +46,24 @@ public class OuvertureCompteController {
         return "createCompte";
     }
 
+
     @PostMapping("/save")
-    public ResponseEntity<String> saveGrossiste(@ModelAttribute("compteDto") OuvertureCompteDto ouvertureCompteDto, Model model , Principal principal) {
+    public String saveGrossiste(@ModelAttribute("compteDto") OuvertureCompteDto ouvertureCompteDto, Model model, Principal principal) {
         String username = principal.getName();
-
         AppUser appUser = userService.loadUserByUsername(username);
-
-        // Utiliser l'ID de l'utilisateur pour obtenir l'agent correspondant
         Agent agent = agentService.findAgentByUserId(appUser.getId());
+
         try {
-            // Enregistrez le grossiste dans la base de données
-            OuvertureCompte compte=ouvertureCompteService.saveOuvertureCompte(ouvertureCompteDto,agent);
-            return ResponseEntity.ok("Grossiste enregistré avec succès. ID: " + compte.getId());
+            OuvertureCompte compte = ouvertureCompteService.saveOuvertureCompte(ouvertureCompteDto, agent);
+            model.addAttribute("successMessage", "Compte créé avec succès. ID: " + compte.getId());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de l'enregistrement du compte");
+            model.addAttribute("errorMessage", "Erreur lors de la création du compte");
+            return "redirect:/ouvertureComptes/save";
         }
+
+        return "redirect:/ouvertureComptes/list";
     }
+
 
     @GetMapping("/list")
     public String getCustomCompte(Model model) {

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
@@ -37,12 +38,12 @@ public class OuvertureCpteEntrepriseController {
 
     @GetMapping("/save")
     public String showCreateCompteForm(Model model){
-        model.addAttribute("compteDto",new OuvertureCpteEntrepriseDto());
+        model.addAttribute("ouvertureCompteDto",new OuvertureCpteEntrepriseDto());
         return "createCpte";
     }
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveGrossiste(@ModelAttribute("compteDto") OuvertureCpteEntrepriseDto ouvertureCompteDto, Model model , Principal principal) {
+    public String saveGrossiste(@ModelAttribute("ouvertureCompteDto") OuvertureCpteEntrepriseDto ouvertureCompteDto, Model model, Principal principal, RedirectAttributes redirectAttributes) {
         String username = principal.getName();
 
         AppUser appUser = userService.loadUserByUsername(username);
@@ -51,12 +52,14 @@ public class OuvertureCpteEntrepriseController {
         Agent agent = agentService.findAgentByUserId(appUser.getId());
         try {
             // Enregistrez le grossiste dans la base de données
-            OuvertureCpteEntreprise compte=ouvertureCompteService.saveOuvertureCpteEntreprise(ouvertureCompteDto,agent);
-            return ResponseEntity.ok("Compte entreprise enregistré avec succès. ID: " + compte.getId());
+            OuvertureCpteEntreprise compte = ouvertureCompteService.saveOuvertureCpteEntreprise(ouvertureCompteDto, agent);
+            redirectAttributes.addFlashAttribute("successMessage", "Compte entreprise enregistré avec succès. ID: " + compte.getId());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de l'enregistrement du compte");
+            redirectAttributes.addFlashAttribute("errorMessage", "Erreur lors de l'enregistrement du compte");
         }
+        return "redirect:/ouvertureCpte/list";
     }
+
 
     @GetMapping("/list")
     public String getCustomCompte(Model model) {
@@ -105,7 +108,7 @@ public class OuvertureCpteEntrepriseController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         compte.setDate(now.format(formatter));
         ouvertureCompteService.updateCompte(ouvertureCompteId,compte);
-        return "redirect:/ouvertureComptes/list";
+        return "redirect:/ouvertureCpte/list";
 
     }
 

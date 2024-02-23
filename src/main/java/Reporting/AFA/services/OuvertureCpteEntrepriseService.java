@@ -81,6 +81,8 @@ public class  OuvertureCpteEntrepriseService {
         customOperationResult.setNumCNI_Passeport((String) result[12]);
         customOperationResult.setAdresse((String) result[13]);
         customOperationResult.setDate((String) result[14]);
+        customOperationResult.setNumTel((String) result[15]);
+
         return customOperationResult;
     }
  
