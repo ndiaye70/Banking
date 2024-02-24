@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"   xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des régularisations</title>
+</head>
+<body>
+<h3>Liste des régularisations</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Libellé</th>
+        <th>Montant</th>
+        <th>Compte/Caisse</th>
+        <th>Régularisateur</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Ici, vous pouvez utiliser Thymeleaf pour parcourir la liste de régularisations et afficher les données -->
+    <tr th:each="regularisation : ${regularisation}">
+        <td th:text="${regularisation.date}"></td>
+        <td th:text="${regularisation.libelle}"></td>
+        <td th:text="${regularisation.montant}"></td>
+        <td th:text="${regularisation.compteCaisse.label}"></td>
+        <td th:text="${regularisation.regularisateur.label}"></td>
+        <td>
+            <a th:href="@{'/regularisations/' + ${regularisation.id} + '/edit'}">Modifier</a>
+            <a th:href="@{'/regularisations/' + ${regularisation.id} + '/delete'}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette régularisation ?')">Supprimer</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{'/regularisations/save'}">Ajouter une régularisation</a>
+</body>
+</html>
