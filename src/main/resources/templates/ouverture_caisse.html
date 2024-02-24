@@ -2,22 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Modifier une Caisse</title>
+    <title>Caisse - Billetage</title>
 </head>
 <body>
-<h3>Modifier une Caisse</h3>
+<h3>Caisse - Billetage</h3>
 
 <!-- Entête -->
 <div>
-    <label>Agent: <span th:text="${nomComplet}"></span></label><br>
+    <label> Agent: <span th:text="${nomComplet}"></span></label><br>
     <label>Agence: <span th:text="${agence.nomAgence}"></span></label><br>
-    <label>Date  et  Heure: <span th:text="${dateHeure}"></span></label><br>
-
-    <label> Caisse </label><br>
-
+    <label>Date et Heure: <span th:text="${dateHeure}"></span></label><br>
 </div>
-<form th:action="@{edit}" method="post" th:object="${caisseForms}">
-    "@{'/grossistes/' + ${grossisteDto.id} + '/edit'}"
+
+<form th:action="@{save}" method="post" th:object="${caisseForm}">
     <!-- Section pour les euros -->
     <h4>Devise: Euros</h4>
     <table>
@@ -154,6 +151,9 @@
             <td><input type="number" th:field="*{xofDto.pieceCinq}" required></td>
         </tr>
     </table>
+
+    <!-- Nature de la caisse (cachée) -->
+    <input type="hidden" id="natureCaisse" name="natureCaisse" value="Ouverture_Caisse">
 
     <button type="submit">Valider</button>
 </form>

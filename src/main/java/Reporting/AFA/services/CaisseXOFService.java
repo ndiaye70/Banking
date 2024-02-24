@@ -40,7 +40,7 @@ public class CaisseXOFService {
         CaisseXOF caisse=new CaisseXOF();
         caisse.setXof(xof);
         caisse.setAgent(agent);
-        caisse.setNatureCaisse(natureCaisse);
+        caisse.setNatureCaisse(Caisse.NatureCaisse.valueOf(natureCaisse));
         caisse.setDateCreation(new Date());
         caisse.calculerMontantTotal();
         return caisseXOFRepository.save(caisse);

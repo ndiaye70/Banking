@@ -26,19 +26,27 @@ public class Caisse {
     @Transient
     private Agence agence;
 
-    private String natureCaisse;
+
+    @Enumerated(EnumType.STRING)
+    private NatureCaisse natureCaisse;
 
     @OneToOne
     private Euro euros;
 
-    @Getter
-    private double montantTotal;
+    @OneToOne
+    private Dollars dollars;
+
+    @OneToOne
+    private XOF xof;
+
+    private double montantDollars;
+    private  double montantEuros;
+    private  double montantFcfa;
 
     public Caisse() {
         this.id = 0L;
         this.dateCreation = new Date();
         this.euros = new Euro();
-        this.montantTotal = 0.0;
     }
 
     public Caisse(Euro euros, Agent agent,String natureCaisse) {
@@ -47,15 +55,37 @@ public class Caisse {
         this.euros = euros;
         this.agent = agent;
         this.agence = agent.getAgence();
-        if (this.euros != null) {
-            this.montantTotal = euros.calculerMontantTotal();
-        } else {
-            this.montantTotal = 0.0;
-        }
+
     }
 
-    public void calculerMontantTotal() {
-        montantTotal = euros.calculerMontantTotal();
+    public void calculerMontantDollars() {
+        montantDollars = dollars.calculerMontantTotal();
+
+    }
+
+    public void calculerMontantEuros() {
+        montantEuros = euros.calculerMontantTotal();
+
+    }
+    public void calculerMontantFcfa() {
+        montantFcfa =xof.calculerMontantTotal();
+
+    }
+
+
+    public enum NatureCaisse {
+        Ouverture_Caisse("Ouverture Caisse"),Billetage("Billetage"),Fermeture_Caisse("Fermeture Caisse");
+
+
+        private final String label;
+
+        NatureCaisse(String label){
+            this.label=label;
+
+        }
+        public String getLabel() {
+            return label;
+        }
 
     }
 }

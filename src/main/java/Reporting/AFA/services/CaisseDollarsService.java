@@ -41,7 +41,7 @@ public class CaisseDollarsService {
         CaisseDollars caisse=new CaisseDollars();
         caisse.setDollars(dollars);
         caisse.setAgent(agent);
-        caisse.setNatureCaisse(natureCaisse);
+        caisse.setNatureCaisse(Caisse.NatureCaisse.valueOf(natureCaisse));
         caisse.setDateCreation(new Date());
         caisse.calculerMontantTotal();
         return caisseDollarsRepository.save(caisse);

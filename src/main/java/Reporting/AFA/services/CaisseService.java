@@ -1,13 +1,10 @@
 package Reporting.AFA.services;
 
-import Reporting.AFA.Entity.Agent;
-import Reporting.AFA.Entity.Caisse;
-import Reporting.AFA.Entity.AppUser;
+import Reporting.AFA.Entity.*;
 import Reporting.AFA.Repository.AgentRepository;
 import Reporting.AFA.Repository.CaisseRepository;
 import Reporting.AFA.Security.repo.UserRepository;
 import Reporting.AFA.dto.CaisseDto;
-import Reporting.AFA.Entity.Euro;
 import Reporting.AFA.dto.EuroDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,13 +38,17 @@ public class CaisseService {
 
     @Transactional
 
-    public Caisse saisirCaisse(Euro euro, Agent agent,String natureCaisse) {
+    public Caisse saisirCaisse(Euro euro, Dollars dollars,XOF xof, Agent agent, String natureCaisse) {
         Caisse caisse=new Caisse();
+        caisse.setDollars(dollars);
+        caisse.setXof(xof);
         caisse.setEuros(euro);
         caisse.setAgent(agent);
-        caisse.setNatureCaisse(natureCaisse);
+        caisse.setNatureCaisse(Caisse.NatureCaisse.valueOf(natureCaisse));
         caisse.setDateCreation(new Date());
-        caisse.calculerMontantTotal();
+        caisse.calculerMontantDollars();
+        caisse.calculerMontantEuros();
+        caisse.calculerMontantFcfa();
         return caisseRepository.save(caisse);
     }
 
@@ -60,7 +61,7 @@ public class CaisseService {
     }
 
     @Transactional
-    public Caisse updateCaisse(Long caisseId, Euro euro, Agent agent) {
+    public Caisse updateCaisse(Long caisseId, Euro euro,Dollars dollars,XOF xof, Agent agent) {
         Optional<Caisse> optionalCaisse = caisseRepository.findById(caisseId);
 
         if (optionalCaisse.isPresent()) {
@@ -81,13 +82,16 @@ public class CaisseService {
                 throw new RuntimeException(e);
             }
             caisse.setEuros(euro);
+            caisse.setDollars(dollars);
+            caisse.setXof(xof);
 
 
             caisse.setAgent(agent);
 
             // Recalculer le montant total après la mise à jour des euros
-            caisse.calculerMontantTotal();
-
+            caisse.calculerMontantFcfa();
+            caisse.calculerMontantEuros();
+            caisse.calculerMontantDollars();
             // Enregistrez les modifications dans la base de données
             return caisseRepository.save(caisse);
         } else {

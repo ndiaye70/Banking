@@ -18,7 +18,9 @@ public class CaisseDollars {
 
     private Date dateCreation;
 
-    private String natureCaisse;
+
+    @Enumerated(EnumType.STRING)
+    private Caisse.NatureCaisse natureCaisse;
 
     @Transient
     private Agence agence;
@@ -50,6 +52,22 @@ public class CaisseDollars {
 
     public void calculerMontantTotal() {
         montantTotal = dollars.calculerMontantTotal();
+    }
+
+    public enum NatureCaisse {
+        Ouverture_Caisse("Ouverture Caisse"),Billetage("Billetage"),Fermeture_Caisse("Fermeture Caisse");
+
+
+        private final String label;
+
+        NatureCaisse(String label){
+            this.label=label;
+
+        }
+        public String getLabel() {
+            return label;
+        }
+
     }
 
 

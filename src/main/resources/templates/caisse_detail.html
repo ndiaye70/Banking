@@ -3,65 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <title>Détails de la Caisse</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- Include html2pdf library -->
-    <script src="https://cdn.rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
-    <!-- Script JavaScript -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#imprimerPdf').click(function () {
-                console.log('Clic sur le bouton Imprimer PDF');
-                // Récupérez le contenu HTML de la page
-                var content = $('#pdfContent').html();
-
-                // Convertissez le HTML en PDF
-                html2pdf(content, {
-                    margin: 10,
-                    filename: 'details_caisse.pdf',
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { scale: 2 },
-                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-                });
-            });
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 
 </head>
 <body>
-<div id="pdfContent">
-<h3>Détails de la Caisse</h3>
+<div id="pdf-content">
+    <h3>Détails de la Caisse</h3>
 
-<!-- Affichage des détails de la caisse -->
-<div>
-    <label>Nature de la Caisse: <span th:text="${caisse.natureCaisse}"></span></label><br>
-    <label>Nom de l'Agent: <span th:text="${user.nom}"></span></label><br>
-    <label>Prénom de l'Agent: <span th:text="${user.prenom}"></span></label><br>
-    <label>Agence: <span th:text="${agence.nomAgence}"></span></label><br>
-    <label>Date de Création: <span th:text="${#dates.format(caisse.dateCreation, 'dd-MM-yyyy HH:mm:ss')}"></span></label><br>
-    <label> Devise : EURO </label><br>
+    <!-- Affichage des détails de la caisse -->
+    <div>
+        <label>Agent: <span th:text="${nomComplet}"></span></label><br>
+        <label>Agence: <span th:text="${agence.nomAgence}"></span></label><br>
+        <label>Date et Heure: <span th:text="${dateHeure}"></span></label><br>
+    </div>
+
+    <!-- Affichage des détails des billets -->
+    <div>
+        <!-- Section pour les euros -->
+        <h4>Devise: Euros</h4>
+        <table>
+            <tr>
+                <th>Billets</th>
+                <th>Quantité</th>
+            </tr>
+            <tr>
+                <td>500 €</td>
+                <td><span th:text="${euros.billetCinqCents}"></span></td>
+            </tr>
+            <tr>
+                <td>200 €</td>
+                <td><span th:text="${euros.billetDeuxCents}"></span></td>
+            </tr>
+            <tr>
+                <td>100 €</td>
+                <td><span th:text="${euros.billetCent}"></span></td>
+            </tr>
+            <tr>
+                <td>50 €</td>
+                <td><span th:text="${euros.billetCinquante}"></span></td>
+            </tr>
+            <tr>
+                <td>20 €</td>
+                <td><span th:text="${euros.billetVingt}"></span></td>
+            </tr>
+            <tr>
+                <td>10 €</td>
+                <td><span th:text="${euros.billetDix}"></span></td>
+            </tr>
+            <tr>
+                <td>5 €</td>
+                <td><span th:text="${euros.billetCinq}"></span></td>
+            </tr>
+
+            <tr>
+                <td>Montant total :</td>
+                <td><span th:text="${euros.calculerMontantTotal()}"></span></td>
+            </tr>
+        </table>
+
+        <!-- Section pour les dollars -->
+        <h4>Devise: Dollars</h4>
+        <table>
+            <tr>
+                <th>Billets</th>
+                <th>Quantité</th>
+            </tr>
+            <tr>
+                <td>1 $</td>
+                <td><span th:text="${dollars.billetUnDollar}"></span></td>
+            </tr>
+            <tr>
+                <td>2 $</td>
+                <td><span th:text="${dollars.billetDeuxDollars}"></span></td>
+            </tr>
+            <tr>
+                <td>5 $</td>
+                <td><span th:text="${dollars.billetCinqDollars}"></span></td>
+            </tr>
+            <tr>
+                <td>10 $</td>
+                <td><span th:text="${dollars.billetDixDollars}"></span></td>
+            </tr>
+            <tr>
+                <td>20 $</td>
+                <td><span th:text="${dollars.billetVingtDollars}"></span></td>
+            </tr>
+            <tr>
+                <td>50 $</td>
+                <td><span th:text="${dollars.billetCinquanteDollars}"></span></td>
+            </tr>
+            <tr>
+                <td>100 $</td>
+                <td><span th:text="${dollars.billetCentDollars}"></span></td>
+            </tr>
+            <tr>
+                <td>Montant total :</td>
+                <td><span th:text="${dollars.calculerMontantTotal()}"></span></td>
+            </tr>
+        </table>
+
+        <!-- Section pour les XOF -->
+        <h4>Devise: XOF</h4>
+        <table>
+            <tr>
+                <th>Billets</th>
+                <th>Quantité</th>
+            </tr>
+            <tr>
+                <td>10,000 FCFA</td>
+                <td><span th:text="${xof.billetDixMille}"></span></td>
+            </tr>
+            <tr>
+                <td>5,000 FCFA</td>
+                <td><span th:text="${xof.billetCinqMille}"></span></td>
+            </tr>
+            <tr>
+                <td>2,000 FCFA</td>
+                <td><span th:text="${xof.billetDeuxMille}"></span></td>
+            </tr>
+            <tr>
+                <td>1,000 FCFA</td>
+                <td><span th:text="${xof.billetMille}"></span></td>
+            </tr>
+            <tr>
+                <td>500 FCFA</td>
+                <td><span th:text="${xof.billetCinqCent}"></span></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Pièces</th>
+                <th>Quantité</th>
+            </tr>
+            <tr>
+                <td>500 FCFA</td>
+                <td><span th:text="${xof.pieceCinqCent}"></span></td>
+            </tr>
+            <tr>
+                <td>200 FCFA</td>
+                <td><span th:text="${xof.pieceDeuxCent}"></span></td>
+            </tr>
+            <tr>
+                <td>100 FCFA</td>
+                <td><span th:text="${xof.pieceCent}"></span></td>
+            </tr>
+            <tr>
+                <td>50 FCFA</td>
+                <td><span th:text="${xof.pieceCinquante}"></span></td>
+            </tr>
+            <tr>
+                <td>25 FCFA</td>
+                <td><span th:text="${xof.pieceVingtCinq}"></span></td>
+            </tr>
+            <tr>
+                <td>10 FCFA</td>
+                <td><span th:text="${xof.pieceDix}"></span></td>
+            </tr>
+            <tr>
+                <td>5 FCFA</td>
+                <td><span th:text="${xof.pieceCinq}"></span></td>
+            </tr>
+
+            <tr>
+                <td>Montant total :</td>
+                <td><span th:text="${xof.calculerMontantTotal()}"></span></td>
+            </tr>
+        </table>
+    </div>
+
 </div>
 
-<!-- Affichage des détails des Euros -->
-<div>
-    <label>Billet 500 € : <span th:text="${euros.billetCinqCents}"></span></label><br>
-    <label>Billet 200 € : <span th:text="${euros.billetDeuxCents}"></span></label><br>
-    <label>Billet 100 € : <span th:text="${euros.billetCent}"></span></label><br>
-    <label>Billet 50 € : <span th:text="${euros.billetCinquante}"></span></label><br>
-    <label>Billet 5 € : <span th:text="${euros.billetCinq}"></span></label><br>
-    <label>Billet 10 € : <span th:text="${euros.billetDix}"></span></label><br>
-    <label>Billet 20 € : <span th:text="${euros.billetVingt}"></span></label><br>
+    <!-- Bouton de retour -->
+    <a href="http://localhost:8081/ipsl/caisses/list" >Retour à la liste</a>
+    <button id="imprimerPdf" >Imprimer en PDF</button>
 
-    <label>Montant : <span th:text="${euros.calculerMontantTotal()}"></span></label><br>
 
-</div>
+    <script>
+        // Ajoute un écouteur d'événement au clic sur le bouton
+        document.getElementById('imprimerPdf').addEventListener('click', function() {
+            // Options pour la conversion PDF
+            var options = {
+                filename: 'details_caisse.pdf', // Nom du fichier PDF
 
-</div>
+                image: { type: 'jpeg', quality: 0.98 }, // Qualité de l'image
+                html2canvas: { scale: 2 }, // Facteur d'échelle HTML2Canvas
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } // Format et orientation du PDF
+                //exclude: '.exclude-from-pdf' // Exclut les éléments avec cette classe de la conversion PDF
+            };
 
-<!-- Ajoutez d'autres détails selon vos besoins -->
+            // Sélectionne le contenu de la page à convertir en PDF
+            //var element = document.body;
+            var element = document.getElementById('pdf-content');
 
-<!-- Bouton de retour -->
-<a href="http://localhost:8081/ipsl/euros/list">Retour à la liste</a>
-<button id="imprimerPdf">Imprimer en PDF</button>
+            // Convertit le contenu en PDF
+            html2pdf().from(element).set(options).save();
+        });
+    </script>
 
 </body>
 </html>
