@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+    <title>Choix de Compte</title>
+    <style>
+        /* Style pour la fenêtre modale */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* Fond noir semi-transparent */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 40%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            animation-name: modalopen;
+            animation-duration: 0.4s;
+            text-align: center;
+        }
+
+        @keyframes modalopen {
+            from {opacity: 0}
+            to {opacity: 1}
+        }
+
+        /* Style pour les options de compte */
+        .option {
+            width: 550px;
+            height: 70px;
+            background-color: blue;
+            border: 2px dotted red;
+            color: white;
+            text-align: center;
+            line-height: 70px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 18px; /* Taille de la police augmentée */
+        }
+
+        /* Style pour le bouton de fermeture */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<div id="auth">
+    <!-- La fenêtre modale -->
+    <div id="myModal" class="modal">
+
+        <!-- Contenu de la fenêtre modale -->
+        <div class="modal-content">
+            <span class="close" onclick="redirectToIndex()">&times;</span>
+            <h2>Type de compte</h2>
+            <div class="option" onclick="redirectToPage1()">Compte Particulier</div>
+            <div class="option" onclick="redirectToPage2()">Compte Entreprise</div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    // Fonction pour ouvrir la fenêtre modale
+    function openModal() {
+        document.getElementById("myModal").style.display = "block";
+    }
+
+    // Fonction pour fermer la fenêtre modale
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+
+    // Fonction pour rediriger vers la page correspondant au Compte 1
+    function redirectToPage1() {
+        window.location.href = "/ipsl/ouvertureComptes/list";
+    }
+
+    // Fonction pour rediriger vers la page correspondant au Compte 2
+    function redirectToPage2() {
+        window.location.href = "/ipsl/ouvertureCpte/list";
+    }
+
+    // Fonction pour rediriger vers la page d'accueil
+    function redirectToIndex() {
+        window.location.href = "/ipsl/index";
+    }
+
+    // Fermer la fenêtre modale et rediriger vers la page d'accueil si l'utilisateur clique en dehors de celle-ci
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal");
+        if (event.target == modal) {
+            closeModal();
+            redirectToIndex();
+        }
+    }
+
+    // Ouvrir automatiquement la fenêtre modale lorsque la page est chargée
+    window.onload = function() {
+        openModal();
+    }
+</script>
+
+</body>
+</html>

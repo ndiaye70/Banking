@@ -16,6 +16,9 @@ public class CustomRepositoryImpl implements CustomRepository {
     @Autowired
     private SoldeDepartRepository soldeDepartRepository;
 
+    @Autowired
+    private  CommissionsRepository commissionsRepository;
+
     public CustomRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
@@ -25,18 +28,18 @@ public class CustomRepositoryImpl implements CustomRepository {
         List<Map<String, Object>> recaps = new ArrayList<>();
 
         Query query = entityManager.createNativeQuery("SELECT 'Orange Money' AS service, " +
-                "    (SELECT COALESCE(SUM(CASE WHEN nature_operation IN ('Dépôt', 'Seddo', 'Paiement_de_Facture') THEN montant ELSE 0 END), 0) FROM operations WHERE service = 'Orange_Money' AND DATE(date) = DATE(NOW())) AS montant_depot, " +
-                "    (SELECT COALESCE(SUM(CASE WHEN nature_operation IN ('retrait', 'RetraitCode') THEN montant ELSE 0 END), 0) FROM operations WHERE service = 'Orange_Money' AND DATE(date) = DATE(NOW())) AS montant_retrait, " +
-                "    (SELECT COALESCE(COUNT(*), 0) FROM operations WHERE service = 'Orange_Money' AND DATE(date) = DATE(NOW())) AS nombre_de_client, " +
+                "    (SELECT COALESCE(SUM(CASE WHEN nature_operation IN ('Dépôt', 'Seddo', 'Paiement_de_Facture') THEN montant ELSE 0 END), 0) FROM operations WHERE service = 'Orange_money' AND DATE(date) = DATE(NOW())) AS montant_depot, " +
+                "    (SELECT COALESCE(SUM(CASE WHEN nature_operation IN ('retrait', 'RetraitCode') THEN montant ELSE 0 END), 0) FROM operations WHERE service = 'Orange_money' AND DATE(date) = DATE(NOW())) AS montant_retrait, " +
+                "    (SELECT COALESCE(COUNT(*), 0) FROM operations WHERE service = 'Orange_money' AND DATE(date) = DATE(NOW())) AS nombre_de_client, " +
                 "    (SELECT COALESCE(SUM(CASE WHEN type IN ('Approvisionnement_caisse_sortant','Approvisionnement_compte_virtuel_entrant') AND compte_caisse2='Orange_Money' THEN montant ELSE 0 END), 0) FROM approvisionnement WHERE DATE(date) = DATE(NOW())) + " +
                 "    (SELECT COALESCE(SUM(CASE WHEN montant_paye_par='OM' THEN montant ELSE 0 END), 0) FROM grossiste WHERE DATE(date) = DATE(NOW())) + " +
                 "    (SELECT COALESCE(SUM(CASE WHEN frais_paye_par='OM' THEN frais ELSE 0 END), 0) FROM grossiste WHERE DATE(date) = DATE(NOW())) AS Appro_Entrant, " +
                 "    (SELECT COALESCE(SUM(CASE WHEN type IN ('Approvisionnement_caisse_entrant','Approvisionnement_compte_virtuel_sortant') AND compte_caisse1='Orange_Money' THEN -montant ELSE 0 END), 0) FROM approvisionnement WHERE DATE(date) = DATE(NOW())) AS Appro_Sortant " +
                 "UNION ALL " +
                 "SELECT 'Free Money' AS service, " +
-                "    (SELECT COALESCE(SUM(CASE WHEN nature_operation IN ('Dépôt', 'IZI', 'Paiement_de_Facture') THEN montant ELSE 0 END), 0) FROM operations WHERE service = 'Free_Money' AND DATE(date) = DATE(NOW())) AS montant_depot, " +
-                "    (SELECT COALESCE(SUM(CASE WHEN nature_operation IN ('retrait', 'RetraitCode') THEN montant ELSE 0 END), 0) FROM operations WHERE service = 'Free_Money' AND DATE(date) = DATE(NOW())) AS montant_retrait, " +
-                "    (SELECT COALESCE(COUNT(DISTINCT service), 0) FROM operations WHERE service = 'Free_Money' AND DATE(date) = DATE(NOW())) AS nombre_de_client, " +
+                "    (SELECT COALESCE(SUM(CASE WHEN nature_operation IN ('Dépôt', 'IZI', 'Paiement_de_Facture') THEN montant ELSE 0 END), 0) FROM operations WHERE service = 'Free_money' AND DATE(date) = DATE(NOW())) AS montant_depot, " +
+                "    (SELECT COALESCE(SUM(CASE WHEN nature_operation IN ('retrait', 'RetraitCode') THEN montant ELSE 0 END), 0) FROM operations WHERE service = 'Free_money' AND DATE(date) = DATE(NOW())) AS montant_retrait, " +
+                "    (SELECT COALESCE(COUNT(DISTINCT service), 0) FROM operations WHERE service = 'Free_money' AND DATE(date) = DATE(NOW())) AS nombre_de_client, " +
                 "    (SELECT COALESCE(SUM(CASE WHEN type IN ('Approvisionnement_caisse_sortant','Approvisionnement_compte_virtuel_entrant') AND compte_caisse2='Free_Money' THEN montant ELSE 0 END), 0) FROM approvisionnement WHERE DATE(date) = DATE(NOW())) AS Appro_Entrant, " +
                 "    (SELECT COALESCE(SUM(CASE WHEN type IN ('Approvisionnement_caisse_entrant','Approvisionnement_compte_virtuel_sortant') AND compte_caisse1='Free_Money' THEN -montant ELSE 0 END), 0) FROM approvisionnement WHERE DATE(date) = DATE(NOW())) AS Appro_Sortant " +
                 "UNION ALL " +
@@ -50,15 +53,15 @@ public class CustomRepositoryImpl implements CustomRepository {
                 "    (SELECT COALESCE(SUM(CASE WHEN type IN ('Approvisionnement_caisse_entrant','Approvisionnement_compte_virtuel_sortant') AND compte_caisse1='Wave' THEN -montant ELSE 0 END), 0) FROM approvisionnement WHERE DATE(date) = DATE(NOW())) AS Appro_Sortant " +
                 "UNION ALL " +
                 "SELECT 'Wizzal' AS service, " +
-                "   (SELECT COALESCE(SUM(CASE WHEN nature_operation IN ('Dépôt', 'Achat_Credit_Telephonique', 'Paiement_de_Facture') THEN montant ELSE 0 END), 0) FROM operations WHERE service = 'Wizzal' AND DATE(date) = DATE(NOW())) AS montant_depot, " +
-                "   (SELECT COALESCE(SUM(CASE WHEN nature_operation IN ('retrait', 'RetraitCode') THEN montant ELSE 0 END), 0) FROM operations WHERE service = 'Wizzal' AND DATE(date) = DATE(NOW())) AS montant_retrait, " +
-                "    (SELECT COALESCE(COUNT(service), 0) FROM operations WHERE service = 'Wizzal' AND DATE(date) = DATE(NOW())) AS nombre_de_client, " +
+                "   (SELECT COALESCE(SUM(CASE WHEN nature_operation IN ('Dépôt', 'Achat_Credit_Telephonique', 'Paiement_de_Facture') THEN montant ELSE 0 END), 0) FROM operations WHERE service = 'Wizall' AND DATE(date) = DATE(NOW())) AS montant_depot, " +
+                "   (SELECT COALESCE(SUM(CASE WHEN nature_operation IN ('retrait', 'RetraitCode') THEN montant ELSE 0 END), 0) FROM operations WHERE service = 'Wizall' AND DATE(date) = DATE(NOW())) AS montant_retrait, " +
+                "    (SELECT COALESCE(COUNT(service), 0) FROM operations WHERE service = 'Wizall' AND DATE(date) = DATE(NOW())) AS nombre_de_client, " +
                 "    COALESCE( " +
-                "        (SELECT SUM(CASE WHEN type IN ('Approvisionnement_caisse_sortant','Approvisionnement_compte_virtuel_entrant') AND compte_caisse2='Wizzal' THEN montant ELSE 0 END) FROM approvisionnement WHERE DATE(date) = DATE(NOW()))," +
+                "        (SELECT SUM(CASE WHEN type IN ('Approvisionnement_caisse_sortant','Approvisionnement_compte_virtuel_entrant') AND compte_caisse2='Wizall' THEN montant ELSE 0 END) FROM approvisionnement WHERE DATE(date) = DATE(NOW()))," +
                 "        0 " +
                 "    ) AS Appro_Entrant, " +
                 "    COALESCE( " +
-                "        (SELECT SUM(CASE WHEN type IN ('Approvisionnement_caisse_entrant','Approvisionnement_compte_virtuel_sortant') AND compte_caisse1='Wizzal' THEN -montant ELSE 0 END) FROM approvisionnement WHERE DATE(date) = DATE(NOW())), " +
+                "        (SELECT SUM(CASE WHEN type IN ('Approvisionnement_caisse_entrant','Approvisionnement_compte_virtuel_sortant') AND compte_caisse1='Wizall' THEN -montant ELSE 0 END) FROM approvisionnement WHERE DATE(date) = DATE(NOW())), " +
                 "        0 " +
                 "    ) AS Appro_Sortant " +
                 "UNION ALL " +
@@ -246,7 +249,7 @@ public class CustomRepositoryImpl implements CustomRepository {
         List<Object[]> results = query.getResultList();
         List<Double> montants = soldeDepartRepository.getMontants(); // Récupérer la liste des montants une seule fois
         List<Double> montants2 = new ArrayList<>(Collections.nCopies(20, 0.0));
-
+        List<Double> commissions=commissionsRepository.getMontantsCom();
         for (int i = 0; i < results.size(); i++) {
             Object[] result = results.get(i);
             Map<String, Object> recap = new HashMap<>();
@@ -261,10 +264,17 @@ public class CustomRepositoryImpl implements CustomRepository {
                 recap.put("SoldeDepart", montants2.get(i));
             }
             else
-            {recap.put("SoldeDepart", montants.get(i));}
-            // Associer le solde départ correspondant au récapitulatif
+            {recap.put("SoldeDepart", montants.get(i));
+            }
+
+            recap.put("Commissions",commissions.get(i));
+
             recaps.add(recap);
+            // Associer le solde départ correspondant au récapitulatif
+
         }
+
+
 
         return recaps;
 

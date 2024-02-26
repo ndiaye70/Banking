@@ -4,41 +4,81 @@
 <head>
     <meta charset="UTF-8">
     <title>Modifier un Compte</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+    <style>
+        /* Ajoutez ici vos styles CSS personnalisés si nécessaire */
+    </style>
 </head>
 
 <body>
-<h3>Modifier un Compte</h3>
-<form th:action="@{'/ouvertureComptes/' + ${compteDto.id} + '/edit'}" method="post" th:object="${compteDto}">
-    <label>Type de Compte:
-        <select th:field="*{typeCompte}" required>
-            <option th:each="type : ${T(Reporting.AFA.Entity.OuvertureCompte.TypeCompte).values()}"
-                    th:value="${type}" th:text="${type.getLabel()}"></option>
-        </select>
-    </label><br>
-    <label>Civilite:
-        <select th:field="*{civilite}" required>
-            <option th:each="civilite : ${T(Reporting.AFA.Entity.OuvertureCompte.Civilite).values()}"
-                    th:value="${civilite}" th:text="${civilite}"></option>
-        </select>
-    </label><br>
-    <label>Nom: <input type="text" th:field="*{nom}" required></label><br>
-    <label>Prénom: <input type="text" th:field="*{prenom}" required></label><br>
-    <label>Numéro de Téléphone: <input type="text" th:field="*{numTel}" required></label><br>
-    <label>Adresse: <input type="text" th:field="*{adresse}" required></label><br>
-    <label>Activité: <input type="text" th:field="*{activite}" required></label><br>
-    <label>Numéro de CNI/Passeport: <input type="text" th:field="*{numCni_Passeport}" required></label><br>
-    <label>Nom Conjoint/Conjointe: <input type="text" th:field="*{nomConjoint_Conjointe}" required></label><br>
-    <label>Nom et Prénom de la Mère: <input type="text" th:field="*{nom_PrenomMere}" required></label><br>
-    <label>Pack:
-        <select th:field="*{pack}" required>
-            <option value="Ganalé">Ganalé</option>
-            <option value="Kilifa">Kilifa</option>
-            <option value="Wurus">Wurus</option>
-        </select>
-    </label><br>
-    <label>Montant de Dépôt Initial: <input type="number" step="0.01" th:field="*{montantDepotInitial}" required></label><br>
-    <button type="submit">Enregistrer les modifications</button>
-</form>
+<div class="container mt-5">
+    <h3>Modifier un Compte</h3>
+    <form class="row g-3" th:action="@{'/ouvertureComptes/' + ${compteDto.id} + '/edit'}" method="post"
+          th:object="${compteDto}">
+        <div class="col-md-6">
+            <label for="typeCompte" class="form-label">Type de Compte:</label>
+            <select id="typeCompte" class="form-select" th:field="*{typeCompte}" required>
+                <option th:each="type : ${T(Reporting.AFA.Entity.OuvertureCompte.TypeCompte).values()}"
+                        th:value="${type}" th:text="${type.getLabel()}"></option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="civilite" class="form-label">Civilite:</label>
+            <select id="civilite" class="form-select" th:field="*{civilite}" required>
+                <option th:each="civilite : ${T(Reporting.AFA.Entity.OuvertureCompte.Civilite).values()}"
+                        th:value="${civilite}" th:text="${civilite}"></option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="nom" class="form-label">Nom:</label>
+            <input type="text" class="form-control" id="nom" th:field="*{nom}" required>
+        </div>
+        <div class="col-md-6">
+            <label for="prenom" class="form-label">Prénom:</label>
+            <input type="text" class="form-control" id="prenom" th:field="*{prenom}" required>
+        </div>
+        <div class="col-md-6">
+            <label for="numTel" class="form-label">Numéro de Téléphone:</label>
+            <input type="text" class="form-control" id="numTel" th:field="*{numTel}" required>
+        </div>
+        <div class="col-md-6">
+            <label for="adresse" class="form-label">Adresse:</label>
+            <input type="text" class="form-control" id="adresse" th:field="*{adresse}" required>
+        </div>
+        <div class="col-md-6">
+            <label for="activite" class="form-label">Activité:</label>
+            <input type="text" class="form-control" id="activite" th:field="*{activite}" required>
+        </div>
+        <div class="col-md-6">
+            <label for="numCni_Passeport" class="form-label">Numéro de CNI/Passeport:</label>
+            <input type="text" class="form-control" id="numCni_Passeport" th:field="*{numCni_Passeport}" required>
+        </div>
+        <div class="col-md-6">
+            <label for="nomConjoint_Conjointe" class="form-label">Nom Conjoint/Conjointe:</label>
+            <input type="text" class="form-control" id="nomConjoint_Conjointe" th:field="*{nomConjoint_Conjointe}" required>
+        </div>
+        <div class="col-md-6">
+            <label for="nom_PrenomMere" class="form-label">Nom et Prénom de la Mère:</label>
+            <input type="text" class="form-control" id="nom_PrenomMere" th:field="*{nom_PrenomMere}" required>
+        </div>
+        <div class="col-md-6">
+            <label for="pack" class="form-label">Pack:</label>
+            <select id="pack" class="form-select" th:field="*{pack}" required>
+                <option value="Ganalé">Ganalé</option>
+                <option value="Kilifa">Kilifa</option>
+                <option value="Wurus">Wurus</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="montantDepotInitial" class="form-label">Montant de Dépôt Initial:</label>
+            <input type="number" step="0.01" class="form-control" id="montantDepotInitial" th:field="*{montantDepotInitial}" required>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+        </div>
+    </form>
+</div>
 </body>
 
 </html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recaps</title>
+    <!-- Bibliothèque pour exporter vers Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
+    <!-- Bibliothèque html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+    <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+<div class="row" id="table-bordered">
+    <div class="col-12">
+        <div class="card">
+            <div class="export-buttons">
+                <button id="exportExcelButton" class="btn btn-primary mt-3 float-right">Exporter vers Excel</button>
+                <button id="exportPdfButton" class="btn btn-primary mt-3 mr-2 float-right">Exporter vers PDF</button>
+
+                <a th:href="@{'/recaps/edit'}" class="btn btn-danger mt-3 float-left">Soldes Depart</a>
+
+                <a th:href="@{'/recaps/commissions/edit'}" class="btn btn-danger mt-3 ml-2 float-left">Commissions</a>
+            </div>
+
+            <div class="card-content">
+                <div class="card-body">
+                    <!-- Début du div pour le contenu du PDF -->
+                    <div id="pdfContent">
+                        <div class="card-header text-center">
+                            <h1>Recap De Caisse</h1>
+                        </div>
+                        <table id="recapsTable" class="table table-bordered mb-0">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>Service</th>
+                                <th>Solde Départ</th>
+                                <th>Montant Dépôt</th>
+                                <th>Montant Retrait</th>
+                                <th>Commissions</th>
+                                <th>Appro Entrant</th>
+                                <th>Appro Sortant</th>
+                                <th>Solde Final</th>
+                                <th>Nombre De Client</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="recap, index : ${recaps}">
+                                <tr class="tr">
+                                    <td th:text="${recap.service}"></td>
+                                    <td th:text="${recap.SoldeDepart}"></td>
+                                    <td th:text="${recap.montantDepot}"></td>
+                                    <td th:text="${recap.montantRetrait}"></td>
+                                    <td th:text="${recap.Commissions}"></td>
+                                    <td th:text="${recap.ApproEntrant}"></td>
+                                    <td th:text="${recap.ApproSortant}"></td>
+                                    <td th:text="${recap.SoldeDepart + recap.montantDepot + recap.montantRetrait + recap.Commissions + recap.ApproEntrant + recap.ApproSortant}"></td>
+                                    <td th:text="${recap.nombreClients}"></td>
+                                </tr>
+                            </th:block>
+                            <tr>
+                                <td>Total Comptes Virtuels</td>
+                                <td th:text="${totalSoldeDepart}"></td>
+                                <td th:text="${totalMontantDepot}"></td>
+                                <td th:text="${totalMontantRetrait}"></td>
+                                <td th:text="${totalCommissions}"></td>
+                                <td th:text="${totalApproEntrant}"></td>
+                                <td th:text="${totalApproSortant}"></td>
+                                <td th:text="${totalLigne}"></td>
+                                <td th:text="${totalNombreClients}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Fin du div pour le contenu du PDF -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Ajoute la classe .tr à chaque ligne du tableau
+    document.addEventListener('DOMContentLoaded', function() {
+        var tableRows = document.querySelectorAll('#recapsTable tbody tr');
+        tableRows.forEach(function(row) {
+            row.classList.add('tr');
+        });
+    });
+
+    document.getElementById('exportExcelButton').addEventListener('click', function() {
+        var currentDate = new Date();
+        var day = currentDate.getDate();
+        var month = currentDate.getMonth() + 1;
+        var year = currentDate.getFullYear();
+        var filename = 'Recap du ' + (day < 10 ? '0' + day : day) + '/' + (month < 10 ? '0' + month : month) + '.xlsx';
+
+        var table = document.querySelector('table');
+        var ws = XLSX.utils.table_to_sheet(table);
+        var wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Feuille1");
+        XLSX.writeFile(wb, filename);
+    });
+
+    document.getElementById('exportPdfButton').addEventListener('click', function() {
+        var currentDate = new Date();
+        var day = currentDate.getDate();
+        var month = currentDate.getMonth() + 1;
+        var year = currentDate.getFullYear();
+        var filename = 'Recap du ' + (day < 10 ? '0' + day : day) + '/' + (month < 10 ? '0' + month : month) + '.pdf';
+
+        var element = document.getElementById('pdfContent'); // Utilisation du div contenant le contenu pour le PDF
+        var opt = {
+            filename: filename,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, letterRendering: true, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' },
+            pagebreak: { avoid: '.tr', exclude: '.export-form-buttons' }
+        };
+        html2pdf().set(opt).from(element).save();
+    });
+</script>
+
+</body>
+</html>

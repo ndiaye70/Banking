@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création de Commissions</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+    <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Création de Commissions</h1>
+            <form th:action="@{save2}" th:object="${commissionsDto}" method="post">
+                <div class="form-group">
+                    <label for="commissionsOM">Commissions OM:</label>
+                    <input type="number" id="commissionsOM" name="commissionsOM" th:field="*{commissionsOM}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="commissionsFreeMoney">Commissions Free Money:</label>
+                    <input type="number" id="commissionsFreeMoney" name="commissionsFreeMoney" th:field="*{commissionsFreeMoney}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="commissionsWave">Commissions Wave:</label>
+                    <input type="number" id="commissionsWave" name="commissionsWave" th:field="*{commissionsWave}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="commissionsWizall">Commissions Wizall:</label>
+                    <input type="number" id="commissionsWizall" name="commissionsWizall" th:field="*{commissionsWizall}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="commissionsWesternUnion">Commissions Western Union:</label>
+                    <input type="number" id="commissionsWesternUnion" name="commissionsWesternUnion" th:field="*{commissionsWesternUnion}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="commissionsRia">Commissions Ria:</label>
+                    <input type="number" id="commissionsRia" name="commissionsRia" th:field="*{commissionsRia}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="commissionsMoneygram">Commissions Moneygram:</label>
+                    <input type="number" id="commissionsMoneygram" name="commissionsMoneygram" th:field="*{commissionsMoneygram}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="commissionsEcobank">Commissions Ecobank:</label>
+                    <input type="number" id="commissionsEcobank" name="commissionsEcobank" th:field="*{commissionsEcobank}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="commissionsSmallWorld">Commissions SmallWorld:</label>
+                    <input type="number" id="commissionsSmallWorld" name="commissionsSmallWorld" th:field="*{commissionsSmallWorld}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="commissionsBnB">Commissions BnB:</label>
+                    <input type="number" id="commissionsBnB" name="commissionsBnB" th:field="*{commissionsBnB}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="commissionsAskia">Commissions Askia:</label>
+                    <input type="number" id="commissionsAskia" name="commissionsAskia" th:field="*{commissionsAskia}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="commissionsSunuAssurance">Commissions Sunu Assurance:</label>
+                    <input type="number" id="commissionsSunuAssurance" name="commissionsSunuAssurance" th:field="*{commissionsSunuAssurance}"
+                           class="form-control">
+
+                    <div class="form-group">
+                        <label for="commissionsCreationEntreprise">Commissions Création d'entreprise:</label>
+                        <input type="number" id="commissionsCreationEntreprise" name="commissionsCreationEntreprise" th:field="*{commissionsCreationEntreprise}"
+                               class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="commissionsCartesComImpExp">Commissions Cartes Com. IMP./EXP.:</label>
+                        <input type="number" id="commissionsCartesComImpExp" name="commissionsCartesComImpExp" th:field="*{commissionsCartesComImpExp}"
+                               class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="commissionsChange">Commissions Change:</label>
+                        <input type="number" id="commissionsChange" name="commissionsChange" th:field="*{commissionsChange}"
+                               class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="commissionsGrossisteBnb">Commissions Grossiste BNB:</label>
+                        <input type="number" id="commissionsGrossisteBnb" name="commissionsGrossisteBnb" th:field="*{commissionsGrossisteBnb}"
+                               class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="commissionsBndeDepotRetrait">Commissions BNDE Dépôt/Retrait:</label>
+                        <input type="number" id="commissionsBndeDepotRetrait" name="commissionsBndeDepotRetrait" th:field="*{commissionsBndeDepotRetrait}"
+                               class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="commissionsOuvertureCompteBnde">Commissions Ouverture de compte BNDE:</label>
+                        <input type="number" id="commissionsOuvertureCompteBnde" name="commissionsOuvertureCompteBnde" th:field="*{commissionsOuvertureCompteBnde}"
+                               class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="commissionsUbaCartesPrepayees">Commissions UBA Cartes Prépayées:</label>
+                        <input type="number" id="commissionsUbaCartesPrepayees" name="commissionsUbaCartesPrepayees" th:field="*{commissionsUbaCartesPrepayees}"
+                               class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="commissionsUbaDepotRetrait">Commissions UBA Dépôt/Retrait:</label>
+                        <input type="number" id="commissionsUbaDepotRetrait" name="commissionsUbaDepotRetrait" th:field="*{commissionsUbaDepotRetrait}"
+                               class="form-control">
+                    </div>
+                </div>
+                <!-- Ajoutez ici les champs pour les autres attributs des commissions -->
+                <div class="form-group">
+                    <input type="submit" value="Enregistrer" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
