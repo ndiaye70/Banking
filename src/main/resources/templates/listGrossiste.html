@@ -2,27 +2,99 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Liste des Grossistes</title>
+  <title>Grossiste BnB</title>
+  <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+  <link th:href="@{/css/app.css}" rel="stylesheet">
+  <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    h3 {
+      color: #343a40;
+      text-align: left;
+      padding: 20px 0;
+      margin-left: 20px; /* Aligner à gauche */
+      font-size: 1.5em; /* Nouvelle taille de police */
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #dee2e6;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007bff;
+      color: #ffffff;
+    }
+
+    .table-header-text {
+      color: #343a40; /* Couleur du texte pour les colonnes */
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    a.btn {
+      margin-right: 5px;
+    }
+
+    .add-operation-btn {
+      margin-top: 20px;
+      margin-right: 20px; /* Aligner à droite */
+      color: #ffffff; /* Couleur du texte */
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      color: #ffffff;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      color: #ffffff;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      color: #ffffff;
+    }
+  </style>
 </head>
 <body>
 
-<h3>Liste des Grossistes</h3>
+<h3>Grossiste BnB</h3>
 
-<table border="1">
-  <thead>
+<div class="row">
+  <div class="col-12">
+    <a th:href="@{'/grossistes/save'}" class="btn btn-success float-right add-operation-btn">Ajouter</a>
+  </div>
+</div>
+
+<table class="table table-bordered">
+  <thead class="thead-dark">
   <tr>
-    <th>Date</th>
-    <th>Caissier</th>
-    <th>Nom</th>
-    <th>Prénom</th>
-    <th>Numéro de Téléphone</th>
-    <th>Montant</th>
-    <th>Frais</th>
-    <th>Autres</th>
-    <th>Statut</th>
-    <th>Montant Payé par</th>
-    <th>Frais Payé par</th>
-    <th>Actions</th>
+    <th class="col-1 table-header-text">Date</th>
+    <th class="col-1 table-header-text">Caissier</th>
+    <th class="col-1 table-header-text">Nom</th>
+    <th class="col-1 table-header-text">Prénom</th>
+    <th class="col-1 table-header-text">Numéro de Téléphone</th>
+    <th class="col-1 table-header-text">Montant</th>
+    <th class="col-1 table-header-text">Frais</th>
+    <th class="col-1 table-header-text">Autres</th>
+    <th class="col-1 table-header-text">Statut</th>
+    <th class="col-1 table-header-text">Montant Payé par</th>
+    <th class="col-1 table-header-text">Frais Payé par</th>
+    <th class="col-2 table-header-text">Actions</th>
   </tr>
   </thead>
   <tbody>
@@ -39,9 +111,8 @@
     <td th:text="${grossiste.montantPayépar}"></td>
     <td th:text="${grossiste.fraisPayépar}"></td>
     <td>
-      <a th:href="@{'/grossistes/' + ${grossiste.id} + '/edit'}">Éditer</a>
-      |
-      <a th:href="@{'/grossistes/' + ${grossiste.id} + '/delete'}">Supprimer</a>
+      <a th:href="@{'/grossistes/' + ${grossiste.id} + '/edit'}" class="btn btn-primary btn-sm">Modifier</a>
+      <a th:href="@{'/grossistes/' + ${grossiste.id} + '/delete'}" class="btn btn-danger btn-sm">Supprimer</a>
     </td>
   </tr>
   </tbody>

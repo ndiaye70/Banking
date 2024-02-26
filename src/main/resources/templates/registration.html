@@ -18,7 +18,7 @@
         }
     </script>
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
-    <link rel="shortcut icon" th:href="@{/images/favicon.svg}" type="image/x-icon">
+    <link rel="shortcut icon" th:href="@{/images/image3.jpg}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
 
@@ -31,8 +31,8 @@
                 <div class="card py-4">
                     <div class="card-body">
                         <div class="text-center mb-5">
-                            <img th:src="@{/images/favicon.svg}" height="48" class='mb-4'>
-                            <h3>Formulaire de création d'utilisateur</h3>
+                            <img th:src="@{/images/image3.jpg}" height="48" class='mb-4'>
+                            <h3>Création de compte </h3>
                             <p>Merci de remplir le formulaire pour vous inscrire.</p>
                         </div>
                         <form th:action="@{/registration/new}" method="post" th:object="${userDto}" onsubmit="return checkPasswordMatch()">

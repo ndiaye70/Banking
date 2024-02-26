@@ -8,100 +8,180 @@
     <link th:href="@{/css/app.css}" rel="stylesheet">
     <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
     <!-- Add your CSS link or style references here -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            margin: 0; /* Supprime la marge par défaut du corps */
+        }
+
+        h3 {
+            color: #343a40;
+            text-align: center; /* Centre le texte */
+            margin-top: 20px;
+        }
+
+        .form {
+            width: 80%;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select,
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 8px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        select {
+            color: #343a40;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #ffffff;
+            margin-right: 10px;
+        }
+
+        .btn-light-secondary {
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        .row {
+            margin-bottom: 20px;
+        }
+
+        .col-md-8 {
+            margin: auto;
+            padding: 0; /* Supprime le rembourrage par défaut de la colonne */
+        }
+
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+        .card-title {
+            margin-bottom: 0;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary,
+        .btn-light-secondary {
+            border-radius: 4px;
+            padding: 8px 20px;
+        }
+
+        .d-flex {
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
 </head>
 
+
 <body>
-<h3>Nouvelle opération</h3>
+
 <form class="form form-horizontal" action="save" method="post" th:object="${operationsDto}">
     <div class="form-body">
         <div class="row">
-            <div class="col-md-3">
-                <label>Banque:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <select th:field="*{banques}" class="form-control" required>
-                    <option value="BNDE">BNDE</option>
-                    <option value="UBA">UBA</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label>Nature Opération:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <select th:field="*{natureOperations}" class="form-control" required>
-                    <option th:each="n : ${T(Reporting.AFA.Entity.OperationsBancaires.NatureOperations).values()}"
-                            th:value="${n}" th:text="${n.getLabel()}"></option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label>Numero Compte:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <input type="number" th:field="*{numeroCompte}" class="form-control" required>
-            </div>
-            <div class="col-md-3">
-                <label>Civilite:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <select th:field="*{civilite}" class="form-control" required>
-                    <option th:each="c : ${T(Reporting.AFA.Entity.OperationsBancaires.Civilite).values()}"
-                            th:value="${c}" th:text="${c}"></option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label>Nom:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <input type="text" th:field="*{nom}" class="form-control" required>
-            </div>
-            <div class="col-md-3">
-                <label>Prénom:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <input type="text" th:field="*{prenom}" class="form-control" required>
-            </div>
-            <div class="col-md-3">
-                <label>Numéro de Téléphone:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <input type="text" th:field="*{numeroTelephone}" class="form-control" required>
-            </div>
-            <div class="col-md-3">
-                <label>Montant:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <input type="number" step="0.01" th:field="*{montant}" class="form-control" required>
-            </div>
-
-            <div class="col-md-3">
-                <label>Comission:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <input type="number"  th:field="*{commissions}" class="form-control" required>
-            </div>
-            <div class="col-md-3">
-                <label>Statut:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <select th:field="*{statut}" class="form-control" required>
-                    <option value="Validé">Validé</option>
-                    <option value="En attente">En attente</option>
-                    <option value="Annulé">Annulé</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label>Autres:</label>
-            </div>
-            <div class="col-md-9 form-group">
-                <input type="text" th:field="*{autres}" class="form-control">
-            </div>
-            <div class="col-sm-12 d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary mr-1 mb-1">Enregistrer</button>
-                <button type="reset" class="btn btn-light-secondary mr-1 mb-1">Reset</button>
+            <div class="col-md-6 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Opérations bancaires</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <label for="banques">Banque:</label>
+                            <select th:field="*{banques}" class="form-control" required>
+                                <option value="BNDE">BNDE</option>
+                                <option value="UBA">UBA</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="natureOperations">Nature Opération:</label>
+                            <select th:field="*{natureOperations}" class="form-control" required>
+                                <option th:each="n : ${T(Reporting.AFA.Entity.OperationsBancaires.NatureOperations).values()}"
+                                        th:value="${n}" th:text="${n.getLabel()}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="numeroCompte">Numero Compte:</label>
+                            <input type="number" th:field="*{numeroCompte}" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="civilite">Civilite:</label>
+                            <select th:field="*{civilite}" class="form-control" required>
+                                <option th:each="c : ${T(Reporting.AFA.Entity.OperationsBancaires.Civilite).values()}"
+                                        th:value="${c}" th:text="${c}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="nom">Nom:</label>
+                            <input type="text" th:field="*{nom}" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom">Prénom:</label>
+                            <input type="text" th:field="*{prenom}" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="numeroTelephone">Numéro de Téléphone:</label>
+                            <input type="text" th:field="*{numeroTelephone}" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="montant">Montant:</label>
+                            <input type="number" step="0.01" th:field="*{montant}" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="commissions">Commission:</label>
+                            <input type="number" th:field="*{commissions}" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="statut">Statut:</label>
+                            <select th:field="*{statut}" class="form-control" required>
+                                <option value="Validé">Validé</option>
+                                <option value="En attente">En attente</option>
+                                <option value="Annulé">Annulé</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="autres">Autres:</label>
+                            <input type="text" th:field="*{autres}" class="form-control">
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary mr-1 mb-1">Enregistrer</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </form>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

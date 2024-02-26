@@ -3,54 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <title>Modifier un approvisionnement</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            text-align: center;
+            color: #007bff;
+        }
+        .no-color {
+            color: inherit; /* Cette règle empêche l'élément de prendre la couleur spécifiée dans h3 */
+        }
+        label {
+            font-weight: bold;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .mb-3 {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        /* Nouvelles règles pour le style spécifique au formulaire d'opération */
+        #devise,
+        #montant,
+        #type,
+        #origine,
+        #compteCaisse1,
+        #destination,
+        #compteCaisse2,
+        #statut {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 <body>
-<h3>Modifier un approvisionnement</h3>
-<form th:action="@{/approvisionnements/{approvisionnementId}/edit(approvisionnementId=${approvisionnement1.id})}"
-      method="post"
-      th:object="${approvisionnement1}">
-    <input type="hidden" th:field="*{id}">
-    <label>Date : <input type="text" th:field="*{date}" readonly></label><br>
-    <label>Montant : <input type="number" step="0.01" th:field="*{montant}" required></label><br>
-    <label>Type :
-        <select th:field="*{type}" required>
-            <option th:each="type : ${T(Reporting.AFA.Entity.Approvisionnement.TYPE).values()}"
-                    th:value="${type}" th:text="${type.getLabel()}"></option>
-        </select>
-    </label><br>
-    <label>Origine :
-        <select th:field="*{origine}" required>
-            <option th:each="origine : ${T(Reporting.AFA.Entity.Approvisionnement.Origine).values()}"
-                    th:value="${origine}" th:text="${origine.getLabel()}"></option>
-        </select>
-    </label><br>
-    <label>Compte Caisse 1 :
-        <select th:field="*{compteCaisse1}" required>
-            <option th:each="compte : ${T(Reporting.AFA.Entity.Approvisionnement.Compte).values()}"
-                    th:value="${compte}" th:text="${compte.getLabel()}"></option>
-        </select>
-    </label><br>
-    <label>Destination :
-        <select th:field="*{destination}" required>
-            <option th:each="destination : ${T(Reporting.AFA.Entity.Approvisionnement.Origine).values()}"
-                    th:value="${destination}" th:text="${destination.getLabel()}"></option>
-        </select>
-    </label><br>
-    <label>Compte Caisse 2 :
-        <select th:field="*{compteCaisse2}" required>
-            <option th:each="compte : ${T(Reporting.AFA.Entity.Approvisionnement.Compte).values()}"
-                    th:value="${compte}" th:text="${compte.getLabel()}"></option>
-        </select>
-    </label><br>
-    <label>Devise :
-        <select th:field="*{devise}" required>
-            <option th:each="devise : ${T(Reporting.AFA.Entity.Approvisionnement.Devise).values()}"
-                    th:value="${devise}" th:text="${devise}"></option>
-        </select>
-    </label><br>
-    <label>Statut : <input type="text" th:field="*{statut}" required></label><br>
+<div class="container">
+    <h3 class="mt-4 no-color">Modifier un approvisionnement</h3>
+    <form th:action="@{/approvisionnements/{approvisionnementId}/edit(approvisionnementId=${approvisionnement1.id})}"
+          method="post"
+          th:object="${approvisionnement1}" class="mt-3">
 
-    <button type="submit">Enregistrer</button>
-</form>
+        <div class="mb-3">
+            <label for="date" class="form-label">Date:</label>
+            <input type="text" id="date" class="form-control" th:field="*{date}" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="montant" class="form-label">Montant:</label>
+            <input type="number" step="0.01" id="montant" class="form-control" th:field="*{montant}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="type" class="form-label">Type:</label>
+            <select id="type" class="form-select" th:field="*{type}" required>
+                <option th:each="type : ${T(Reporting.AFA.Entity.Approvisionnement.TYPE).values()}"
+                        th:value="${type}" th:text="${type.getLabel()}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="origine" class="form-label">Origine:</label>
+            <select id="origine" class="form-select" th:field="*{origine}" required>
+                <option th:each="origine : ${T(Reporting.AFA.Entity.Approvisionnement.Origine).values()}"
+                        th:value="${origine}" th:text="${origine.getLabel()}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="compteCaisse1" class="form-label">Compte Caisse 1:</label>
+            <select id="compteCaisse1" class="form-select" th:field="*{compteCaisse1}" required>
+                <option th:each="compte : ${T(Reporting.AFA.Entity.Approvisionnement.Compte).values()}"
+                        th:value="${compte}" th:text="${compte.getLabel()}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="destination" class="form-label">Destination:</label>
+            <select id="destination" class="form-select" th:field="*{destination}" required>
+                <option th:each="destination : ${T(Reporting.AFA.Entity.Approvisionnement.Origine).values()}"
+                        th:value="${destination}" th:text="${destination.getLabel()}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="compteCaisse2" class="form-label">Compte Caisse 2:</label>
+            <select id="compteCaisse2" class="form-select" th:field="*{compteCaisse2}" required>
+                <option th:each="compte : ${T(Reporting.AFA.Entity.Approvisionnement.Compte).values()}"
+                        th:value="${compte}" th:text="${compte.getLabel()}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="devise" class="form-label">Devise:</label>
+            <select id="devise" class="form-select" th:field="*{devise}" required>
+                <option th:each="devise : ${T(Reporting.AFA.Entity.Approvisionnement.Devise).values()}"
+                        th:value="${devise}" th:text="${devise}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="statut" class="form-label">Statut:</label>
+            <input type="text" id="statut" class="form-control" th:field="*{statut}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

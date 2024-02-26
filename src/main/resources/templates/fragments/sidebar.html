@@ -8,7 +8,7 @@
 <div id="sidebar" class='active' th:fragment="sidebar">
     <div class="sidebar-wrapper active">
         <div class="d-flex justify-content-center align-items-center">
-            <img th:src="@{/images/image3.JPG}" alt="" srcset="" style="width: 200px; height: 200px;">
+            <img th:src="@{/images/image3.JPG}" alt="" srcset="" style="width: 100px; height: 100px;">
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
@@ -19,7 +19,7 @@
 
 
                 <li class="sidebar-item active ">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="/ipsl/index" class='sidebar-link'>
                         <i data-feather="home" width="20"></i>
                         <span>Dashboard</span>
                     </a>
@@ -38,15 +38,15 @@
                     <ul class="submenu ">
 
                         <li>
-                            <a href="component-alert.html">Ouverture de caisse</a>
+                            <a href="/ipsl/caisses/ouverture">Ouverture de caisse</a>
                         </li>
 
                         <li>
-                            <a href="component-badge.html">Billetage</a>
+                            <a href="/ipsl/caisses/billetage">Billetage</a>
                         </li>
 
                         <li>
-                            <a href="component-breadcrumb.html">Fermeture de caisse</a>
+                            <a href="/ipsl/caisses/fermeture">Fermeture de caisse</a>
                         </li>
 
 
@@ -71,7 +71,7 @@
                         </li>
 
                         <li>
-                            <a href="component-extra-divider.html">Dépôt-Retrait</a>
+                            <a href="/ipsl/operationsBancaires/list">Dépôt-Retrait</a>
                         </li>
 
                     </ul>
@@ -102,7 +102,7 @@
                         </li>
 
                         <li>
-                            <a href="form-element-select.html">Grossiste BnB</a>
+                            <a href="/ipsl/grossistes/list">Grossiste BnB</a>
                         </li>
 
 
@@ -114,7 +114,7 @@
 
 
                 <li class="sidebar-item  ">
-                    <a href="form-layout.html" class='sidebar-link'>
+                    <a href="/ipsl/entreprises/list" class='sidebar-link'>
                         <i data-feather="layout" width="20"></i>
                         <span>Création d'entreprise</span>
                     </a>
@@ -125,7 +125,7 @@
 
 
                 <li class="sidebar-item  ">
-                    <a href="table.html" class='sidebar-link'>
+                    <a href="/ipsl/cartes/list" class='sidebar-link'>
                         <i data-feather="grid" width="20"></i>
                         <span>Carte Commerçant/Import-Export</span>
                     </a>
@@ -136,7 +136,7 @@
 
 
                 <li class="sidebar-item  ">
-                    <a href="table-datatable.html" class='sidebar-link'>
+                    <a href="/ipsl/approvisionnements/list" class='sidebar-link'>
                         <i data-feather="file-plus" width="20"></i>
                         <span>Approvisionnement</span>
                     </a>

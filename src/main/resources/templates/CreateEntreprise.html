@@ -1,30 +1,91 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Créer une entreprise</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+    <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
 </head>
+
 <body>
-<h3>Créer une nouvelle entreprise</h3>
-<form th:action="@{/entreprises/save}" method="post" th:object="${entrepriseDto}" enctype="multipart/form-data">
-    <label>Nom: <input type="text" th:field="*{nom}" required></label><br>
-    <label>Prénom: <input type="text" th:field="*{prenom}" required></label><br>
-    <label>Numéro de Téléphone: <input type="text" th:field="*{numTel}" required></label><br>
-    <label>CNI: <input type="text" th:field="*{cni}" required></label><br>
-    <label>Nom De l'Entreprise: <input type="text" th:field="*{nom_Entreprise}" required></label><br>
-    <label>Type d'entreprise:
-        <select th:field="*{typeEntreprise}" required>
-            <option th:each="type : ${T(Reporting.AFA.Entity.Entreprise.TypeEntreprise).values()}"
-                    th:value="${type}" th:text="${type.getLabel()}"></option>
-        </select>
-    </label><br>
-    <label>Demande:
-        <select th:field="*{demande}" required>
-            <option th:each="demande : ${T(Reporting.AFA.Entity.Entreprise.Demande).values()}"
-                    th:value="${demande}" th:text="${demande.getLabel()}"></option>
-        </select>
-    </label><br>
-    <button type="submit">Enregistrer</button>
-</form>
+<section id="basic-vertical-layouts">
+    <div class="row match-height">
+        <div class="col-md-6 col-12 mx-auto my-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Création d'entreprise</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <form class="form form-vertical" th:action="@{/entreprises/save}" method="post" th:object="${entrepriseDto}" enctype="multipart/form-data">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="nom">Nom</label>
+                                            <input type="text" id="nom" class="form-control" th:field="*{nom}" required placeholder="Nom">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="prenom">Prénom</label>
+                                            <input type="text" id="prenom" class="form-control" th:field="*{prenom}" required placeholder="Prénom">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="numTel">Numéro de Téléphone</label>
+                                            <input type="text" id="numTel" class="form-control" th:field="*{numTel}" required placeholder="Numéro de Téléphone">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="cni">CNI</label>
+                                            <input type="text" id="cni" class="form-control" th:field="*{cni}" required placeholder="CNI">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="nom_Entreprise">Nom de l'Entreprise</label>
+                                            <input type="text" id="nom_Entreprise" class="form-control" th:field="*{nom_Entreprise}" required placeholder="Nom de l'Entreprise">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="typeEntreprise">Type d'entreprise</label>
+                                            <select id="typeEntreprise" class="form-control" th:field="*{typeEntreprise}" required>
+                                                <option th:each="type : ${T(Reporting.AFA.Entity.Entreprise.TypeEntreprise).values()}"
+                                                        th:value="${type}" th:text="${type.getLabel()}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="demande">Demande</label>
+                                            <select id="demande" class="form-control" th:field="*{demande}" required>
+                                                <option th:each="demande : ${T(Reporting.AFA.Entity.Entreprise.Demande).values()}"
+                                                        th:value="${demande}" th:text="${demande.getLabel()}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary mr-1 mb-1">Enregistrer</button>
+                                        <!-- Ajout du bouton Reset -->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -2,22 +2,80 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier une Carte</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            text-align: center;
+            color: #007bff;
+        }
+        .no-color {
+            color: inherit; /* Cette règle empêche l'élément de prendre la couleur spécifiée dans h3 */
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        /* Nouvelles règles pour le style spécifique au formulaire d'opération */
+        #nomComplet,
+        #Tel,
+        #service {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 <body>
-<h3>Modifier les détails de la Carte</h3>
-<form th:action="@{'/cartes/'+${carteDto.id}+'/edit'}" method="post" th:object="${carteDto}">
+<div class="container">
+    <h3 class="mt-4 no-color">Modifier</h3>
+    <form th:action="@{'/cartes/' + ${carteDto.id} + '/edit'}" method="post" th:object="${carteDto}" class="mt-3">
 
-    <label>Nom et Prenom: <input type="text" th:field="*{nomComplet}" required></label><br>
+        <div class="mb-3">
+            <label for="nomComplet" class="form-label">Prénom et Nom:</label>
+            <input type="text" id="nomComplet" class="form-control" th:field="*{nomComplet}" required>
+        </div>
 
-    <label>Numéro de Téléphone: <input type="text" th:field="*{Tel}" required></label><br>
-    <label>service:
-        <select th:field="*{service}" required>
-            <option th:each="type : ${T(Reporting.AFA.Entity.Carte.Service).values()}"
-                    th:value="${type}" th:text="${type.getLabel()}"></option>
-        </select>
-    </label><br>
-    <button type="submit">Enregistrer les modifications</button>
-</form>
+        <div class="mb-3">
+            <label for="Tel" class="form-label">Numéro de Téléphone:</label>
+            <input type="text" id="Tel" class="form-control" th:field="*{Tel}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="service" class="form-label">Service:</label>
+            <select id="service" class="form-select" th:field="*{service}" required>
+                <option th:each="type : ${T(Reporting.AFA.Entity.Carte.Service).values()}"
+                        th:value="${type}" th:text="${type.getLabel()}"></option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

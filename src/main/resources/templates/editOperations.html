@@ -1,15 +1,76 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier une opération</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .no-color {
+            color: inherit; /* Cette règle empêche l'élément de prendre la couleur spécifiée dans h3 */
+        }
+        label {
+            font-weight: bold;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        /* Ajout de nouvelles règles pour harmoniser avec le style du formulaire d'opération */
+        .mb-3 {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        /* Nouvelles règles pour le style spécifique au formulaire d'opération */
+        #service,
+        #natureOperation,
+        #civilite,
+        #nom,
+        #prenom,
+        #numeroTelephone,
+        #montant,
+        #autres,
+        #statut {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
+
 <body>
 <div class="container">
-    <h3 class="mt-4">Modifier une opération</h3>
+    <h3 class="mt-4 no-color">Modifier</h3>
     <form th:action="@{'/operations/' + ${operationsDto.id} + '/edit'}" method="post" th:object="${operationsDto}" class="mt-3">
+
         <div class="mb-3">
             <label for="service" class="form-label">Service:</label>
             <select id="service" class="form-select" th:field="*{service}" required>
@@ -17,6 +78,7 @@
                         th:value="${s}" th:text="${s.getLabel()}"></option>
             </select>
         </div>
+
         <div class="mb-3">
             <label for="natureOperation" class="form-label">Nature d'Opération:</label>
             <select id="natureOperation" class="form-select" th:field="*{natureOperation}" required>
@@ -24,6 +86,7 @@
                         th:value="${n}" th:text="${n.getLabel()}"></option>
             </select>
         </div>
+
         <div class="mb-3">
             <label for="civilite" class="form-label">Civilite:</label>
             <select id="civilite" class="form-select" th:field="*{civilite}" required>
@@ -31,30 +94,37 @@
                         th:value="${c}" th:text="${c.getLabel()}"></option>
             </select>
         </div>
+
         <div class="mb-3">
             <label for="nom" class="form-label">Nom:</label>
             <input type="text" id="nom" class="form-control" th:field="*{nom}" required>
         </div>
+
         <div class="mb-3">
             <label for="prenom" class="form-label">Prénom:</label>
             <input type="text" id="prenom" class="form-control" th:field="*{prenom}" required>
         </div>
+
         <div class="mb-3">
             <label for="numeroTelephone" class="form-label">Numéro de Téléphone:</label>
             <input type="text" id="numeroTelephone" class="form-control" th:field="*{numeroTelephone}" required>
         </div>
+
         <div class="mb-3">
             <label for="montant" class="form-label">Montant:</label>
             <input type="number" step="0.01" id="montant" class="form-control" th:field="*{montant}" required>
         </div>
+
         <div class="mb-3">
             <label for="autres" class="form-label">Autres:</label>
             <input type="text" id="autres" class="form-control" th:field="*{autres}">
         </div>
+
         <div class="mb-3">
             <label for="statut" class="form-label">Statut:</label>
             <input type="text" id="statut" class="form-control" th:field="*{statut}" required>
         </div>
+
         <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
     </form>
 </div>

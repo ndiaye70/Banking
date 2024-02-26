@@ -1,39 +1,117 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+-<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Cartes</title>
+    <title>Carte commerçant-Imp/Exp</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+    <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            margin: 0; /* Supprime la marge par défaut du body */
+            padding: 0; /* Supprime le remplissage par défaut du body */
+            box-sizing: border-box; /* Utilise la boîte de modèle border-box pour simplifier le dimensionnement */
+        }
+
+        .container {
+            width: 100%;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #343a40;
+            text-align: left;
+            padding: 20px 0;
+            margin-left: 20px;
+            font-size: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        .table-header-text {
+            color: #343a40;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        a.btn {
+            margin-right: 5px;
+        }
+
+        .add-operation-btn {
+            margin-top: 20px;
+            margin-right: 20px;
+            color: #ffffff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
-<h1>Liste des Cartes</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Date</th>
-        <th>Agent</th>
-        <th>Nom et Prenom du Client</th>
-        <th>Telephone</th>
-        <th>Services</th>
-        <th>Montant </th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <tr th:each="customcarte : ${customCarte}">
-        <td th:text="${customcarte.date}"></td>
-        <td th:text="${customcarte.agent}"></td>
-        <td th:text="${customcarte.nomComplet}"></td>
-        <td th:text="${customcarte.tel}"></td>
-        <td th:text="${customcarte.service.label}"></td>
-        <td th:text="${customcarte.montant}"></td>
-        <td>
-            <a th:href="@{'/cartes/' + ${customcarte.id} + '/edit'}">Éditer</a>
-            |
-            <a th:href="@{'/cartes/' + ${customcarte.id} + '/delete'}">Supprimer</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <h1>Carte commerçant-Imp/Exp</h1>
+    <div class="row">
+        <div class="col-12">
+            <a th:href="@{'/cartes/save'}" class="btn btn-success float-right add-operation-btn">Ajouter </a>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th class="col-1 table-header-text">Date</th>
+                <th class="col-1 table-header-text">Agent</th>
+                <th class="col-1 table-header-text">Nom et Prénom du Client</th>
+                <th class="col-1 table-header-text">Téléphone</th>
+                <th class="col-1 table-header-text">Services</th>
+                <th class="col-1 table-header-text">Montant </th>
+                <th class="col-2 table-header-text">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="customcarte : ${customCarte}" th:if="${customcarte != null}">
+                <td th:text="${customcarte.date}" class="table-header-text"></td>
+                <td th:text="${customcarte.agent}" class="table-header-text"></td>
+                <td th:text="${customcarte.nomComplet}" class="table-header-text"></td>
+                <td th:text="${customcarte.tel}" class="table-header-text"></td>
+                <td th:text="${customcarte.service.label}" class="table-header-text"></td>
+                <td th:text="${customcarte.montant}" class="table-header-text"></td>
+                <td>
+                    <a th:href="@{'/cartes/' + ${customcarte.id} + '/edit'}" class="btn btn-primary btn-sm">Modifier</a>
+                    <a th:href="@{'/cartes/' + ${customcarte.id} + '/delete'}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette carte ?')" class="btn btn-danger btn-sm">Supprimer</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

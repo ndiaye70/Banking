@@ -2,20 +2,45 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Liste des approvisionnements</title>
+    <title>Approvisionnements</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+    <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
     <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        h2 {
+            color: #343a40;
+            text-align: left;
+            padding: 20px 0;
+            margin-left: 20px;
+            font-size: 1.5em;
+        }
+
         table {
-            border-collapse: collapse;
             width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
         }
 
         th, td {
-            border: 1px solid black;
+            border: 1px solid #dee2e6;
             padding: 8px;
             text-align: left;
         }
 
         th {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        .table-header-text {
+            color: #343a40;
+        }
+
+        tr:nth-child(even) {
             background-color: #f2f2f2;
         }
 
@@ -23,47 +48,74 @@
             display: inline-block;
             margin-right: 5px;
         }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #ffffff;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: #ffffff;
+        }
+
+        .add-operation-btn {
+            margin-top: 20px;
+            margin-right: 20px;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
 
-<h2>Liste des approvisionnements :</h2>
+<h2>Approvisionnements</h2>
 
-<table>
-    <thead>
+<div class="row">
+    <div class="col-12">
+        <a th:href="@{'/approvisionnements/save'}" class="btn btn-success float-right add-operation-btn">Ajouter</a>
+    </div>
+</div>
+
+<table class="table table-bordered">
+    <thead class="thead-dark">
     <tr>
-        <th>Date</th>
-        <th>Montant</th>
-        <th>Agent</th>
-        <th>Type</th>
-        <th>Origine</th>
-        <th>Compte Caisse 1</th>
-        <th>Destination</th>
-        <th>Compte Caisse 2</th>
-        <th>Devise</th>
-        <th>Statut</th>
-        <th>Actions</th>
+        <th class="col-1 table-header-text">Date</th>
+        <th class="col-1 table-header-text">Montant</th>
+        <th class="col-1 table-header-text">Agent</th>
+        <th class="col-1 table-header-text">Type</th>
+        <th class="col-1 table-header-text">Origine</th>
+        <th class="col-1 table-header-text">Compte Caisse 1</th>
+        <th class="col-1 table-header-text">Destination</th>
+        <th class="col-1 table-header-text">Compte Caisse 2</th>
+        <th class="col-1 table-header-text">Devise</th>
+        <th class="col-1 table-header-text">Statut</th>
+        <th class="col-2 table-header-text">Actions</th>
     </tr>
     </thead>
     <tbody>
     <!-- Loop through each customApprovisionnement and display its details -->
     <tr th:each="approvisionnement : ${customApprovisionnements}">
-        <td th:text="${approvisionnement.date}"></td>
-        <td th:text="${approvisionnement.montant}"></td>
-        <td th:text="${approvisionnement.agent}"></td>
-        <td th:text="${approvisionnement.type.label}"></td>
-        <td th:text="${approvisionnement.origine.label}"></td>
-        <td th:text="${approvisionnement.compteCaisse1.label}"></td>
-        <td th:text="${approvisionnement.destination.label}"></td>
-        <td th:text="${approvisionnement.compteCaisse2.label}"></td>
-        <td th:text="${approvisionnement.devise}"></td>
-        <td th:text="${approvisionnement.statut}"></td>
+        <td th:text="${approvisionnement.date}" class="table-header-text"></td>
+        <td th:text="${approvisionnement.montant}" class="table-header-text"></td>
+        <td th:text="${approvisionnement.agent}" class="table-header-text"></td>
+        <td th:text="${approvisionnement.type.label}" class="table-header-text"></td>
+        <td th:text="${approvisionnement.origine.label}" class="table-header-text"></td>
+        <td th:text="${approvisionnement.compteCaisse1.label}" class="table-header-text"></td>
+        <td th:text="${approvisionnement.destination.label}" class="table-header-text"></td>
+        <td th:text="${approvisionnement.compteCaisse2.label}" class="table-header-text"></td>
+        <td th:text="${approvisionnement.devise}" class="table-header-text"></td>
+        <td th:text="${approvisionnement.statut}" class="table-header-text"></td>
         <td>
             <span class="action-links">
-                <a th:href="@{/approvisionnements/{approvisionnementId}/edit(approvisionnementId=${approvisionnement.id})}">Modifier</a>
+                <a th:href="@{/approvisionnements/{approvisionnementId}/edit(approvisionnementId=${approvisionnement.id})}" class="btn btn-primary btn-sm">Modifier</a>
             </span>
             <span class="action-links">
-                <a th:href="@{/approvisionnements/{approvisionnementId}/delete(approvisionnementId=${approvisionnement.id})}" onclick="return confirm('Voulez-vous vraiment supprimer cet approvisionnement ?')">Supprimer</a>
+                <a th:href="@{/approvisionnements/{approvisionnementId}/delete(approvisionnementId=${approvisionnement.id})}" onclick="return confirm('Voulez-vous vraiment supprimer cet approvisionnement ?')" class="btn btn-danger btn-sm">Supprimer</a>
             </span>
         </td>
     </tr>

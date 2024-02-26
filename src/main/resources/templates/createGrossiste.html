@@ -2,40 +2,109 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Créer un Grossiste</title>
+  <title>Nouvelle opération</title>
+  <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+  <link th:href="@{/css/app.css}" rel="stylesheet">
+  <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
 </head>
 <body>
-<h3>Créer un nouveau Grossiste</h3>
-<form th:action="@{/grossistes/save}" method="post" th:object="${grossisteDto}">
-  <label>Nom : <input type="text" th:field="*{nom}" required></label><br>
-  <label>Prénom : <input type="text" th:field="*{prenom}" required></label><br>
-  <label>Numéro de Téléphone : <input type="text" th:field="*{numTel}" required></label><br>
-  <label>Civilite :
-    <select th:field="*{civilite}">
-      <option value="M">M.</option>
-      <option value="Mme">Mme</option>
-    </select>
-  </label><br>
-  <label>Montant : <input type="number" step="0.01" th:field="*{montant}" required></label><br>
-  <label>Montant Payé par :
-    <select th:field="*{montantPayePar}">
-      <option value="Especes">Espèces</option>
-      <option value="Wave">Wave</option>
-      <option value="OM">OM</option>
-    </select>
-  </label><br>
-  <label>Frais : <input type="number" step="0.01" th:field="*{frais}" required></label><br>
-  <label>Frais Payés par :
-    <select th:field="*{fraisPayePar}">
-      <option value="Especes">Espèces</option>
-      <option value="Wave">Wave</option>
-      <option value="OM">OM</option>
-    </select>
-  </label><br>
-  <label>Autres : <input type="text" th:field="*{autres}"></label><br>
-  <label>Statut : <input type="text" th:field="*{statut}" required></label><br>
+<section id="basic-vertical-layouts">
+  <div class="row match-height">
+    <div class="col-md-6 col-12 mx-auto my-5">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Créer un nouveau Grossiste</h4>
+        </div>
+        <div class="card-content">
+          <div class="card-body">
+            <form class="form form-vertical" th:action="@{/grossistes/save}" method="post" th:object="${grossisteDto}">
+              <div class="form-body">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="nom">Nom</label>
+                      <input type="text" id="nom" class="form-control" th:field="*{nom}" required placeholder="Nom">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="prenom">Prénom</label>
+                      <input type="text" id="prenom" class="form-control" th:field="*{prenom}" required placeholder="Prénom">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="numTel">Numéro de Téléphone</label>
+                      <input type="text" id="numTel" class="form-control" th:field="*{numTel}" required placeholder="Numéro de Téléphone">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="civilite">Civilite</label>
+                      <select id="civilite" class="form-control" th:field="*{civilite}" required>
+                        <option value="M">M.</option>
+                        <option value="Mme">Mme</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="montant">Montant</label>
+                      <input type="number" step="0.01" id="montant" class="form-control" th:field="*{montant}" required placeholder="Montant">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="montantPayePar">Montant Payé par</label>
+                      <select id="montantPayePar" class="form-control" th:field="*{montantPayePar}" required>
+                        <option value="Especes">Espèces</option>
+                        <option value="Wave">Wave</option>
+                        <option value="OM">OM</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="frais">Frais</label>
+                      <input type="number" step="0.01" id="frais" class="form-control" th:field="*{frais}" required placeholder="Frais">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="fraisPayePar">Frais Payés par</label>
+                      <select id="fraisPayePar" class="form-control" th:field="*{fraisPayePar}" required>
+                        <option value="Especes">Espèces</option>
+                        <option value="Wave">Wave</option>
+                        <option value="OM">OM</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="autres">Autres</label>
+                      <input type="text" id="autres" class="form-control" th:field="*{autres}" placeholder="Autres">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="statut">Statut</label>
+                      <input type="text" id="statut" class="form-control" th:field="*{statut}" required placeholder="Statut">
+                    </div>
+                  </div>
+                  <div class="col-12 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary mr-1 mb-1">Enregistrer</button>
+                    <!-- Ajout du bouton Reset -->
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <button type="submit">Enregistrer</button>
-</form>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

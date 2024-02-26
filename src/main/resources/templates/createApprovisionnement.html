@@ -1,61 +1,97 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Créer un approvisionnement</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+    <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
 </head>
+
 <body>
-<h2>Créer un nouvel approvisionnement</h2>
-<form th:action="@{/approvisionnements/save}" method="post" th:object="${approvisionnementDto}">
+<section id="basic-vertical-layouts">
+    <div class="row match-height">
+        <div class="col-md-6 col-12 mx-auto my-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Création d'approvisionnement</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <form class="form form-vertical" th:action="@{/approvisionnements/save}" method="post" th:object="${approvisionnementDto}">
 
+                            <div class="form-group">
+                                <label for="devise">Devise :</label>
+                                <select id="devise" name="devise" class="form-control" th:field="*{devise}" required>
+                                    <option th:each="devise : ${T(Reporting.AFA.Entity.Approvisionnement.Devise).values()}"
+                                            th:value="${devise}" th:text="${devise}"></option>
+                                </select>
+                            </div>
 
-    <label for="devise">Devise :</label>
-    <select id="devise" name="devise" th:field="*{devise}" required>
-        <option th:each="devise : ${T(Reporting.AFA.Entity.Approvisionnement.Devise).values()}"
-                th:value="${devise}" th:text="${devise}"></option>
-    </select><br>
+                            <div class="form-group">
+                                <label for="montant">Montant :</label>
+                                <input type="number" id="montant" name="montant" class="form-control" th:field="*{montant}" required>
+                            </div>
 
+                            <div class="form-group">
+                                <label for="type">Type :</label>
+                                <select id="type" name="type" class="form-control" th:field="*{type}" required>
+                                    <option th:each="type : ${T(Reporting.AFA.Entity.Approvisionnement.TYPE).values()}"
+                                            th:value="${type}" th:text="${type.label}"></option>
+                                </select>
+                            </div>
 
-    <label for="montant">Montant :</label>
-    <input type="number" id="montant" name="montant" th:field="*{montant}" required><br>
+                            <div class="form-group">
+                                <label for="origine">Origine :</label>
+                                <select id="origine" name="origine" class="form-control" th:field="*{origine}" required>
+                                    <option th:each="origine : ${T(Reporting.AFA.Entity.Approvisionnement.Origine).values()}"
+                                            th:value="${origine}" th:text="${origine.label}"></option>
+                                </select>
+                            </div>
 
-    <label for="type">Type :</label>
-    <select id="type" name="type" th:field="*{type}" required>
-        <option th:each="type : ${T(Reporting.AFA.Entity.Approvisionnement.TYPE).values()}"
-                th:value="${type}" th:text="${type.label}"></option>
-    </select><br>
+                            <div class="form-group">
+                                <label for="compteCaisse1">Compte/Caisse :</label>
+                                <select id="compteCaisse1" name="compteCaisse1" class="form-control" th:field="*{compteCaisse1}" required>
+                                    <option th:each="compte : ${T(Reporting.AFA.Entity.Approvisionnement.Compte).values()}"
+                                            th:value="${compte}" th:text="${compte.label}"></option>
+                                </select>
+                            </div>
 
+                            <div class="form-group">
+                                <label for="destination">Destination :</label>
+                                <select id="destination" name="destination" class="form-control" th:field="*{destination}" required>
+                                    <option th:each="destination : ${T(Reporting.AFA.Entity.Approvisionnement.Origine).values()}"
+                                            th:value="${destination}" th:text="${destination.label}"></option>
+                                </select>
+                            </div>
 
+                            <div class="form-group">
+                                <label for="compteCaisse2">Compte/Caisse :</label>
+                                <select id="compteCaisse2" name="compteCaisse2" class="form-control" th:field="*{compteCaisse2}" required>
+                                    <option th:each="compte : ${T(Reporting.AFA.Entity.Approvisionnement.Compte).values()}"
+                                            th:value="${compte}" th:text="${compte.label}"></option>
+                                </select>
+                            </div>
 
-    <label for="origine">Origine :</label>
-    <select id="origine" name="origine" th:field="*{origine}" required>
-        <option th:each="origine : ${T(Reporting.AFA.Entity.Approvisionnement.Origine).values()}"
-                th:value="${origine}" th:text="${origine.label}"></option>
-    </select><br>
+                            <div class="form-group">
+                                <label for="statut">Statut :</label>
+                                <input type="text" id="statut" name="statut" class="form-control" th:field="*{statut}" required>
+                            </div>
 
-    <label for="compteCaisse1">Compte/Caisse  :</label>
-    <select id="compteCaisse1" name="compteCaisse1" th:field="*{compteCaisse1}" required>
-        <option th:each="compte : ${T(Reporting.AFA.Entity.Approvisionnement.Compte).values()}"
-                th:value="${compte}" th:text="${compte.label}"></option>
-    </select><br>
+                            <div class="form-group d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary mr-1 mb-1">Enregistrer</button>
+                            </div>
 
-    <label for="destination">Destination:</label>
-    <select id="destination" name="destination" th:field="*{destination}" required>
-        <option th:each="destination : ${T(Reporting.AFA.Entity.Approvisionnement.Origine).values()}"
-                th:value="${destination}" th:text="${destination.label}"></option>
-    </select><br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <label for="compteCaisse2">Compte/Caisse:</label>
-    <select id="compteCaisse2" name="compteCaisse2" th:field="*{compteCaisse2}" required>
-        <option th:each="compte : ${T(Reporting.AFA.Entity.Approvisionnement.Compte).values()}"
-                th:value="${compte}" th:text="${compte.label}"></option>
-    </select><br>
-
-    <label>Statut : <input type="text" th:field="*{statut}" required></label><br>
-
-    <!-- Ajouter les autres champs et options ici -->
-
-    <button type="submit">Enregistrer</button>
-</form>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
