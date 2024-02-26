@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création de Solde de Départ</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+    <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Création de Solde de Départ</h1>
+            <form th:action="@{/recaps/save}" th:object="${soldeDepartDto}" method="post">
+                <div class="form-group">
+                    <label for="orangeMoney">Orange Money:</label>
+                    <input type="number" id="orangeMoney" name="orangeMoney" th:field="*{orangeMoney}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="freeMoney">Free Money:</label>
+                    <input type="number" id="freeMoney" name="freeMoney" th:field="*{freeMoney}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="wave">Wave:</label>
+                    <input type="number" id="wave" name="wave" th:field="*{wave}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="wari">Wari:</label>
+                    <input type="number" id="wari" name="wari" th:field="*{wari}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="wizall">Wizall:</label>
+                    <input type="number" id="wizall" name="wizall" th:field="*{wizall}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="westernUnion">Western Union:</label>
+                    <input type="number" id="westernUnion" name="westernUnion" th:field="*{westernUnion}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="ria">Ria:</label>
+                    <input type="number" id="ria" name="ria" th:field="*{ria}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="moneygram">Moneygram:</label>
+                    <input type="number" id="moneygram" name="moneygram" th:field="*{moneygram}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="ecobank">Ecobank:</label>
+                    <input type="number" id="ecobank" name="ecobank" th:field="*{ecobank}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="smallWorld">SmallWorld:</label>
+                    <input type="number" id="smallWorld" name="smallWorld" th:field="*{smallWorld}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="bnb">BnB:</label>
+                    <input type="number" id="bnb" name="bnb" th:field="*{bnb}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="askia">Askia:</label>
+                    <input type="number" id="askia" name="askia" th:field="*{askia}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="sunuAssurance">SUNU Assurance:</label>
+                    <input type="number" id="sunuAssurance" name="sunuAssurance" th:field="*{sunuAssurance}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="creationEntreprise">Création d'entreprise:</label>
+                    <input type="number" id="creationEntreprise" name="creationEntreprise"
+                           th:field="*{creationEntreprise}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="cartesComImpExp">Cartes Com. IMP./EXP.:</label>
+                    <input type="number" id="cartesComImpExp" name="cartesComImpExp"
+                           th:field="*{cartesComImpExp}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="change">Change:</label>
+                    <input type="number" id="change" name="change" th:field="*{change}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="grossisteBnb">Grossiste BNB:</label>
+                    <input type="number" id="grossisteBnb" name="grossisteBnb" th:field="*{grossisteBnb}"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="bndeDepotRetrait">BNDE Dépôt/Retrait:</label>
+                    <input type="number" id="bndeDepotRetrait" name="bndeDepotRetrait"
+                           th:field="*{bndeDepotRetrait}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="ouvertureCompteBnde">Ouverture de compte BNDE:</label>
+                    <input type="number" id="ouvertureCompteBnde" name="ouvertureCompteBnde"
+                           th:field="*{ouvertureCompteBnde}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="ubaCartesPrepayees">UBA cartes prépayées:</label>
+                    <input type="number" id="ubaCartesPrepayees" name="ubaCartesPrepayees"
+                           th:field="*{ubaCartesPrepayees}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="ubaDepotRetrait">UBA Dépôt/Retrait:</label>
+                    <input type="number" id="ubaDepotRetrait" name="ubaDepotRetrait"
+                           th:field="*{ubaDepotRetrait}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Enregistrer" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
