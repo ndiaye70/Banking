@@ -72,6 +72,79 @@
             </select>
         </div>
 
+        <!-- Labels pour les options de vérification -->
+        <div class="mb-3">
+            <label class="form-label">NINEA:</label>
+            <div class="form-check">
+                <input type="radio" id="nineaCopie1" name="nineaCopie" value="1" class="form-check-input" th:checked="${carteDto.nineaCopie == 1}">
+                <label for="nineaCopie1" class="form-check-label">Une copie</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="nineaCopie2" name="nineaCopie" value="2" class="form-check-input" th:checked="${carteDto.nineaCopie == 2}">
+                <label for="nineaCopie2" class="form-check-label">Deux copies</label>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">RC:</label>
+            <div class="form-check">
+                <input type="radio" id="rcCopie1" name="rcCopie" value="1" class="form-check-input" th:checked="${carteDto.rcCopie == 1}">
+                <label for="rcCopie1" class="form-check-label">Une copie</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="rcCopie2" name="rcCopie" value="2" class="form-check-input" th:checked="${carteDto.rcCopie == 2}">
+                <label for="rcCopie2" class="form-check-label">Deux copies</label>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Passeport/CNI valide:</label>
+            <div class="form-check">
+                <input type="radio" id="passeportCopie1" name="passeportCopie" value="1" class="form-check-input" th:checked="${carteDto.passeportCopie == 1}">
+                <label for="passeportCopie1" class="form-check-label">Une copie</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="passeportCopie2" name="passeportCopie" value="2" class="form-check-input" th:checked="${carteDto.passeportCopie == 2}">
+                <label for="passeportCopie2" class="form-check-label">Deux copies</label>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Photo d'identité:</label>
+            <div class="form-check">
+                <input type="radio" id="photoCopie1" name="photoCopie" value="1" class="form-check-input" th:checked="${carteDto.photoCopie == 1}">
+                <label for="photoCopie1" class="form-check-label">Une copie</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="photoCopie2" name="photoCopie" value="2" class="form-check-input" th:checked="${carteDto.photoCopie == 2}">
+                <label for="photoCopie2" class="form-check-label">Deux copies</label>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Ancienne C.C:</label>
+            <div class="form-check">
+                <input type="radio" id="ccCopie1" name="ccCopie" value="1" class="form-check-input" th:checked="${carteDto.ccCopie == 1}">
+                <label for="ccCopie1" class="form-check-label">Une copie</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="ccCopie2" name="ccCopie" value="2" class="form-check-input" th:checked="${carteDto.ccCopie == 2}">
+                <label for="ccCopie2" class="form-check-label">Deux copies</label>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Ancienne C.I.E:</label>
+            <div class="form-check">
+                <input type="radio" id="cieCopie1" name="cieCopie" value="1" class="form-check-input" th:checked="${carteDto.cieCopie == 1}">
+                <label for="cieCopie1" class="form-check-label">Une copie</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="cieCopie2" name="cieCopie" value="2" class="form-check-input" th:checked="${carteDto.cieCopie == 2}">
+                <label for="cieCopie2" class="form-check-label">Deux copies</label>
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
     </form>
 </div>

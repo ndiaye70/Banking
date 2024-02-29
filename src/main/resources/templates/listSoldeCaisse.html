@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des soldes de caisse</title>
+</head>
+<body>
+<h1>Liste des soldes de caisse</h1>
+
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Ouverture XOF</th>
+    <th>Fermeture XOF</th>
+    <th>Ouverture EUR</th>
+    <th>Fermeture EUR</th>
+    <th>Ouverture USD</th>
+    <th>Fermeture USD</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Boucle sur chaque solde de caisse -->
+  <tr th:each="soldeCaisse : ${soldeCaisses}">
+    <td th:text="${soldeCaisse.id}"></td>
+    <td th:text="${soldeCaisse.ouvertureCaisseXof}"></td>
+    <td th:text="${soldeCaisse.fermetureCaisseXof}"></td>
+    <td th:text="${soldeCaisse.ouvertureCaisseEur}"></td>
+    <td th:text="${soldeCaisse.fermetureCaisseEur}"></td>
+    <td th:text="${soldeCaisse.ouvertureCaisseUsd}"></td>
+    <td th:text="${soldeCaisse.fermetureCaisseUsd}"></td>
+    <td>
+      <!-- Bouton pour modifier -->
+      <a th:href="@{'/soldeCaisse/' + ${soldeCaisse.id} + '/edit'}">Modifier</a>
+
+      <a th:href="@{'/soldeCaisse/' + ${soldeCaisse.id} + '/delete'}">Supprimer</a>
+      <!-- Bouton pour supprimer -->
+
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

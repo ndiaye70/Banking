@@ -17,9 +17,9 @@
 <body>
 <div id="app">
 
-    <span th:replace="fragments/sidebar :: sidebar"></span>
+    <span th:replace="~{fragments/sidebar :: sidebar}"></span>
     <div id="main">
-        <span th:replace="fragments/header :: header"></span>
+        <span th:replace="~{fragments/header :: header}"></span>
         <div class="main-content container-fluid" layout:fragment="content">
             <div class="main-content container-fluid">
                 <div class="page-title">
@@ -293,7 +293,7 @@
                 </section>
             </div>
         </div>
-            <span th:replace="fragments/footer::footer"></span>
+            <span th:replace="~{fragments/footer::footer}"></span>
         </div>
     </div>
         <script th:src="@{/js/feather.min.js}"></script>
@@ -303,7 +303,6 @@
         <script th:src="@{/js/apexcharts.min.js}"></script>
         <script th:src="@{/js/dashboard.js}"></script>
         <script th:src="@{/js/main.js}"></script>
-    </div>
 </body>
 
 </html>

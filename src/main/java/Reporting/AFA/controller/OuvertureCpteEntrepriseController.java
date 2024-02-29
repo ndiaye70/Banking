@@ -117,7 +117,7 @@ public class OuvertureCpteEntrepriseController {
     public ResponseEntity<String> deleteOuvertureCompte(@PathVariable String ouvertureCompteId) {
         try {
             ouvertureCompteService.deleteOuvertureCpteEntrepriseById(ouvertureCompteId);
-            return ResponseEntity.ok("Compte supprimée avec succès");
+            return ResponseEntity.ok("Compte supprimé avec succès");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de la suppression du Compte");
         }

@@ -4,11 +4,7 @@ import Reporting.AFA.Entity.*;
 import Reporting.AFA.Security.Services.AccountServiceImpl;
 import Reporting.AFA.dto.*;
 import Reporting.AFA.services.*;
-import lombok.AllArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,19 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import org.springframework.http.MediaType;
-import java.nio.file.Path;
 
 
 @Controller

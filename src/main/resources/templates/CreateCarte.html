@@ -27,6 +27,7 @@
         <div class="col-md-6">
             <label for="service" class="form-label">Service:</label>
             <select id="service" name="service" onchange="updateMontant()" class="form-select" required>
+                <option value=" ">Choisir une Service </option>
                 <option value="CARTE_COMMERCANT">Carte Commerçant (C.C)</option>
                 <option value="CARTE_IMPORT_EXPORT">Carte Import-Export (C.I.E)</option>
                 <option value="Première_demande_PACK">Première demande Pack (C.C et C.I.E)</option>
@@ -42,15 +43,16 @@
         </div>
 
         <!-- NINEA -->
+        <!-- NINEA -->
         <div class="col-12">
             <label class="form-label">NINEA:</label>
+
             <div class="form-check">
-                <input type="radio" id="nineaCopie1" name="nineaCopie" value="Une copie" class="form-check-input"
-                       required>
+                <input type="radio" id="nineaCopie1" name="nineaCopie" value="1" class="form-check-input">
                 <label for="nineaCopie1" class="form-check-label">Une copie</label>
             </div>
             <div class="form-check">
-                <input type="radio" id="nineaCopie2" name="nineaCopie" value="Deux copies" class="form-check-input">
+                <input type="radio" id="nineaCopie2" name="nineaCopie" value="2" class="form-check-input">
                 <label for="nineaCopie2" class="form-check-label">Deux copies</label>
             </div>
         </div>
@@ -58,13 +60,13 @@
         <!-- RC -->
         <div class="col-12">
             <label class="form-label">RC:</label>
+
             <div class="form-check">
-                <input type="radio" id="rcCopie1" name="rcCopie" value="Une copie" class="form-check-input"
-                       required>
+                <input type="radio" id="rcCopie1" name="rcCopie" value="1" class="form-check-input">
                 <label for="rcCopie1" class="form-check-label">Une copie</label>
             </div>
             <div class="form-check">
-                <input type="radio" id="rcCopie2" name="rcCopie" value="Deux copies" class="form-check-input">
+                <input type="radio" id="rcCopie2" name="rcCopie" value="2" class="form-check-input">
                 <label for="rcCopie2" class="form-check-label">Deux copies</label>
             </div>
         </div>
@@ -72,14 +74,13 @@
         <!-- Passeport/CNI valide -->
         <div class="col-12">
             <label class="form-label">Passeport/CNI valide:</label>
+
             <div class="form-check">
-                <input type="radio" id="passeportCopie1" name="passeportCopie" value="Une copie"
-                       class="form-check-input" required>
+                <input type="radio" id="passeportCopie1" name="passeportCopie" value="1" class="form-check-input">
                 <label for="passeportCopie1" class="form-check-label">Une copie</label>
             </div>
             <div class="form-check">
-                <input type="radio" id="passeportCopie2" name="passeportCopie" value="Deux copies"
-                       class="form-check-input">
+                <input type="radio" id="passeportCopie2" name="passeportCopie" value="2" class="form-check-input">
                 <label for="passeportCopie2" class="form-check-label">Deux copies</label>
             </div>
         </div>
@@ -88,13 +89,12 @@
         <div class="col-12">
             <label class="form-label">Photo d'identité:</label>
             <div class="form-check">
-                <input type="radio" id="photoCopie1" name="photoCopie" value="Une copie" class="form-check-input"
-                       required>
-                <label for="photoCopie1" class="form-check-label">Une copie</label>
+                <input type="radio" id="photoCopie1" name="photoCopie" value="1" class="form-check-input">
+                <label for="photoCopie1" class="form-check-label">Une photo</label>
             </div>
             <div class="form-check">
-                <input type="radio" id="photoCopie2" name="photoCopie" value="Deux copies" class="form-check-input">
-                <label for="photoCopie2" class="form-check-label">Deux copies</label>
+                <input type="radio" id="photoCopie2" name="photoCopie" value="2" class="form-check-input">
+                <label for="photoCopie2" class="form-check-label">Deux photos</label>
             </div>
         </div>
 
@@ -102,13 +102,8 @@
         <div class="col-12">
             <label class="form-label">Ancienne C.C:</label>
             <div class="form-check">
-                <input type="radio" id="ccCopie1" name="ccCopie" value="Une copie" class="form-check-input"
-                       required>
+                <input type="radio" id="ccCopie1" name="ccCopie" value="1" class="form-check-input">
                 <label for="ccCopie1" class="form-check-label">Une copie</label>
-            </div>
-            <div class="form-check">
-                <input type="radio" id="ccCopie2" name="ccCopie" value="Deux copies" class="form-check-input">
-                <label for="ccCopie2" class="form-check-label">Deux copies</label>
             </div>
         </div>
 
@@ -116,13 +111,8 @@
         <div class="col-12">
             <label class="form-label">Ancienne C.I.E:</label>
             <div class="form-check">
-                <input type="radio" id="cieCopie1" name="cieCopie" value="Une copie" class="form-check-input"
-                       required>
+                <input type="radio" id="cieCopie1" name="cieCopie" value="1" class="form-check-input">
                 <label for="cieCopie1" class="form-check-label">Une copie</label>
-            </div>
-            <div class="form-check">
-                <input type="radio" id="cieCopie2" name="cieCopie" value="Deux copies" class="form-check-input">
-                <label for="cieCopie2" class="form-check-label">Deux copies</label>
             </div>
         </div>
 
@@ -132,7 +122,6 @@
     </form>
 </div>
 
-<button id="imprimerPdf" class="btn btn-secondary mt-3">Imprimer en PDF</button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
@@ -147,6 +136,8 @@
 
         // Mettre à jour automatiquement le montant en fonction du service sélectionné
         switch (service) {
+        case " ":
+        montantInput.value = 0;
             case "CARTE_COMMERCANT":
                 montantInput.value = 19200;
                 break;
@@ -169,6 +160,8 @@
                 montantInput.value = ""; // Effacer le montant si aucun service n'est sélectionné
         }
     }
+
+
 
     $(document).ready(function () {
         $('#imprimerPdf').click(function () {

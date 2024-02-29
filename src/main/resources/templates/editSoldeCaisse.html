@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Édition d'un solde de caisse</title>
+</head>
+<body>
+<h1>Édition d'un solde de caisse</h1>
+
+<form th:action="@{'/soldeCaisse/'+${id}+'/edit'}" method="post" th:object="${soldeCaisse}">
+    <input type="hidden" th:field="*{id}" />
+
+    <!-- Section pour le solde en XOF -->
+    <h2>Solde en XOF</h2>
+    <label for="ouvertureCaisseXof">Ouverture de caisse (XOF) :</label>
+    <input type="number" id="ouvertureCaisseXof" name="ouvertureCaisseXof" th:field="*{ouvertureCaisseXof}" required>
+    <br>
+    <label for="fermetureCaisseXof">Fermeture de caisse (XOF) :</label>
+    <input type="number" id="fermetureCaisseXof" name="fermetureCaisseXof" th:field="*{fermetureCaisseXof}" required>
+    <br>
+
+    <!-- Ajoutez d'autres champs spécifiques à la devise XOF ici si nécessaire -->
+
+    <!-- Section pour le solde en EUR -->
+    <h2>Solde en EUR</h2>
+    <label for="ouvertureCaisseEur">Ouverture de caisse (EUR) :</label>
+    <input type="number" id="ouvertureCaisseEur" name="ouvertureCaisseEur" th:field="*{ouvertureCaisseEur}" required>
+    <br>
+    <label for="fermetureCaisseEur">Fermeture de caisse (EUR) :</label>
+    <input type="number" id="fermetureCaisseEur" name="fermetureCaisseEur" th:field="*{fermetureCaisseEur}" required>
+    <br>
+
+    <!-- Ajoutez d'autres champs spécifiques à la devise EUR ici si nécessaire -->
+
+    <!-- Section pour le solde en USD -->
+    <h2>Solde en USD</h2>
+    <label for="ouvertureCaisseUsd">Ouverture de caisse (USD) :</label>
+    <input type="number" id="ouvertureCaisseUsd" name="ouvertureCaisseUsd" th:field="*{ouvertureCaisseUsd}" required>
+    <br>
+    <label for="fermetureCaisseUsd">Fermeture de caisse (USD) :</label>
+    <input type="number" id="fermetureCaisseUsd" name="fermetureCaisseUsd" th:field="*{fermetureCaisseUsd}" required>
+    <br>
+
+    <!-- Ajoutez d'autres champs spécifiques à la devise USD ici si nécessaire -->
+
+    <button type="submit">Enregistrer</button>
+</form>
+</body>
+</html>

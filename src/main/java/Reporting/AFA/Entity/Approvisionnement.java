@@ -70,9 +70,9 @@ public class Approvisionnement {
     }
 
         public enum Compte {
-            Caisse("Caisse"), Orange_Money("Orange Money"), Free_Money("Free Money"), Wave("Wave"), Wari("Wari"), Wizall("Wizall"), Ecobank("Ecobank"), ORABANK_Western_Union("ORABANK_Western_Union"),
-            ORABANK_Ria("ORABANK_Ria"),
-            ORABANK_Moneygram("ORABANK Moneygram"), ORABANK_SmallWorld("ORABANK SmallWorld"), BnB("BnB"), Askia("Askia"), SUNU_Assurance("SUNU Assurance");
+            Caisse("Caisse"), Orange_Money("Orange Money"), Free_Money("Free Money"), Wave("Wave"), Wari("Wari"), Wizall("Wizall"), Ecobank("Ecobank"), Western_Union("ORABANK Western Union"),
+            Ria("ORABANK Ria"),
+            Moneygram("ORABANK Moneygram"), SmallWorld("ORABANK SmallWorld"), BnB("BnB"), Askia("Askia"), SUNU_Assurance("Sunu Assurance");
 
 
             private final String label;
