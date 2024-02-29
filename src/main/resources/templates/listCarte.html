@@ -1,4 +1,4 @@
--<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -10,9 +10,9 @@
     <style>
         body {
             background-color: #f8f9fa;
-            margin: 0; /* Supprime la marge par défaut du body */
-            padding: 0; /* Supprime le remplissage par défaut du body */
-            box-sizing: border-box; /* Utilise la boîte de modèle border-box pour simplifier le dimensionnement */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         .container {
@@ -63,6 +63,12 @@
             color: #ffffff;
         }
 
+        .home-btn {
+            margin-top: 20px;
+            margin-right: 5px;
+            color: #ffffff;
+        }
+
         .btn-primary {
             background-color: #007bff;
             color: #ffffff;
@@ -79,7 +85,8 @@
     <h1>Carte commerçant-Imp/Exp</h1>
     <div class="row">
         <div class="col-12">
-            <a th:href="@{'/cartes/save'}" class="btn btn-success float-right add-operation-btn">Ajouter </a>
+            <a th:href="@{'/cartes/save'}" class="btn btn-success float-right add-operation-btn">Ajouter</a>
+            <a th:href="@{'/index'}" class="btn btn-secondary float-right home-btn">Accueil</a>
         </div>
     </div>
     <div class="table-responsive">

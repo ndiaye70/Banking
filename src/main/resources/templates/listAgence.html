@@ -3,15 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <title>Liste des Agences</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+  <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    h3 {
+      color: #343a40;
+      text-align: left;
+      padding: 20px 0;
+      margin-left: 20px;
+      font-size: 1.5em;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #dee2e6;
+      padding: 8px;
+      text-align: left;
+      color: #343a40; /* Couleur du texte pour les cellules de tableau */
+    }
+
+    th {
+      background-color: #007bff;
+      color: #ffffff;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    a.btn {
+      margin-right: 5px;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: #ffffff;
+    }
+  </style>
 </head>
 <body>
+
 <h3>Liste des Agences</h3>
-<table>
+<div class="row">
+  <div class="col-12">
+    <a th:href="@{/agences/new}" class="btn btn-success float-right mt-2">Nouvelle Agence</a>
+    <a th:href="@{'/index'}" class="btn btn-secondary float-right mt-2 mr-2">Accueil</a>
+  </div>
+</div>
+<table class="table table-bordered">
   <thead>
   <tr>
-    <th>Code</th>
-    <th>Nom</th>
+    <th style="color: #343a40;">Code</th>
+    <th style="color: #343a40;">Nom</th>
   </tr>
   </thead>
   <tbody>
@@ -21,9 +77,6 @@
   </tr>
   </tbody>
 </table>
-
-<!-- Ajouter une option "New" -->
-<a th:href="@{/agences/new}">Nouvelle Agence</a>
 
 </body>
 </html>
