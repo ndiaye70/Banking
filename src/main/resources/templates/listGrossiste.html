@@ -54,6 +54,12 @@
       color: #ffffff; /* Couleur du texte */
     }
 
+    .home-btn {
+      margin-top: 20px;
+      margin-right: 5px; /* Aligner à droite */
+      color: #ffffff; /* Couleur du texte */
+    }
+
     .btn-primary {
       background-color: #007bff;
       color: #ffffff;
@@ -77,6 +83,7 @@
 <div class="row">
   <div class="col-12">
     <a th:href="@{'/grossistes/save'}" class="btn btn-success float-right add-operation-btn">Ajouter</a>
+    <a th:href="@{'/index'}" class="btn btn-secondary float-right home-btn">Accueil</a>
   </div>
 </div>
 
@@ -90,7 +97,6 @@
     <th class="col-1 table-header-text">Numéro de Téléphone</th>
     <th class="col-1 table-header-text">Montant</th>
     <th class="col-1 table-header-text">Frais</th>
-    <th class="col-1 table-header-text">Autres</th>
     <th class="col-1 table-header-text">Statut</th>
     <th class="col-1 table-header-text">Montant Payé par</th>
     <th class="col-1 table-header-text">Frais Payé par</th>
@@ -106,7 +112,6 @@
     <td th:text="${grossiste.numTel}"></td>
     <td th:text="${grossiste.montant}"></td>
     <td th:text="${grossiste.frais}"></td>
-    <td th:text="${grossiste.autres}"></td>
     <td th:text="${grossiste.statut}"></td>
     <td th:text="${grossiste.montantPayépar}"></td>
     <td th:text="${grossiste.fraisPayépar}"></td>

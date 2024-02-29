@@ -1,20 +1,99 @@
 <!DOCTYPE html>
-<html lang="en"   xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Liste des régularisations</title>
+    <title>Régularisations</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+    <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        h3 {
+            color: #343a40;
+            text-align: left;
+            padding: 20px 0;
+            margin-left: 20px;
+            font-size: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        .table-header-text {
+            color: #343a40;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        a.btn {
+            margin-right: 5px;
+        }
+
+        .add-operation-btn {
+            margin-top: 20px;
+            margin-right: 20px;
+            color: #ffffff;
+        }
+
+        .home-btn {
+            margin-top: 20px;
+            margin-right: 5px;
+            color: #ffffff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: #ffffff;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
-<h3>Liste des régularisations</h3>
-<table border="1">
-    <thead>
+
+<h3>Régularisations</h3>
+<div class="row">
+    <div class="col-12">
+        <a th:href="@{'/regularisations/save'}" class="btn btn-success float-right add-operation-btn">Ajouter</a>
+        <a th:href="@{'/index'}" class="btn btn-secondary float-right home-btn">Accueil</a>
+    </div>
+</div>
+<table class="table table-bordered">
+    <thead class="thead-dark">
     <tr>
-        <th>Date</th>
-        <th>Libellé</th>
-        <th>Montant</th>
-        <th>Compte/Caisse</th>
-        <th>Régularisateur</th>
-        <th>Actions</th>
+        <th class="col-1 table-header-text">Date</th>
+        <th class="col-2 table-header-text">Libellé</th>
+        <th class="col-1 table-header-text">Montant</th>
+        <th class="col-2 table-header-text">Compte/Caisse</th>
+        <th class="col-2 table-header-text">Régularisateur</th>
+        <th class="col-2 table-header-text">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -26,12 +105,12 @@
         <td th:text="${regularisation.compteCaisse.label}"></td>
         <td th:text="${regularisation.regularisateur.label}"></td>
         <td>
-            <a th:href="@{'/regularisations/' + ${regularisation.id} + '/edit'}">Modifier</a>
-            <a th:href="@{'/regularisations/' + ${regularisation.id} + '/delete'}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette régularisation ?')">Supprimer</a>
+            <a th:href="@{'/regularisations/' + ${regularisation.id} + '/edit'}" class="btn btn-primary btn-sm">Modifier</a>
+            <a th:href="@{'/regularisations/' + ${regularisation.id} + '/delete'}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette régularisation ?')">Supprimer</a>
         </td>
     </tr>
     </tbody>
 </table>
-<a th:href="@{'/regularisations/save'}">Ajouter une régularisation</a>
+
 </body>
 </html>
