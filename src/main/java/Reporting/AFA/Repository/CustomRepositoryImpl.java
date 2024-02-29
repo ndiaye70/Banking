@@ -66,7 +66,7 @@ public class CustomRepositoryImpl implements CustomRepository {
                 "    ) AS Appro_Sortant " +
                 "UNION ALL " +
 
-                "SELECT 'Western_union' AS service, " +
+                "SELECT 'Western Union' AS service, " +
                 "    (SELECT COALESCE(SUM(CASE WHEN nature_operation IN ('Envoie') THEN montant ELSE 0 END), 0) FROM operations WHERE service = 'Western_union' AND DATE(date) = DATE(NOW())) AS montant_depot, " +
                 "    (SELECT COALESCE(SUM(CASE WHEN nature_operation IN ('retrait') THEN montant ELSE 0 END), 0) FROM operations WHERE service = 'Western_union' AND DATE(date) = DATE(NOW())) AS montant_retrait," +
                 "    (SELECT COALESCE(COUNT(service), 0) FROM operations WHERE service = 'Western_union' AND DATE(date) = DATE(NOW())) AS nombre_de_client, " +

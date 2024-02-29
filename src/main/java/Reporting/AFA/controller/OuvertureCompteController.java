@@ -1,28 +1,28 @@
 package Reporting.AFA.controller;
 
-        import Reporting.AFA.Entity.Agent;
-        import Reporting.AFA.Entity.AppUser;
-        import Reporting.AFA.Entity.Grossiste;
-        import Reporting.AFA.Security.Services.AccountServiceImpl;
-        import Reporting.AFA.dto.CustomCompteResult;
-        import Reporting.AFA.dto.CustomEntrepriseResult;
-        import Reporting.AFA.dto.GrossisteDto;
-        import Reporting.AFA.dto.OuvertureCompteDto;
-        import Reporting.AFA.Entity.OuvertureCompte;
-        import Reporting.AFA.services.AgentService;
-        import Reporting.AFA.services.OuvertureCompteService;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.http.HttpStatus;
-        import org.springframework.http.ResponseEntity;
-        import org.springframework.stereotype.Controller;
-        import org.springframework.ui.Model;
-        import org.springframework.web.bind.annotation.*;
+import Reporting.AFA.Entity.Agent;
+import Reporting.AFA.Entity.AppUser;
+import Reporting.AFA.Entity.Grossiste;
+import Reporting.AFA.Security.Services.AccountServiceImpl;
+import Reporting.AFA.dto.CustomCompteResult;
+import Reporting.AFA.dto.CustomEntrepriseResult;
+import Reporting.AFA.dto.GrossisteDto;
+import Reporting.AFA.dto.OuvertureCompteDto;
+import Reporting.AFA.Entity.OuvertureCompte;
+import Reporting.AFA.services.AgentService;
+import Reporting.AFA.services.OuvertureCompteService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-        import java.security.Principal;
-        import java.time.LocalDateTime;
-        import java.time.format.DateTimeFormatter;
-        import java.util.List;
-        import java.util.Optional;
+import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/ouvertureComptes")
@@ -38,6 +38,11 @@ public class OuvertureCompteController {
         this.ouvertureCompteService = ouvertureCompteService;
         this.agentService=agentService;
         this.userService=userService;
+    }
+
+    @GetMapping("/type")
+    public String shoosetype(){
+        return "fenetre";
     }
 
     @GetMapping("/save")
@@ -117,15 +122,16 @@ public class OuvertureCompteController {
     }
 
 
-        @GetMapping("/{ouvertureCompteId}/delete")
-        public ResponseEntity<String> deleteOuvertureCompte(@PathVariable String ouvertureCompteId) {
-            try {
-                ouvertureCompteService.deleteOuvertureCompteById(ouvertureCompteId);
-                return ResponseEntity.ok("Compte supprimée avec succès");
-            } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de la suppression du Compte");
-            }
+    @GetMapping("/{ouvertureCompteId}/delete")
+    public ResponseEntity<String> deleteOuvertureCompte(@PathVariable String ouvertureCompteId) {
+        try {
+            ouvertureCompteService.deleteOuvertureCompteById(ouvertureCompteId);
+            return ResponseEntity.ok("Compte supprimé avec succès");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de la suppression du Compte");
         }
     }
+
+}
 
 

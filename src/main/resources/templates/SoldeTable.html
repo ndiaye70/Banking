@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau des montants</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<table>
+    <caption>Solde Agence</caption>
+    <thead>
+    <tr>
+        <th>Devise</th>
+        <th>Solde de fermeture</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>XOF</td>
+        <td><span th:text="${totalSolde}"></span></td>
+    </tr>
+    <tr>
+        <td>EUR</td>
+        <td th:text="${fermetureCaisseEur}"></td>
+    </tr>
+    <tr>
+        <td>USD</td>
+        <td th:text="${fermetureCaisseUsd}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<h2>Tableau des montants</h2>
+
+<!-- Tableau pour la devise XOF -->
+<table>
+    <caption>Caisse XOF</caption>
+    <thead>
+    <tr>
+        <th>Solde Ouverture Caisse</th>
+        <th>Total Entrée</th>
+        <th>Total Sortie</th>
+        <th>Appro Entrant</th>
+        <th>Appro Sortant</th>
+        <th>Solde théorique Caisse</th>
+        <th>Solde Fermeture Caisse</th>
+        <th>Écart</th><!-- Nouvelle colonne pour les liens -->
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Boucle sur les montants -->
+    <tr>
+        <td th:text="${ouvertureCaisseXof}"></td>
+        <td th:text="${montants[0]}"></td>
+        <td th:text="${montants[1]}"></td>
+        <td th:text="${montants[2]}"></td>
+        <td th:text="${montants[3]}"></td>
+        <td th:text="${ouvertureCaisseXof + montants[0] - montants[1] + montants[2] - montants[3]}"></td>
+        <td th:text="${fermetureCaisseXof}"></td>
+        <td th:text="${fermetureCaisseXof - (ouvertureCaisseXof + montants[0] - montants[1] + montants[2] - montants[3])}"></td>
+
+    </tr>
+    </tbody>
+</table>
+
+<!-- Tableau pour la devise EUR -->
+<table>
+    <caption>Caisse EUR</caption>
+    <thead>
+    <tr>
+        <th>Solde Ouverture Caisse</th>
+        <th>Total Entrées</th>
+        <th>Total Sorties</th>
+        <th>Appro Entrant</th>
+        <th>Appro Sortant</th>
+        <th>Solde théorique Caisse</th>
+        <th>Solde Fermeture Caisse</th>
+        <th>Écart</th><!-- Nouvelle colonne pour les liens -->
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Boucle sur les montants -->
+    <tr>
+        <td th:text="${ouvertureCaisseEur}"></td>
+        <td th:text="${montants[4]}"></td>
+        <td th:text="${montants[5]}"></td>
+        <td th:text="${montants[6]}"></td>
+        <td th:text="${montants[7]}"></td>
+        <td th:text="${ouvertureCaisseEur + montants[4] - montants[5] + montants[6] - montants[7]}"></td>
+        <td th:text="${fermetureCaisseEur}"></td>
+        <td th:text="${fermetureCaisseEur - (ouvertureCaisseEur + montants[4] - montants[5] + montants[6] - montants[7])}"></td>
+
+    </tr>
+    </tbody>
+</table>
+
+<!-- Tableau pour la devise USD -->
+<table>
+    <caption>Caisse USD</caption>
+    <thead>
+    <tr>
+        <th>Solde Ouverture Caisse</th>
+        <th>Total Entrée</th>
+        <th>Total Sortie</th>
+        <th>Appro Entrant</th>
+        <th>Appro Sortant</th>
+        <th>Solde théorique Caisse</th>
+        <th>Solde Fermeture Caisse</th>
+        <th>Écart</th><!-- Nouvelle colonne pour les liens -->
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Boucle sur les montants -->
+    <tr>
+        <td th:text="${ouvertureCaisseUsd}"></td>
+        <td th:text="${montants[8]}"></td>
+        <td th:text="${montants[9]}"></td>
+        <td th:text="${montants[10]}"></td>
+        <td th:text="${montants[11]}"></td>
+        <td th:text="${ouvertureCaisseUsd + montants[8] - montants[9] + montants[10] - montants[11]}"></td>
+        <td th:text="${fermetureCaisseUsd}"></td>
+        <td th:text="${fermetureCaisseUsd - (ouvertureCaisseUsd + montants[8] - montants[9] + montants[10] - montants[11])}"></td>
+
+    </tr>
+    </tbody>
+</table>
+<td>
+    <a th:href="@{'http://localhost:8081/ipsl/soldeCaisse/' + ${id} + '/edit'}">Modifier solde</a>
+    <a th:href="@{'http://localhost:8081/ipsl/soldeCaisse/save'}">Nouveau solde</a>
+</td>
+</body>
+</html>

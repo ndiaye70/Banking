@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détail de la Carte</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        h3 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .section {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .download-button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="pdfContent">
+    <h3 class="mt-4">Quittance Provisoire-Demande/Renouvellement de Cartes</h3>
+
+    <!-- Section Informations de l'Agence -->
+    <div class="section">
+        <h4>Informations de l'Agence</h4>
+        <div class="mb-3">
+            <span class="label">Agence:</span>
+            <span th:text="${agence.nomAgence}"></span>
+        </div>
+        <div class="mb-3">
+            <span class="label">Caissier:</span>
+            <span th:text="${nomComplet}"></span>
+        </div>
+        <div class="mb-3">
+            <span class="label">Date:</span>
+            <span th:text="${date}"></span>
+        </div>
+    </div>
+
+    <!-- Section Informations de la Carte -->
+    <div class="section">
+        <h4>Client et Paiement</h4>
+        <div class="mb-3">
+            <span class="label">Nom Complet:</span>
+            <span th:text="${carteDto.nomComplet}"></span>
+        </div>
+        <div class="mb-3">
+            <span class="label">Numéro de Téléphone:</span>
+            <span th:text="${carteDto.tel}"></span>
+        </div>
+        <div class="mb-3">
+            <span class="label">Service Sollicité:</span>
+            <span th:text="${carteDto.service}"></span>
+        </div>
+        <div class="mb-3">
+            <span class="label">Montant:</span>
+            <span th:text="${carteDto.montant}"></span>
+        </div>
+    </div>
+
+    <!-- Section Options Sélectionnées -->
+    <div class="section">
+        <h4>Documents Reçus</h4>
+        <div class="mb-3">
+            <span class="label">NINEA:</span>
+            <span th:if="${carteDto.nineaCopie == null}">Non reçu</span>
+            <span th:if="${carteDto.nineaCopie == 1}">Une copie</span>
+            <span th:if="${carteDto.nineaCopie == 2}">Deux copies</span>
+        </div>
+        <div class="mb-3">
+            <span class="label">RC:</span>
+            <span th:if="${carteDto.rcCopie == null}">Non reçu</span>
+            <span th:if="${carteDto.rcCopie == 1}">Une copie</span>
+            <span th:if="${carteDto.rcCopie == 2}">Deux copies</span>
+        </div>
+        <div class="mb-3">
+            <span class="label">Passeport/CNI valide:</span>
+            <span th:if="${carteDto.passeportCopie == null}">Non reçu</span>
+            <span th:if="${carteDto.passeportCopie == 1}">Une copie</span>
+            <span th:if="${carteDto.passeportCopie == 2}">Deux copies</span>
+        </div>
+        <div class="mb-3">
+            <span class="label">Photo d'identité:</span>
+            <span th:if="${carteDto.photoCopie == null}">Non reçu</span>
+            <span th:if="${carteDto.photoCopie == 1}">Une photo</span>
+            <span th:if="${carteDto.photoCopie == 2}">Deux photos</span>
+        </div>
+        <div class="mb-3">
+            <span class="label">Ancienne C.C:</span>
+            <span th:if="${carteDto.ccCopie == null}">Non reçu</span>
+            <span th:if="${carteDto.ccCopie == 1}">Une copie</span>
+            <span th:if="${carteDto.ccCopie == 2}">Deux copies</span>
+        </div>
+        <div class="mb-3">
+            <span class="label">Ancienne C.I.E:</span>
+            <span th:if="${carteDto.cieCopie == null}">Non reçu</span>
+            <span th:if="${carteDto.cieCopie == 1}">Une copie</span>
+            <span th:if="${carteDto.cieCopie == 2}">Deux copies</span>
+        </div>
+    </div>
+</div>
+
+<!-- Bouton de Téléchargement -->
+<div class="download-button">
+    <button id="exportPdfButton" class="btn btn-primary">Imprimer en PDF</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+<script type="text/javascript">
+    document.getElementById('exportPdfButton').addEventListener('click', function() {
+        var element = document.getElementById('pdfContent');
+        var opt = {
+            filename: 'Recue_de_Carte.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, letterRendering: true, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' },
+            pagebreak: { avoid: '.tr', exclude: '.export-form-buttons' }
+        };
+        html2pdf().set(opt).from(element).save();
+    });
+</script>
+</body>
+</html>

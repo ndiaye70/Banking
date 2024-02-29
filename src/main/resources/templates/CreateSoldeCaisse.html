@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Création d'un solde de caisse</title>
+</head>
+<body>
+<h1>Création d'un solde de caisse</h1>
+
+<!-- Section pour le solde en XOF -->
+<h2>Solde en XOF</h2>
+<form th:action="@{save}" method="post" th:object="${soldeCaisse}">
+    <label for="ouvertureCaisseXof">Ouverture de caisse (XOF) :</label>
+    <input type="number" id="ouvertureCaisseXof" name="ouvertureCaisseXof" th:value="0" required>
+    <br>
+    <label for="fermetureCaisseXof">Fermeture de caisse (XOF) :</label>
+    <input type="number" id="fermetureCaisseXof" name="fermetureCaisseXof" th:value="0" required>
+    <br>
+
+    <!-- Ajoutez d'autres champs spécifiques à la devise XOF ici si nécessaire -->
+
+    <!-- Section pour le solde en EUR -->
+    <h2>Solde en EUR</h2>
+    <label for="ouvertureCaisseEur">Ouverture de caisse (EUR) :</label>
+    <input type="number" id="ouvertureCaisseEur" name="ouvertureCaisseEur" th:value="0" required>
+    <br>
+    <label for="fermetureCaisseEur">Fermeture de caisse (EUR) :</label>
+    <input type="number" id="fermetureCaisseEur" name="fermetureCaisseEur" th:value="0" required>
+    <br>
+
+    <!-- Ajoutez d'autres champs spécifiques à la devise EUR ici si nécessaire -->
+
+    <!-- Section pour le solde en USD -->
+    <h2>Solde en USD</h2>
+    <label for="ouvertureCaisseUsd">Ouverture de caisse (USD) :</label>
+    <input type="number" id="ouvertureCaisseUsd" name="ouvertureCaisseUsd" th:value="0" required>
+    <br>
+    <label for="fermetureCaisseUsd">Fermeture de caisse (USD) :</label>
+    <input type="number" id="fermetureCaisseUsd" name="fermetureCaisseUsd" th:value="0" required>
+    <br>
+
+    <!-- Ajoutez d'autres champs spécifiques à la devise USD ici si nécessaire -->
+
+    <button type="submit">Enregistrer</button>
+</form>
+</body>
+</html>

@@ -69,6 +69,12 @@ public class CarteService {
             existingCarte.setService(carte.getService());
             existingCarte.setMontant(carte.getService().getMontant());
             existingCarte.setAgent(carte.getAgent());
+            existingCarte.setNineaCopie(carte.getNineaCopie());
+            existingCarte.setRcCopie(carte.getRcCopie());
+            existingCarte.setPasseportCopie(carte.getPasseportCopie());
+            existingCarte.setPhotoCopie(carte.getPhotoCopie());
+            existingCarte.setCcCopie(carte.getCcCopie());
+            existingCarte.setCieCopie(carte.getCieCopie());
             // Sauvegarder la carte mise à jour
             return carteRepository.save(existingCarte);
         } else {

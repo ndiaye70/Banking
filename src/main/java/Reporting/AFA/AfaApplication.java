@@ -24,7 +24,7 @@ public class AfaApplication {
 			//accountService.addNewRole("ADMIN");
 			//accountService.addNewUser("philly","alpha","wann","flingo@gmail.com","1234","1234");
 
-			//accountService.addNewUser("user1","issa","faye","ins@gmail.com","1234","1234");
+			//accountService.  addNewUser("user1","issa","faye","ins@gmail.com","1234","1234");
 			//accountService.addNewUser("user2","khady","gueye","khg@gmail.com","1234","1234");
 
 			//accountService.addRoleToUser("pan","ADMIN");

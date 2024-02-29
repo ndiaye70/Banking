@@ -27,7 +27,7 @@ public class AgenceController {
     @GetMapping("/new")
     public String showCreateAgenceForm(Model model) {
         model.addAttribute("agenceDto", new AgenceDto());
-        return "createAgenceForm"; // Cela correspond au nom de votre fichier HTML (createAgenceForm.html)
+        return "createAgence"; // Cela correspond au nom de votre fichier HTML (createAgence.html)
     }
 
     @PostMapping("/save")

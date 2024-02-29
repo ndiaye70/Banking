@@ -1,13 +1,17 @@
 package Reporting.AFA.controller;
 
 import Reporting.AFA.Entity.Commissions;
+import Reporting.AFA.Entity.SoldeCaisse;
 import Reporting.AFA.Entity.SoldeDepart;
 import Reporting.AFA.Repository.CommissionsRepository;
 import Reporting.AFA.Repository.CustomRepository;
+import Reporting.AFA.Repository.SoldeCaisseRepository;
 import Reporting.AFA.Repository.SoldeDepartRepository;
 import Reporting.AFA.dto.CommissionsDto;
+import Reporting.AFA.dto.SoldeCaisseDto;
 import Reporting.AFA.dto.SoldeDepartDto;
 import Reporting.AFA.services.CommissionsService;
+import Reporting.AFA.services.SoldeCaisseService;
 import Reporting.AFA.services.SoldeDepartService;
 import ch.qos.logback.core.joran.sanity.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +23,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/recaps")
 public class RecapController {
+
+    @Autowired
+    private SoldeCaisseRepository soldeCaisseRepository;
+
+    @Autowired
+    private final SoldeCaisseService soldeCaisseService;
 
     @Autowired
     private CustomRepository customRepository;
@@ -37,7 +48,8 @@ public class RecapController {
     @Autowired
     private final CommissionsService commissionsService;
 
-    public RecapController(SoldeDepartRepository soldeDepartRepository, CommissionsRepository commissionsRepository, SoldeDepartService soldeDepartService, CommissionsService commissionsService) {
+    public RecapController(SoldeCaisseService soldeCaisseService, SoldeDepartRepository soldeDepartRepository, CommissionsRepository commissionsRepository, SoldeDepartService soldeDepartService, CommissionsService commissionsService) {
+        this.soldeCaisseService = soldeCaisseService;
         this.soldeDepartRepository = soldeDepartRepository;
         this.commissionsRepository = commissionsRepository;
         this.soldeDepartService = soldeDepartService;
@@ -60,14 +72,29 @@ public class RecapController {
         long totalNombreClients = recaps.stream().mapToInt(recap -> Math.toIntExact((long) recap.get("nombreClients"))).sum();
 
 
-        double totalLigne = recaps.stream()
-                .mapToDouble(recap -> (double) recap.get("SoldeDepart") +
-                        (double) recap.get("montantDepot") +
-                        (double) recap.get("montantRetrait") +
-                        (double) recap.get("Commissions") +
-                        (double) recap.get("ApproEntrant") +
-                        (double) recap.get("ApproSortant") )
+        double totalLigne = IntStream.range(0, 3) // Boucle sur les indices de 0 à 2 (pour les trois premières entrées)
+                .mapToDouble(i -> {
+                    Map<String, Object> recap = recaps.get(i); // Récupère l'élément à l'indice i
+                    return (double) recap.get("SoldeDepart") +
+                            (double) recap.get("montantDepot") +
+                            (double) recap.get("montantRetrait") +
+                            (double) recap.get("Commissions") +
+                            (double) recap.get("ApproEntrant") +
+                            (double) recap.get("ApproSortant");
+                })
                 .sum();
+
+
+        Map<String, Object> recap = recaps.get(8); // Récupère le premier élément de la liste
+
+
+        double totalLigne2 = (double) recap.get("SoldeDepart") +
+                (double) recap.get("montantDepot") +
+                (double) recap.get("montantRetrait") +
+                (double) recap.get("Commissions") +
+                (double) recap.get("ApproEntrant") +
+                (double) recap.get("ApproSortant");
+
 
 
         // Ajout des sommes au modèle
@@ -78,9 +105,68 @@ public class RecapController {
         model.addAttribute("totalApproEntrant", totalApproEntrant);
         model.addAttribute("totalApproSortant", totalApproSortant);
         model.addAttribute("totalNombreClients", totalNombreClients);
-        model.addAttribute("totalLigne", totalLigne); // Ajout de la somme des cellules dans la colonne "Total_ligne"
+        model.addAttribute("totalLigne", totalLigne+totalLigne2); // Ajout de la somme des cellules dans la colonne "Total_ligne"
 
         return "recaps";}
+
+
+    @GetMapping("/soldes")
+    public String getMontants(Model model) {
+        List<Map<String, Object>> recaps = customRepository.getRecaps();
+
+        double totalLigne1 = IntStream.range(0, 3) // Boucle sur les indices de 0 à 2 (pour les trois premières entrées)
+                .mapToDouble(i -> {
+                    Map<String, Object> recap = recaps.get(i); // Récupère l'élément à l'indice i
+                    return (double) recap.get("SoldeDepart") +
+                            (double) recap.get("montantDepot") +
+                            (double) recap.get("montantRetrait") +
+                            (double) recap.get("Commissions") +
+                            (double) recap.get("ApproEntrant") +
+                            (double) recap.get("ApproSortant");
+                })
+                .sum();
+
+
+        Map<String, Object> recap = recaps.get(8); // Récupère le premier élément de la liste
+
+
+        double totalLigne2 = (double) recap.get("SoldeDepart") +
+                (double) recap.get("montantDepot") +
+                (double) recap.get("montantRetrait") +
+                (double) recap.get("Commissions") +
+                (double) recap.get("ApproEntrant") +
+                (double) recap.get("ApproSortant");
+
+
+
+
+        List<Double> montants = soldeCaisseRepository.getMontants();
+        model.addAttribute("montants", montants);
+        Long id= Long.valueOf(soldeCaisseRepository.getID());
+        Optional<SoldeCaisse> soldeCaisse = soldeCaisseService.getSoldeCaisseById(id);
+        if (soldeCaisse.isPresent()) {
+            SoldeCaisse solde = soldeCaisse.get();
+            model.addAttribute("id",id);
+            model.addAttribute("ouvertureCaisseXof", solde.getOuvertureCaisseXof());
+            model.addAttribute("fermetureCaisseXof", solde.getFermetureCaisseXof());
+            model.addAttribute("ouvertureCaisseEur", solde.getOuvertureCaisseEur());
+            model.addAttribute("fermetureCaisseEur", solde.getFermetureCaisseEur());
+            model.addAttribute("ouvertureCaisseUsd", solde.getOuvertureCaisseUsd());
+            model.addAttribute("fermetureCaisseUsd", solde.getFermetureCaisseUsd());
+            Double totalLigne=totalLigne1+totalLigne2;
+            Double totalSolde = solde.getFermetureCaisseXof() + totalLigne;
+            model.addAttribute("totalSolde",totalSolde);
+        }
+        return "SoldeTable"; // Nom de la vue Thymeleaf pour afficher le tableau de montants
+    }
+
+
+
+
+
+
+
+
 
     @GetMapping("/save")
     public String showCreateSoldeDepartForm(Model model) {

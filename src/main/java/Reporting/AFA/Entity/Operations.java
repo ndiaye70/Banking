@@ -70,7 +70,7 @@ public class Operations implements Identifiable {
         Askia("Askia"),
         Sunu_Assurance("Sunu Assurance"),
         Creation_Entreprise("Création Entreprise"),
-        Cartes("Cartes"),
+        Cartes_Com_Imp_Exp("Cartes Com-Imp/Exp"),
         Natte("Natte");
 
         private final String label;
