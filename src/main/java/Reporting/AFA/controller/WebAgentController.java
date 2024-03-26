@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/agents")
+@RequestMapping("/admin/agents")
 public class WebAgentController {
 
     private final AgentService agentService;
@@ -45,8 +45,10 @@ public class WebAgentController {
     @PostMapping("/new")
     public String createAgent(@ModelAttribute("agentDto") AgentDto agentDto) {
         agentService.createAgent(agentDto);
-        return "redirect:/agents/list";
+        return "redirect:/admin/agents/list";
     }
+
+
 
     @GetMapping("/list")
     public String showAllAgents(Model model) {
@@ -57,7 +59,7 @@ public class WebAgentController {
     @GetMapping("/delete/{agentId}")
     public String deleteAgent(@PathVariable Long agentId) {
         agentService.deleteAgent(agentId);
-        return "redirect:/agents/list";
+        return "redirect:/admin/agents/list";
     }
 
 
@@ -76,12 +78,13 @@ public class WebAgentController {
         return "assign";
     }
 
+
     @PostMapping("/assign/{agentId}")
     public String assignAgentToAnotherAgence(
             @PathVariable Long agentId,
             @ModelAttribute("agentDto") AgentDto agentDto) {
         agentService.assignAgentToAnotherAgence(agentId, agentDto.getAgenceNom());
-        return "redirect:/agents/list";
+        return "redirect:/admin/agents/list";
     }
 
 

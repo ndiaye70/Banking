@@ -42,6 +42,12 @@ public class ChangeController {
         this.userService = userService;
     }
 
+    @GetMapping("/save")
+    public String showChangeForm(Model model) {
+        model.addAttribute("changeDto", new ChangeDto());
+        return "createChange";
+    }
+
 
     @PostMapping("/save")
     public String saveChange(@ModelAttribute("changeDto") @Valid ChangeDto changeDto, Principal principal, BindingResult result) {
@@ -61,15 +67,11 @@ public class ChangeController {
             changeService.saveChange(changeDto, agent);
             return "redirect:/changes/list";
         } catch (Exception e) {
-            return "redirect:/index";
+            return "redirect:/changes/save";
         }
     }
 
-    @GetMapping("/save")
-    public String showChangeForm(Model model) {
-        model.addAttribute("changeDto", new ChangeDto());
-        return "createChange";
-    }
+
 
     @GetMapping("/list")
     public String allchange (Model model){

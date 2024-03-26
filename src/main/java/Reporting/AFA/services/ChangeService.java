@@ -43,6 +43,7 @@ public class ChangeService {
             Change existingChange = existingChangeOptional.get();
 
             // Copie des valeurs mises à jour vers l'entité existante
+            existingChange.setDate(change.getDate());
             existingChange.setPrenom(change.getPrenom());
             existingChange.setNom(change.getNom());
             existingChange.setService(change.getService());

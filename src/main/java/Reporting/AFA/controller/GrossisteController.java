@@ -49,6 +49,7 @@ public class GrossisteController {
 
         // Utiliser l'ID de l'utilisateur pour obtenir l'agent correspondant
         Agent agent = agentService.findAgentByUserId(appUser.getId());
+
         try {
             // Enregistrez le grossiste dans la base de données
             Grossiste grossiste = grossisteService.saveGrossiste(grossisteDto,agent);

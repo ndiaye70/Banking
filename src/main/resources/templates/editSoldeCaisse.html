@@ -7,7 +7,7 @@
 <body>
 <h1>Édition d'un solde de caisse</h1>
 
-<form th:action="@{'/soldeCaisse/'+${id}+'/edit'}" method="post" th:object="${soldeCaisse}">
+<form th:action="@{'/soldeCaisse/'+${ id}+'/edit'}" method="post" th:object="${soldeCaisse}">
     <input type="hidden" th:field="*{id}" />
 
     <!-- Section pour le solde en XOF -->

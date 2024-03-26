@@ -56,7 +56,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Liste des agents</h3>
-                <a th:href="@{'/agents/new'}" class="btn btn-success mt-2 float-right">Ajouter</a>
+                <a th:href="@{'/admin/agents/new'}" class="btn btn-success mt-2 float-right">Ajouter</a>
                 <a th:href="@{'/index'}" class="btn btn-secondary mt-2 float-right mr-2">Accueil</a>
             </div>
             <div class="card-content">
@@ -80,8 +80,8 @@
                             <td th:text="${agent.user.username}"></td>
                             <td th:text="${agent.agence.nomAgence}"></td>
                             <td>
-                                <a th:href="@{/agents/assign/{id}(id=${agent.id})}" class="btn btn-success">Affecter</a>
-                                <a th:href="@{/agents/delete/{id}(id=${agent.id})}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet agent ?')">Supprimer</a>
+                                <a th:href="@{/admin/agents/assign/{id}(id=${agent.id})}" class="btn btn-success">Affecter</a>
+                                <a th:href="@{/admin/agents/delete/{id}(id=${agent.id})}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet agent ?')">Supprimer</a>
                             </td>
                         </tr>
                         </tbody>
