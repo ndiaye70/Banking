@@ -52,7 +52,7 @@
 </head>
 <body>
 <h3>Nouvel agent</h3>
-<form th:action="@{/agents/new}" th:object="${agentDto}" method="post" class="mb-3">
+<form th:action="@{/admin/agents/new}" th:object="${agentDto}" method="post" class="mb-3">
     <label for="utilisateur">Sélectionnez un utilisateur:</label>
     <select id="utilisateur" name="utilisateur" th:field="*{username}" class="form-control">
         <option th:each="user : ${utilisateurs}" th:value="${user.username}" th:text="${user.username}"></option>

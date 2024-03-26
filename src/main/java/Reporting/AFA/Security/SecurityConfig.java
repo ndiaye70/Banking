@@ -58,7 +58,7 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
 
-                authorize -> authorize.requestMatchers("/ipsl/**").permitAll()
+                authorize -> authorize.requestMatchers("/**").permitAll()
 
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/forgotPass/**").permitAll()
@@ -94,7 +94,7 @@ public class SecurityConfig {
                         //.addLogoutHandler(new HeaderWriterLogoutHandler(new ClearSiteDataHeaderWriter(COOKIES)))
                         //.deleteCookies("JSESSIONID")
                         .invalidateHttpSession(false)
-                        .logoutUrl("/ipsl/logout")
+                        .logoutUrl("/logout")
                         .logoutSuccessUrl("/login"));
 
 

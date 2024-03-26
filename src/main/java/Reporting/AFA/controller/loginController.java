@@ -28,6 +28,11 @@ public class loginController {
 
         }
 
+    @GetMapping("/")
+    public String redirectToIndex() {
+        return "login";
+    }
+
     @GetMapping("/index")
     String index() {
         return "index";

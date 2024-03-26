@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/agences")
+@RequestMapping("/admin/agences")
 public class AgenceController {
 
     private final AgenceService agenceService;
@@ -35,7 +35,7 @@ public class AgenceController {
         try {
             Agence agence = agenceService.createAgence(agenceDto);
             model.addAttribute("successMessage", "Opération enregistrée avec succès. ID: " + agence.getCode());
-            return "redirect:/agences/list";
+            return "redirect:/admin/agences/list";
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Erreur lors de l'enregistrement de l'agence");
             return "error";
