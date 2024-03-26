@@ -63,7 +63,7 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/forgotPass/**").permitAll()
                         .requestMatchers("/ResetPass/{id}").permitAll()
-                        .requestMatchers("/registration/**").anonymous()
+                        .requestMatchers("/registration/**").permitAll()
                         // Seulement accessible aux utilisateurs non authentifiés
                         .requestMatchers("/ResetPass/**").permitAll()
                         .requestMatchers("/recaps/**").permitAll()

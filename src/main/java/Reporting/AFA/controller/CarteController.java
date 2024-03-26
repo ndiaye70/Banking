@@ -52,7 +52,8 @@ public class CarteController {
             Carte carte = carteService.saveCarte(carteDto, agent);
 
             // Rediriger vers la page de détails de la carte nouvellement créée
-            return "redirect:/cartes/" +carte.getId()+ "/details" ;
+            return "redirect:/cartes/list" +
+                    "3";
         } catch (Exception e) {
             // Gérer les erreurs et afficher un message approprié
             model.addAttribute("error", "Erreur lors de l'enregistrement de la carte");
@@ -65,17 +66,7 @@ public class CarteController {
         Optional<Carte> carte = carteService.getCarteById(carteId);
         if (carte.isPresent()) {
             model.addAttribute("carteDto", convertToDto(carte.get()));
-            Agent agent=carte.get().getAgent();
-            String date=carte.get().getDate();
-            Agence agence = agent.getAgence();
-            AppUser appUser = agent.getUser();
-            String nom = appUser.getNom();
-            String prenom = appUser.getPrenom();
-            String nomComplet = prenom.concat(" ").concat(nom);
-            model.addAttribute("date", date);
-            model.addAttribute("agence", agence);
-            model.addAttribute("nomComplet", nomComplet);
-
+            // Ajoutez d'autres attributs nécessaires à votre vue
             return "detailCarte"; // Nom de la page HTML pour les détails de la carte
         } else {
             // Carte non trouvée, rediriger vers la liste ou afficher un message d'erreur
@@ -98,7 +89,7 @@ public class CarteController {
     }
 
     @PostMapping("/{carteId}/edit")
-    public String updateCarte(@PathVariable("carteId") String carteId, CarteDto carteDto, Principal principal,Model model) {
+    public String updateCarte(@PathVariable("carteId") String carteId, CarteDto carteDto, Principal principal) {
         // Obtenir l'utilisateur actuellement connecté
         String username = principal.getName();
         AppUser appUser = userService.loadUserByUsername(username);
@@ -118,20 +109,10 @@ public class CarteController {
         carte.setDate(now.format(formatter));
 
         // Mettre à jour la carte dans la base de données
-
+        carteService.updateCarte(carteId, carte);
 
         // Rediriger vers la page de détails de la carte mise à jour
-        try {
-            // Enregistrez la carte dans la base de données
-            carteService.updateCarte(carteId, carte);
-
-            // Rediriger vers la page de détails de la carte nouvellement créée
-            return "redirect:/cartes/" +carteId+ "/details" ;
-        } catch (Exception e) {
-            // Gérer les erreurs et afficher un message approprié
-            model.addAttribute("error", "Erreur lors de l'enregistrement de la carte");
-            return "CreateCarte"; // Vous pouvez également rediriger vers la page de création avec un message d'erreur
-        }
+        return "redirect:/cartes/list";
     }
 
     @GetMapping("/list")
@@ -149,17 +130,7 @@ public class CarteController {
 
     private CarteDto convertToDto(Carte carte) {
         CarteDto carteDto = new CarteDto();
-        carteDto.setMontant(carte.getMontant());
-        carteDto.setTel(carte.getTel());
-        carteDto.setNomComplet(carte.getNomComplet());
-        carteDto.setService(String.valueOf(carte.getService().getLabel()));
-        carteDto.setCcCopie(carte.getCcCopie());
-        carteDto.setCieCopie(carte.getCieCopie());
-        carteDto.setNineaCopie(carte.getNineaCopie());
-        carteDto.setRcCopie(carte.getRcCopie());
-        carteDto.setPhotoCopie(carte.getPhotoCopie());
-        carteDto.setPasseportCopie(carte.getPasseportCopie());
-
+        // Convertir les attributs de l'entité Carte en objet CarteDto
         return carteDto;
     }
 
