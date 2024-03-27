@@ -58,9 +58,7 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
 
-                authorize -> authorize.requestMatchers("/**").permitAll()
-
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                authorize -> authorize.requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/forgotPass/**").permitAll()
                         .requestMatchers("/ResetPass/{id}").permitAll()
                         .requestMatchers("/registration/**").anonymous()

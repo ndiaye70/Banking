@@ -2,6 +2,7 @@ package Reporting.AFA.Security.Services;
 
 import Reporting.AFA.Entity.AppRole;
 import Reporting.AFA.Entity.AppUser;
+import Reporting.AFA.Repository.AdminRepository;
 import Reporting.AFA.Security.repo.AppRoleRepository;
 import Reporting.AFA.Security.repo.UserRepository;
 import Reporting.AFA.dto.AppUserDto;
@@ -24,6 +25,9 @@ public class AccountServiceImpl implements AccountService {
     private AppRoleRepository appRoleRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    AdminRepository adminRepository;
 
     @Autowired
     public AccountServiceImpl(UserRepository userRepository, AppRoleRepository appRoleRepository, PasswordEncoder passwordEncoder) {
@@ -127,10 +131,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void addRoleToUser(String username, String role) {
-        AppUser user=userRepository.findByUsername(username);
-        AppRole appRole=appRoleRepository.findById(role).get();
-        user.getRoles().add(appRole);
-
+        AppUser user = userRepository.findByUsername(username);
+        AppRole appRole = appRoleRepository.findById(role).orElse(null); // Utilisation de findById() avec orElse(null) pour gérer le cas où le rôle n'existe pas
+        if (user != null && appRole != null && !user.getRoles().contains(appRole)) { // Vérification que l'utilisateur et le rôle existent et que l'utilisateur ne possède pas déjà ce rôle
+            user.getRoles().add(appRole);
+            userRepository.save(user); // Enregistrer les modifications apportées à l'utilisateur
+        }
     }
 
     @Override
@@ -138,9 +144,16 @@ public class AccountServiceImpl implements AccountService {
         AppUser user=userRepository.findByUsername(username);
         AppRole appRole=appRoleRepository.findById(role).get();
         user.getRoles().remove(appRole);
-
-
     }
+
+    public List<Object[]> getAdmin() {
+        return adminRepository.getAdmin();
+    }
+
+    public  List getUser(){
+        return adminRepository.getUser();
+    }
+
     @Override
     public AppUser loadUserByUsername(String username){
         return userRepository.findByUsername(username);

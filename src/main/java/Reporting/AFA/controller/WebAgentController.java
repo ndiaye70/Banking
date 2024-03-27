@@ -25,7 +25,7 @@ public class WebAgentController {
     @Autowired
     public WebAgentController(AgentService agentService, AgenceService agenceService, AccountServiceImpl accountService) {
         this.agentService = agentService;
-        this.agenceService=agenceService;
+        this.agenceService = agenceService;
         this.accountService = accountService;
     }
 
@@ -41,14 +41,11 @@ public class WebAgentController {
         return "new";
     }
 
-
     @PostMapping("/new")
     public String createAgent(@ModelAttribute("agentDto") AgentDto agentDto) {
         agentService.createAgent(agentDto);
         return "redirect:/admin/agents/list";
     }
-
-
 
     @GetMapping("/list")
     public String showAllAgents(Model model) {
@@ -61,8 +58,6 @@ public class WebAgentController {
         agentService.deleteAgent(agentId);
         return "redirect:/admin/agents/list";
     }
-
-
 
     @GetMapping("/assign/{agentId}")
     public String showAssignAgentForm(@PathVariable Long agentId, Model model) {
@@ -78,7 +73,6 @@ public class WebAgentController {
         return "assign";
     }
 
-
     @PostMapping("/assign/{agentId}")
     public String assignAgentToAnotherAgence(
             @PathVariable Long agentId,
@@ -87,5 +81,27 @@ public class WebAgentController {
         return "redirect:/admin/agents/list";
     }
 
+    @GetMapping("/admin-page")
+    public String showAdminPage(Model model) {
+        model.addAttribute("adminData", accountService.getAdmin());
+        return "admin-page"; // Assuming you have an HTML file named "admin-page.html" in your templates folder
+    }
+
+    @GetMapping("/add-admin")
+    public String addAdmin(Model model) {
+        List usernames = accountService.getUser();
+        model.addAttribute("Username", usernames);
+        return "add-admin";
+    }
+
+    @PostMapping("/add-admin")
+    public String submitAdmin(@RequestParam("selectedUsername") String selectedUsername) {
+
+        accountService.addRoleToUser(selectedUsername,"ADMIN");
+        return "redirect:/admin/agents/admin-page"; // Redirection vers une page appropriée après avoir soumis les données
+    }
+
 
 }
+
+
