@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+</head>
+<body>
+<h1>Liste des administrateurs</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Nom d'utilisateur</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through the admin data -->
+    <tr th:each="admin : ${adminData}">
+        <td th:text="${admin[0]}"></td> <!-- Assuming prenom is at index 0 -->
+        <td th:text="${admin[1]}"></td> <!-- Assuming nom is at index 1 -->
+        <td th:text="${admin[2]}"></td> <!-- Assuming email is at index 2 -->
+        <td th:text="${admin[3]}"></td> <!-- Assuming username is at index 3 -->
+    </tr>
+    </tbody>
+</table>
+
+  <a th:href="@{'/admin/agents/add-admin'}"> Ajouter un nouveau Admin</a>
+</body>
+</html>

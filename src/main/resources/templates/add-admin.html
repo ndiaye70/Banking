@@ -1,0 +1,21 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un administrateur</title>
+</head>
+<body>
+<h1>Ajouter un administrateur</h1>
+<form action="add-admin" method="post">
+    <label for="user">Sélectionner un utilisateur :</label>
+    <select name="selectedUsername" id="user">
+        <!-- Loop through the usernames -->
+        <option th:each="username : ${Username}" th:value="${username}" th:text="${username}"></option>
+    </select>
+    <button type="submit">Attribuer le rôle d'administrateur</button>
+
+
+</form>
+</body>
+</html>
