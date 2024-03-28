@@ -4,18 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un administrateur</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+    <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
+    <!-- Add your CSS link or style references here -->
 </head>
 <body>
-<h1>Ajouter un administrateur</h1>
-<form action="add-admin" method="post">
-    <label for="user">Sélectionner un utilisateur :</label>
-    <select name="selectedUsername" id="user">
-        <!-- Loop through the usernames -->
-        <option th:each="username : ${Username}" th:value="${username}" th:text="${username}"></option>
-    </select>
-    <button type="submit">Attribuer le rôle d'administrateur</button>
-
-
+<h3>Ajouter un administrateur</h3>
+<form class="form form-horizontal" action="add-admin" method="post">
+    <div class="form-group">
+        <label class="col-md-3">Sélectionner un utilisateur :</label>
+        <div class="col-md-9">
+            <select name="selectedUsername" class="form-control">
+                <!-- Loop through the usernames -->
+                <option th:each="username : ${Username}" th:value="${username}" th:text="${username}"></option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-12 d-flex justify-content-end">
+        <button type="submit" class="btn btn-success mr-1 mb-1">Attribuer le rôle d'administrateur</button>
+        <a th:href="@{'/index'}" class="btn btn-secondary mr-1 mb-1">Accueil</a>
+    </div>
 </form>
 </body>
 </html>

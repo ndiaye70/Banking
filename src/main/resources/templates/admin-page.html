@@ -3,30 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
+    <title>Liste des administrateurs</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
+    <link th:href="@{/css/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet">
+    <style>
+        /* Ajoutez une règle CSS pour colorer le bouton en vert */
+        .custom-green-btn {
+            background-color: green !important;
+            border-color: green !important;
+        }
+    </style>
 </head>
 <body>
-<h1>Liste des administrateurs</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Prénom</th>
-        <th>Nom</th>
-        <th>Email</th>
-        <th>Nom d'utilisateur</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Loop through the admin data -->
-    <tr th:each="admin : ${adminData}">
-        <td th:text="${admin[0]}"></td> <!-- Assuming prenom is at index 0 -->
-        <td th:text="${admin[1]}"></td> <!-- Assuming nom is at index 1 -->
-        <td th:text="${admin[2]}"></td> <!-- Assuming email is at index 2 -->
-        <td th:text="${admin[3]}"></td> <!-- Assuming username is at index 3 -->
-    </tr>
-    </tbody>
-</table>
+<div class="row" id="table-bordered">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Administrateurs</h4>
+                <a th:href="@{/admin/agents/add-admin}" class="btn btn-primary float-right mt-2 custom-green-btn">Ajouter un nouvel admin</a>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <!-- Votre texte introductif va ici si nécessaire -->
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered mb-0">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Nom d'utilisateur</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- Loop through the admin data -->
+                        <tr th:each="admin : ${adminData}">
+                            <td th:text="${admin[0]}"></td> <!-- Assuming prenom is at index 0 -->
+                            <td th:text="${admin[1]}"></td> <!-- Assuming nom is at index 1 -->
+                            <td th:text="${admin[2]}"></td> <!-- Assuming email is at index 2 -->
+                            <td th:text="${admin[3]}"></td> <!-- Assuming username is at index 3 -->
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-  <a th:href="@{'/admin/agents/add-admin'}"> Ajouter un nouveau Admin</a>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
