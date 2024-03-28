@@ -87,7 +87,9 @@ public class EntrepriseService {
             existingEntreprise.setNumTel(entreprise.getNumTel());
             existingEntreprise.setNom_Entreprise(entreprise.getNom_Entreprise());
             existingEntreprise.setTypeEntreprise(entreprise.getTypeEntreprise());
-            existingEntreprise.setMontant(entreprise.getMontant());
+
+            Double Montant=entreprise.getDemande().getMontant();
+            existingEntreprise.setMontant(Montant);
 
             // Save the updated entity
             return entrepriseRepository.save(existingEntreprise);
