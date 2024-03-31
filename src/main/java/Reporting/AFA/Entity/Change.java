@@ -25,6 +25,19 @@ public class Change {
     @Enumerated(EnumType.STRING)
     private Service service;
 
+
+    @Enumerated(EnumType.STRING)
+    private Type_Piece_Identite typePieceIdentite;
+
+    private String numero_piece_identité;
+
+    private String date_delivrance;
+
+    private String Telephone;
+
+    @Enumerated(EnumType.STRING)
+    private Resident resident;
+
     @Enumerated(EnumType.STRING)
     private Devise deviseRecu;
 
@@ -33,6 +46,10 @@ public class Change {
 
     private double montantRecu;
     private double montantRemis;
+
+    private Integer CNI;
+    private Integer Passeport;
+    private Integer Billet_Avion;
 
     @ManyToOne
     @JoinColumn(name = "id_agent")
@@ -48,6 +65,9 @@ public class Change {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.date = now.format(formatter);
         this.montantRemis = 0.0;
+        this.Billet_Avion=0;
+        this.CNI=0;
+        this.Passeport=0;
     }
 
     // Enumérations
@@ -65,8 +85,26 @@ public class Change {
         }
     }
 
+    public enum Type_Piece_Identite  {
+        CNI("CNI"), Passport("Passeport"),Carte_Consulaire("Carte Consulaire");
+
+        private final String label;
+
+        Type_Piece_Identite(String label) {
+            this.label = label;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+    }
+
     public enum Devise {
         EUR, XOF, USD
+    }
+
+    public enum Resident {
+        OUI,NON
     }
 
     public double convertirMontants(CourDuJourService courDuJourService) {

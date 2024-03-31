@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saisir le mot de passe</title>
+</head>
+<body>
+<h1>Saisir le mot de passe</h1>
+<form th:action="@{/Password}" method="post">
+  <div>
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" name="password" required>
+  </div>
+  <div>
+    <a th:href="@{/forgotPass}">Mot de Passe Oublié ?</a>
+  </div>
+  <button type="submit">Envoyer</button>
+</form>
+
+<div th:if="${errorMessage}" class="error-message">
+  <p th:text="${errorMessage}"></p>
+</div>
+
+</body>
+</html>

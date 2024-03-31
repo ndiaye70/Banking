@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Détails du changement</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <style>
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .quittance {
+            text-decoration: underline;
+        }
+
+        .signature-label {
+            margin-right: 10px;
+        }
+
+        .mt-2 {
+            margin-top: 0; /* Ajustez cette valeur pour supprimer l'espace */
+        }
+    </style>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            // Ajoutez un écouteur d'événements sur le clic du bouton
+            document.getElementById('exportPdfButton').addEventListener('click', function () {
+                var element = document.getElementById('pdfContent');
+                var opt = {
+                    filename: 'Recue_de_Carte.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    margin: [10, 10, 10, 10],
+                    html2canvas: { scale: 2, letterRendering: true, useCORS: true },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                };
+                html2pdf().set(opt).from(element).save();
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+<div style="text-align: right; margin-right: 10px; margin-top:30px">
+    <a th:href="@{'/changes/list'}" style="color: white; text-decoration: none; background-color:red; padding: 10px 10px; border-radius: 5px;">Liste Changes</a>
+</div>
+
+<div id="pdfContent" class="container mt-5">
+    <div class="row">
+        <div class="col-12 text-center mb-4">
+            <img th:src="@{/images/image3.jpg}" alt="Logo" style="max-width: 50px;">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="card-title">Bordereau Change</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <!-- Affichage des détails du changement -->
+                        <p>Agent : <span th:text="${nomComplet}"></span></p>
+                        <p>Agence : <span th:text="${agence.nomAgence}"></span></p>
+                        <p>Effectué le : <span th:text="${date}"></span></p>
+                        <p>Prénom : <span th:text="${changeDto.prenom}"></span></p>
+                        <p>Nom : <span th:text="${changeDto.nom}"></span></p>
+                        <p>Numéro Téléphone : <span th:text="${changeDto.Telephone}"></span></p>
+                        <p>Type de pièce d'identité : <span th:text="${changeDto.typePieceIdentite.label}"></span></p>
+                        <p>Numéro de pièce d'identité : <span th:text="${changeDto.numero_piece_identité}"></span></p>
+                        <p>Date de délivrance : <span th:text="${changeDto.date_delivrance}"></span></p>
+                        <p>Résident : <span th:text="${changeDto.resident}"></span></p>
+
+                        <p>Service : <span th:text="${changeDto.service.label}"></span></p>
+                        <p>Devise Reçue : <span th:text="${changeDto.deviseRecu}"></span></p>
+                        <p>Devise Remise : <span th:text="${changeDto.deviseRemis}"></span></p>
+                        <p>Montant Reçu : <span th:text="${changeDto.montantRecu}"></span></p>
+
+                        <p>CNI : <span th:text="${changeDto.CNI} == 1 ? 'Une copie' : 'Non Reçu'"></span></p>
+                        <p>Passeport : <span th:text="${changeDto.Passeport} == 1 ? 'Une copie' : 'Non Reçu'"></span></p>
+                        <p>Billet d'avion : <span th:text="${changeDto.Billet_Avion} == 1 ? 'Une copie' : 'Non Reçu'"></span></p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section des signatures -->
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body signature-section">
+                        <div class="signature-label">
+                            <p>Signature Client: ____________________</p>
+                        </div>
+                        <div class="signature-label">
+                            <p>Signature Caissier: ____________________</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Bouton pour imprimer en PDF -->
+    <div class="row mt-4">
+        <div class="download-button">
+            <button id="exportPdfButton" class="btn btn-primary">Imprimer en PDF</button>
+        </div>
+
+    </div>
+</body>
+
+</html>

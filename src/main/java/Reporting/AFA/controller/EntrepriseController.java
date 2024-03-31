@@ -132,6 +132,7 @@ public class EntrepriseController {
             return "redirect:/entreprises/list";
         }
     }
+
     @GetMapping("/{entrepriseId}/edit")
     public String showUpdateForm(@PathVariable String entrepriseId, Model model) {
         Optional<Entreprise> entrepriseOptional = entrepriseService.getEntrepriseById(entrepriseId);
@@ -149,7 +150,7 @@ public class EntrepriseController {
     @PostMapping("/{entrepriseId}/edit")
     public String updateOperations(@PathVariable("entrepriseId") String entrepriseId, EntrepriseDto entrepriseDto, Principal principal) {
 
-        Entreprise entreprise=entrepriseDto.toEntity();
+        Entreprise entreprise = entrepriseDto.toEntity();
 
         String username = principal.getName();
 
@@ -163,9 +164,15 @@ public class EntrepriseController {
         // Formater la date avec suppression des fractions de seconde
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         entreprise.setDateCreation(now.format(formatter));
-        entrepriseService.updateEntreprise(entrepriseId, entreprise);
-        return "redirect:/entreprises/" + entreprise.getId() + "/details";
 
+        try {
+            entrepriseService.updateEntreprise(entrepriseId, entreprise);
+            return "redirect:/entreprises/" + entrepriseId + "/details?success=true"; // Redirection en cas de succès
+        } catch (Exception e) {
+            return "redirect:/entreprises/" + entrepriseId + "/edit?error=Erreur lors de l'enregistrement de l'entreprise"; // Redirection en cas d'erreur
+        }
     }
 }
+
+
 

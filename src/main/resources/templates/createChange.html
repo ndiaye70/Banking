@@ -72,6 +72,30 @@
         <input type="text" id="nom" name="nom" class="form-control" required>
     </div>
     <div class="mb-3">
+        <label for="typePieceIdentite">Type de pièce d'identité:</label>
+        <select id="typePieceIdentite" name="typePieceIdentite" class="form-select" required>
+            <option th:each="type : ${T(Reporting.AFA.Entity.Change.Type_Piece_Identite).values()}"
+                    th:value="${type}" th:text="${type.getLabel()}"></option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="resident">Résident:</label>
+        <select id="resident" name="resident" class="form-select" required>
+            <option th:each="res : ${T(Reporting.AFA.Entity.Change.Resident).values()}"
+                    th:value="${res}" th:text="${res}"></option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="date_delivrance">Date de délivrance de la pièce d'identité:</label>
+        <input type="date" id="date_delivrance" name="date_delivrance" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="Telephone">Téléphone:</label>
+        <input type="tel" id="Telephone" name="Telephone" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
         <label for="deviseRecue">Devise Reçue:</label>
         <select id="deviseRecue" name="deviseRecu" class="form-select" onchange="updateServiceLabel(this.value)" required>
             <option value="EUR">EUR</option>
@@ -92,13 +116,52 @@
         <label for="service">Service:</label>
         <select id="service" name="service" class="form-select" required>
             <option value="Achat_de_Devise">Achat de Devise</option>
-            <option value="Vente_de_Devise">Vente de Devise</option>
+            <option value="Vente_Devise">Vente de Devise</option>
         </select>
     </div>
     <div class="mb-3">
         <label for="montantRecu">Montant Reçu:</label>
         <input type="number" id="montantRecu" name="montantRecu" class="form-control" required>
     </div>
+
+    <div class="mb-3">
+        <label class="form-label">CNI:</label>
+        <div class="form-check">
+            <input type="radio" id="CNI" name="CNI" value="1" class="form-check-input">
+            <label for="CNI" class="form-check-label">Une copie</label>
+        </div>
+
+        <div class="form-check">
+            <input type="radio" id="CNI0" name="CNI" value="0" class="form-check-input">
+            <label for="CNI" class="form-check-label">Non Reçue</label>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Passeport:</label>
+        <div class="form-check">
+            <input type="radio" id="Passeport" name="Passeport" value="1" class="form-check-input">
+            <label for="Passeport" class="form-check-label">Une copie</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" id="Passeport0" name="Passeport" value="0" class="form-check-input">
+            <label for="Passeport" class="form-check-label">Non Reçue</label>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Billet d'avion:</label>
+        <div class="form-check">
+            <input type="radio" id="Billet_Avion" name="Billet_Avion" value="1" class="form-check-input">
+            <label for="Billet_Avion" class="form-check-label">Une copie</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" id="Billet_Avion0" name="Billet_Avion" value="0" class="form-check-input">
+            <label for="Billet_Avion" class="form-check-label">Non Reçu</label>
+        </div>
+    </div>
+
+
     <button type="submit" class="btn btn-primary">Enregistrer</button>
 </form>
 
@@ -109,7 +172,7 @@
         if (devise === "EUR" || devise === "USD") {
             serviceSelect.value = "Achat_de_Devise";
         } else if (devise === "XOF") {
-            serviceSelect.value = "Vente_de_Devise";
+            serviceSelect.value = "Vente_Devise";
         }
     }
 

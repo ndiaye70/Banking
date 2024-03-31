@@ -28,6 +28,10 @@ public class ChangeService {
 
     public Change saveChange(ChangeDto changeDto, Agent agent) {
         Change change = changeDto.toEntity();
+
+
+
+
         change.setAgent(agent);
 
         double montant=change.convertirMontants(courDuJourService);
@@ -50,6 +54,13 @@ public class ChangeService {
             existingChange.setDeviseRecu(change.getDeviseRecu());
             existingChange.setDeviseRemis(change.getDeviseRemis());
             existingChange.setMontantRecu(change.getMontantRecu());
+            existingChange.setCNI(change.getCNI());
+            existingChange.setPasseport(change.getPasseport());
+            existingChange.setBillet_Avion(change.getBillet_Avion());
+            existingChange.setResident(change.getResident());
+            existingChange.setTelephone(change.getTelephone());
+            existingChange.setDate_delivrance(change.getDate_delivrance());
+            existingChange.setTypePieceIdentite(change.getTypePieceIdentite());
 
             // Conversion des montants si nécessaire
             double montantRemis = existingChange.convertirMontants(courDuJourService);

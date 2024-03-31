@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editer Profil</title>
+</head>
+<body>
+<h1>Editer Profil</h1>
+<form th:action="@{'/editer'}" method="post" th:object="${profileDTO}">
+    <div>
+        <label for="nom">Nom:</label>
+        <input type="text" id="nom" name="nom" th:field="*{nom}" th:value="${profileDTO.nom}"/>
+    </div>
+    <div>
+        <label for="prenom">Prénom:</label>
+        <input type="text" id="prenom" name="prenom" th:field="*{prenom}" th:value="${profileDTO.prenom}"/>
+    </div>
+    <div>
+        <label for="username">Nom d'utilisateur:</label>
+        <input type="text" id="username" name="username" th:field="*{username}" th:value="${profileDTO.username}"/>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" th:field="*{email}" th:value="${profileDTO.email}"/>
+    </div>
+    <button type="submit">Enregistrer</button>
+</form>
+</body>
+</html>
